@@ -1,0 +1,39 @@
+---
+layout: page
+status: publish
+published: true
+title: Cloud Flare Bundle
+author:
+  display_name: Tobias Nyholm
+  login: Tobias Nyholm
+  email: tobias@happyr.com
+  url: ''
+author_login: Tobias Nyholm
+author_email: tobias@happyr.com
+wordpress_id: 619
+wordpress_url: http://developer.happyr.com/?page_id=619
+date: '2014-06-26 09:04:40 +0200'
+date_gmt: '2014-06-26 07:04:40 +0200'
+categories: []
+tags: []
+comments: []
+---
+<p>[markdown]https://raw.githubusercontent.com/HappyR/CloudFlareBundle/master/README.md[/markdown]</p>
+<h2>Command to clear cache</h2>
+<p>I host my static resources with CloudFlare and I use this bundle to clear the cache for the main script.xxx.js and style.xxx.css. I've named my static resources after the Git commit. (See <a href="http://developer.happyr.com/rename-dump-from-asseticbundle">blog post here</a>.) I use the following command.</p>
+<p>[php]</p>
+<p>    protected function execute(InputInterface $input, OutputInterface $output)<br />
+    {<br />
+        if (!$this-&gt;getContainer()-&gt;has('happyr.clourflare.service.cloudflare')) {<br />
+            return;<br />
+        }</p>
+<p>        $cloudFlare=$this-&gt;getContainer()-&gt;get('happyr.clourflare.service.cloudflare');<br />
+        $base=rtrim($this-&gt;getContainer()-&gt;getParameter('static_assets_base_url'),'/');<br />
+        $domain=preg_replace('|^https?://|','', $base);<br />
+        $gitVersion=$this-&gt;getContainer()-&gt;getParameter('git_version');</p>
+<p>        $cloudFlare-&gt;api('zone_file_purge', array('z'=&gt;$domain, 'url'=&gt;$base.'/static/style.'.$gitVersion.'.css'));<br />
+        $cloudFlare-&gt;api('zone_file_purge', array('z'=&gt;$domain, 'url'=&gt;$base.'/static/script.'.$gitVersion.'.js'));<br />
+    }<br />
+[/php]</p>
+<h2>Source</h2>
+<p>You find the source on <a href="https://github.com/HappyR/CloudFlareBundle">GitHub</a>.</p>

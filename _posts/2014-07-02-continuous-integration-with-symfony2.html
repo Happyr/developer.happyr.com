@@ -1,0 +1,145 @@
+---
+layout: post
+status: publish
+published: true
+title: Continuous integration with Symfony2
+author:
+  display_name: Tobias Nyholm
+  login: Tobias Nyholm
+  email: tobias@happyr.com
+  url: ''
+author_login: Tobias Nyholm
+author_email: tobias@happyr.com
+wordpress_id: 203
+wordpress_url: http://developer.happyr.se/?p=203
+date: '2014-07-02 13:50:36 +0200'
+date_gmt: '2014-07-02 11:50:36 +0200'
+categories:
+- Happyr developing
+- Symfony2
+tags: []
+comments:
+- id: 83932
+  author: Attila HOFFEREK
+  author_email: azhofi@gmail.com
+  author_url: ''
+  date: '2015-03-22 20:55:23 +0100'
+  date_gmt: '2015-03-22 19:55:23 +0100'
+  content: Thanks for the great article!
+- id: 89191
+  author: Andreas Lorenz
+  author_email: lorenz.and@gmail.com
+  author_url: ''
+  date: '2015-04-28 14:42:45 +0200'
+  date_gmt: '2015-04-28 12:42:45 +0200'
+  content: Great article, do you also consider to backup your database when you need
+    to update your schema?
+- id: 89193
+  author: Tobias Nyholm
+  author_email: tobias@happyr.com
+  author_url: ''
+  date: '2015-04-28 14:54:31 +0200'
+  date_gmt: '2015-04-28 12:54:31 +0200'
+  content: "Thank you. \r\nYou are very correct. Since I wrote this article I've started
+    using https://github.com/dizda/CloudBackupBundle \r\nI do that at the very first
+    step."
+- id: 92096
+  author: barat
+  author_email: barat84@gmail.com
+  author_url: ''
+  date: '2015-05-20 14:18:05 +0200'
+  date_gmt: '2015-05-20 12:18:05 +0200'
+  content: "\" At each build we tell Ant to: run composer update\" ...\r\nIMO it should
+    never happen. Composer updates should be made on Your dev env and then composer.lock
+    should be commited and pushed to repository. Running composer update when building
+    prod/stage is asking for troubles if You don't have strict declared versions in
+    composer - not every bundle provider is providing compatibility even on minor
+    version bump."
+- id: 94275
+  author: Guido Kritz
+  author_email: contacto@guidokritz.com
+  author_url: ''
+  date: '2015-06-15 06:56:29 +0200'
+  date_gmt: '2015-06-15 04:56:29 +0200'
+  content: Agreed. Learned this the hard way. Run composer install on production environments.
+- id: 97882
+  author: Wirone
+  author_email: wirone@gmail.com
+  author_url: http://demo.wirone.info
+  date: '2015-08-04 13:45:18 +0200'
+  date_gmt: '2015-08-04 11:45:18 +0200'
+  content: Couldn't agree more. Always use <code>composer.lock</code> and <code>composer
+    install</code> for keeping consistency and stability between instances.
+- id: 99037
+  author: Steve Wamsley
+  author_email: swamsley@gmail.com
+  author_url: http://stevewamsley.com
+  date: '2015-08-21 17:46:52 +0200'
+  date_gmt: '2015-08-21 15:46:52 +0200'
+  content: "Thanks so much for putting this article together. It's giving me a good
+    jump start into CI with Symfony2.\r\n\r\nOne question: How are you handling database
+    schema migrations?"
+- id: 99235
+  author: Tobias Nyholm
+  author_email: tobias@happyr.com
+  author_url: ''
+  date: '2015-08-24 12:47:30 +0200'
+  date_gmt: '2015-08-24 10:47:30 +0200'
+  content: "Database migrations are hard. I use DoctrineMigrationBundle and I make
+    sure that only use migrations that do not break BC. \r\n\r\nExample: I do not
+    rename a column, instead I add a new column and removed the old one some weeks/deploys
+    later."
+- id: 111844
+  author: Leonel
+  author_email: leohernandez2013@gmail.com
+  author_url: ''
+  date: '2017-08-03 16:29:31 +0200'
+  date_gmt: '2017-08-03 14:29:31 +0200'
+  content: "The link is broken \r\nhttp://developer.happyr.se/wp-content/uploads/2013/07/Sonar_profile_Symfony2_php.xml_.zip"
+- id: 112377
+  author: FirstAnalisa
+  author_email: jamie.marler@gmail.com
+  author_url: https://11Jaime.blogspot.co.uk
+  date: '2017-12-03 18:33:27 +0100'
+  date_gmt: '2017-12-03 17:33:27 +0100'
+  content: "I have noticed you don't monetize your website, don't waste \r\nyour traffic,
+    you can earn extra bucks every month \r\nbecause you've got hi quality content.
+    If you want to know how to make extra \r\nbucks, search for: Boorfe's tips best
+    adsense alternative"
+---
+<p><strong>There are many great articles that tells you why you should use continuous integration i.e. the one by <a href="http://martinfowler.com/articles/continuousIntegration.html">Martin Fowler</a> and the book This is Lean by Niklas Modig and Pär Ahlström. This article describes our workflow and what tools we use to achieve continuous integration and extreme programming. We are doing most of our developing in Symfony2 and we are using tools like Jenkins, Sonar, Ant and a bunch of homemade services and scripts. </strong></p>
+<p>We use <a href="http://jenkins-ci.org">Jenkins</a> as a continuous integration server. Jenkins is a great platform where you can add on other services that may run analysis, tests, generate reports etc. Whenever we do a push to our Git server, Jenkins will start to "build" the project. We have defined an <a href="http://ant.apache.org">Ant</a> target to specify what to do when the project is being built. The instruction file for Ant is called build.xml and it is basically a list of tasks. (You will find a reference to our build.xml at the bottom of this page.) At each build we tell Ant to:</p>
+<ol>
+<li>Purge the cache</li>
+<li>Create some folders, like app/build/logs</li>
+<li>Run composer update</li>
+<li>Run PHPUnit</li>
+</ol>
+<p>We have instructed PHPUnit to generate both test reports and code cover reports. After all the above Ant tasks have succeeded, Jenkins will send the code to quality analysis.</p>
+<h2>Code analysis with Sonar</h2>
+<p>Sonar is a great peace of software from <a href="http://www.sonarqube.org">Sonarsource</a>. It is a platform for code analysis. Sonar supports a lot of common programming languages. I've installed the PHP package which contains HP Depend, PHP Mess Detector, PHP CodeSniffer. Together with the Sonar core and a some nice quality profiles it will help us find bugs and make the code uniform. We've made some strict rules that will fire alarms if the code contains more than 5 major violations or if the minor violations has increased with more than 15 since last week. When a alarm is fired Jenkins will mark the build as failed.</p>
+<p>Except from code style Sonar will also measure complexity and find logical bugs. Sonar once told me I had to rewrite a function because it was over 100 possible execution ways through that function...</p>
+<p>The first couple of weeks with Sonar was pain. Each commit we did had a lot of violations and we thought it was just slowing us down. But soon we learned how to write code with no violations and it really made our code more uniform and easy to read and maintain.</p>
+<p>Another great code analysis software for PHP is the <a href="https://insight.sensiolabs.com/">SensioLabs insight</a>. Sonar and SensioLabs insight should both be used as they complement each other. SensioLabs insight detects much more sophisticated errors and security vulnerabilities.</p>
+<p>Download our <a href="http://developer.happyr.se/wp-content/uploads/2013/07/Sonar_profile_Symfony2_php.xml_.zip">Symfony2 Sonar quality profile</a>.</p>
+<h2>When build fails</h2>
+<p>When a build fails (i.e. when the PHPUnit or the analysis fails) Jenkins will stop the execution flow and send an email to whoever broke the build. The code must not proceed to the development or production servers.</p>
+<p>I've read some examples of companies who have implemented some sort of monitoring of the builds. You may see build status in Jenkins but it would be a lot cooler to have a red lava lamp that gets turned on when the code in the master branch does not pass the tests or quality profile. If the build is broken for 15 minutes or more the lava lamp bubbles are starting to move. =)</p>
+<h2>Distribution to test and production</h2>
+<p>If the build passes both the test suite and the quality profile it is time to deploy the project to a development server. This is done at each successful build. You may run more manual tests and/or QA tests on this server. It is also a good place to let you manager try the new features.</p>
+<p>Jenkins should also be in charge of deployment to the QA server and production server. I prefer to start those deployment myself by clicking on a button in Jenkins but I know of developers that would like to deploy to production when pushing to the "production" git branch.</p>
+<p>Our deployment is a Ant target. Ant will:</p>
+<ol>
+<li>Do a git pull</li>
+<li>Put the site in maintenance mode</li>
+<li>Run composer install</li>
+<li>Migrate the database and clear APC cache</li>
+<li>Install new bower dependencies</li>
+<li>Run Assetic dump</li>
+<li>Clear and warm up the cache</li>
+<li>Remove the maintenance mode</li>
+</ol>
+<p>Since Jenkins is running on a different server than many of our application I tell Jenkins that a deployment is to start a shell script. The shell script uses ssh to get to the production server and then start the Ant task from there. It is possible to set up Jenkins to communicate with other servers but I prefer to keep things simple.</p>
+<p>Download our Ant <a href="http://developer.happyr.com/wp-content/uploads/2014/06/build.xml_.zip">build.xml</a>.</p>
+<h2>Choose your tools</h2>
+<p>Which tools and services I use is not too important. What you should learn form this article is the workflow, the concept and that automation is key. If you are a .NET developer you might file that TeamCity is a much better choice over Jenkins or if you feel like using Capistrano instead of Ant that is fine. The concept is the same and you will achieve the same results no matter the name of the tool.</p>

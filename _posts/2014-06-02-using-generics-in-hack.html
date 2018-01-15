@@ -1,0 +1,141 @@
+---
+layout: post
+status: publish
+published: true
+title: Using generics in Hack
+author:
+  display_name: Tobias Nyholm
+  login: Tobias Nyholm
+  email: tobias@happyr.com
+  url: ''
+author_login: Tobias Nyholm
+author_email: tobias@happyr.com
+wordpress_id: 563
+wordpress_url: http://developer.happyr.com/?p=563
+date: '2014-06-02 06:32:06 +0200'
+date_gmt: '2014-06-02 04:32:06 +0200'
+categories:
+- Happyr
+tags: []
+comments:
+- id: 451
+  author: romain
+  author_email: kurt_le_punk922@hotmail.com
+  author_url: http://noneyet
+  date: '2014-06-15 21:02:43 +0200'
+  date_gmt: '2014-06-15 19:02:43 +0200'
+  content: "Hello. Thank you for this post. It was of great help to me. I first thought
+    of using templates.. generic type just as in C++ or Java. But you just have to
+    write a variable and it uses its type as the generic type... Not bad after all
+    ! \r\nthank you again and good luck !"
+- id: 589
+  author: Josh Watzman
+  author_email: jwatzman@fb.com
+  author_url: ''
+  date: '2014-07-01 19:05:11 +0200'
+  date_gmt: '2014-07-01 17:05:11 +0200'
+  content: In your second example, you still have an untyped Map -- I think you could
+    make it even more type safe by typing it as "private Map&lt;Trow, Map&gt; $map"!
+- id: 590
+  author: Tobias Nyholm
+  author_email: tobias@happyr.com
+  author_url: ''
+  date: '2014-07-01 19:27:37 +0200'
+  date_gmt: '2014-07-01 17:27:37 +0200'
+  content: Thank you @Josh.
+- id: 609
+  author: Tobias Nyholm
+  author_email: tobias@happyr.com
+  author_url: ''
+  date: '2014-07-02 14:34:36 +0200'
+  date_gmt: '2014-07-02 12:34:36 +0200'
+  content: Thanks. I'm glad you like it.
+- id: 108051
+  author: Prabhu
+  author_email: e75026h7k@gmail.com
+  author_url: http://www.facebook.com/profile.php?id=100003469600338
+  date: '2016-02-14 13:31:59 +0100'
+  date_gmt: '2016-02-14 12:31:59 +0100'
+  content: This is not strictly ovaloreding but similar.public class Loading { public
+    static <A> A test() {      System.out.println("String");      return null;    }    public
+    static <B> B test() {      System.out.println("Number");     return null;  }  public
+    static void main(String[] args) {  Loading.test();  Loading.test(); }}
+---
+<p>Hack has introduced some new collection objects that will be a replacement for the array(). But what if you feel that something is missing? What if you have a problem that is easiest solved with another type of object? This is where we use generics.</p>
+<p>Say that you want to build a chess game. You may find it useful to have a class representing the board.</p>
+<p>[php]</p>
+<p>class Matrix {<br />
+    private Map $matrix;<br />
+    public function __construct()<br />
+    {<br />
+        $this-&gt;matrix = new Map();<br />
+    }</p>
+<p>    public function get(int $row, string $col): ?ChessPiece {<br />
+        if (!$this-&gt;matrix-&gt;containsKey($row)) {<br />
+            return null;<br />
+        }</p>
+<p>        return $this-&gt;matrix-&gt;get($row)-&gt;get($col);<br />
+    }</p>
+<p>    public function set(int $row, string $col, ChessPiece $value): void {<br />
+        if (!$this-&gt;matrix-&gt;containsKey($row)) {<br />
+            $this-&gt;matrix-&gt;set($row, new Map());<br />
+        }</p>
+<p>        $this-&gt;matrix-&gt;get($row)-&gt;set($col, $value);<br />
+    }<br />
+}</p>
+<p>[/php]</p>
+<p>This will probably work well for you. But when your manager ask you to build a Tic-tac-toe you have to rebuild your board like to be a Matrix[int][int]=Mark.</p>
+<p>A better solution here is to use generics. You use generics as placeholders for types that are unknown at the time of writing. It is still statically typed because the types are defined when you are using an object of that class. Below you see an example of the matrix with generics.</p>
+<p>[php]<br />
+class Matrix&lt;Trow,Tcol,Tv&gt; {</p>
+<p>    private Map&lt;Trow, Map&gt; $matrix;</p>
+<p>    public function __construct()<br />
+    {<br />
+        $this-&gt;matrix = new Map();<br />
+    }</p>
+<p>    public function get(Trow $row, Tcol $col): ?Tv {<br />
+        if (!$this-&gt;matrix-&gt;containsKey($row)) {<br />
+            return null;<br />
+        }</p>
+<p>        return $this-&gt;matrix-&gt;get($row)-&gt;get($col);<br />
+    }</p>
+<p>    public function set(Trow $row, Tcol $col, Tv $value): void {<br />
+        if (!$this-&gt;matrix-&gt;containsKey($row)) {<br />
+            $this-&gt;matrix-&gt;set($row, new Map());<br />
+        }</p>
+<p>        $this-&gt;matrix-&gt;get($row)-&gt;set($col, $value);<br />
+    }<br />
+}</p>
+<p>$matrix = new Matrix();<br />
+$matrix-&gt;set(1,2,'hello');<br />
+$matrix-&gt;set(2,3,'world');<br />
+echo $matrix-&gt;get(1,2);</p>
+<p>[/php]</p>
+<p>It is important to know the difference between generic and variable. A generic could be any value but can not change after it got its type. See this example with Vector&lt;T&gt;</p>
+<p>[php]</p>
+<p>function foobar() {<br />
+  $x = Vector {1, 2, 3, 4}; // T is associated with int<br />
+  $y = Vector {'a', 'b', 'c', 'd'}; // T is associated with string<br />
+}</p>
+<p>foobar();</p>
+<p>[/php]</p>
+<p>$x is of type Vector&lt;int&gt; and $y is of type Vector&lt;string&gt;. $x and $y are not of the same type.</p>
+<p>It is good practice to name generic types with capital T in the beginning. You may use as many generics you want. Generic types can be used on both classes and functions.</p>
+<h2>Not supported features of generics</h2>
+<p>One documented unsupported of generics is to create a new instance of a generic type. This does not work.</p>
+<p>[php]</p>
+<p>class Foo&lt;T&gt; {<br />
+	private ?T $data;</p>
+<p>	public function __construct(?T $data) {<br />
+		$this-&gt;data=$data;<br />
+	}</p>
+<p>	public function getNewOrExisting():T {<br />
+		if ($this-&gt;data===null) {<br />
+			return new T();<br />
+		}<br />
+		return $this-&gt;data;<br />
+	}<br />
+}</p>
+<p>[/php]</p>
+<h2>Conclusion</h2>
+<p>Generics are great when you want to create a wrapper object for something or when you are making your own data types. I am about to write a blog post about how the type checker works and how it works with generics. Stay updated.</p>

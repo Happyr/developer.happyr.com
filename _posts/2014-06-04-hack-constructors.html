@@ -1,0 +1,71 @@
+---
+layout: post
+status: publish
+published: true
+title: Hack constructors
+author:
+  display_name: Tobias Nyholm
+  login: Tobias Nyholm
+  email: tobias@happyr.com
+  url: ''
+author_login: Tobias Nyholm
+author_email: tobias@happyr.com
+wordpress_id: 576
+wordpress_url: http://developer.happyr.com/?p=576
+date: '2014-06-04 06:21:31 +0200'
+date_gmt: '2014-06-04 04:21:31 +0200'
+categories:
+- Hack
+tags: []
+comments:
+- id: 635
+  author: Josh Watzman
+  author_email: jwatzman@fb.com
+  author_url: ''
+  date: '2014-07-03 20:14:12 +0200'
+  date_gmt: '2014-07-03 18:14:12 +0200'
+  content: "&gt; The “problem” with this is that the spelling error on line 7 might
+    get undetected. The type checker will not tell you and it might take a while in
+    production before anyone detects this bug.\r\n\r\nThis will get detected if your
+    class is in partial or strict mode, and all of its recursive superclasses are
+    all in Hack files (any mode -- but not PHP files). With a superclass in a PHP
+    file, we have to assume that \"cuont\" is defined somewhere there -- but if it's
+    Hack all the way up, we can know that member doesn't exist and yell about it."
+- id: 636
+  author: Tobias Nyholm
+  author_email: tobias@happyr.com
+  author_url: ''
+  date: '2014-07-03 21:09:46 +0200'
+  date_gmt: '2014-07-03 19:09:46 +0200'
+  content: "I might have to rewrite that a little bit. I meant to say that the spelling
+    error might get undetected when writing PHP. \r\nThank you for noticing."
+---
+<p>Hack got a lot of features and improvements of different kinds. It comes with some syntactic sugar. The constructor is a subject for a syntactic sugar improvement. </p>
+<p>The PHP-way of writing a class might look like this:<br />
+[php]<br />
+&lt;?php</p>
+<p>class Foobar {<br />
+  protected string $name;<br />
+  private int $count=0;</p>
+<p>  public function __construct(string $name, int $count) {<br />
+    $this-&gt;name=$name;<br />
+    $this-&gt;cuont=$count;<br />
+    $this-&gt;init();<br />
+  }<br />
+  private function init() { }<br />
+}<br />
+[/php]</p>
+<p>The “problem” with this is that the spelling error on line 7 might get undetected. The Hack type checker might help you with this if all the supertypes are written in Hack. But in PHP, you might not find this bug until production. </p>
+<p>With the new syntactic sugar in Hack you may write the same (without the spelling error) class variable and constructor like this:<br />
+[php]<br />
+&lt;?hh</p>
+<p>class Foobar {<br />
+  public function __construct(protected string $name, private int $count) {<br />
+    $this-&gt;init();<br />
+  }<br />
+  private function init() { }<br />
+}<br />
+[/php]</p>
+<h2>Annotations</h2>
+<p>It is tempting to annotate constructors with void or this. Both make kind of sense since you are not returning anything, but then again you are getting an instance of the class. But how will it work when using this and class inheritance?<br />
+To avoid all confusion, don’t annotate a return type on the constructor. In fact, the type checker will throw an error if you do annotate the return type of a constructor. </p>

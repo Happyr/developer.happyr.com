@@ -1,0 +1,223 @@
+---
+layout: post
+status: publish
+published: true
+title: Why collections?
+author:
+  display_name: Tobias Nyholm
+  login: Tobias Nyholm
+  email: tobias@happyr.com
+  url: ''
+author_login: Tobias Nyholm
+author_email: tobias@happyr.com
+wordpress_id: 584
+wordpress_url: http://developer.happyr.com/?p=584
+date: '2014-06-10 16:52:59 +0200'
+date_gmt: '2014-06-10 14:52:59 +0200'
+categories:
+- Hack
+tags: []
+comments:
+- id: 1270
+  author: Mathias Verraes
+  author_email: mathias@verraes.net
+  author_url: http://verraes.net
+  date: '2014-07-28 09:36:14 +0200'
+  date_gmt: '2014-07-28 07:36:14 +0200'
+  content: "\"You will, however, never encounter a situation where you need to use
+    immutable objects.\"\r\n\r\nCould you clarify this?"
+- id: 1271
+  author: Tobias Nyholm
+  author_email: tobias@happyr.com
+  author_url: ''
+  date: '2014-07-28 09:40:51 +0200'
+  date_gmt: '2014-07-28 07:40:51 +0200'
+  content: "What I mean is that you will never face a problem that can't be solved
+    with mutable objects but the problem is solvable with immutable objects. No situation
+    *require* you to use immutable objects, but there is (of course) situations where
+    it is beneficial. \r\n\r\nI will rewrite that sentence to make it more clear."
+---
+<p>Hack has introduced some new object to replace the PHP array. These collections are Vector, Set, Map, Pair and some more. If you are familiar with Java or C# you probably know the benefits of each of these collections already. You might be thinking:</p>
+<blockquote><p>Why would you want to replace the PHP array? I use it for everything...</p></blockquote>
+<p>That is the problem. PHP arrays are used everywhere and for everything. The keys might be ordered, unordered, strings, integers. A value might be a boolean, string or another array. It is impossible to predict the behavior of an array. PHP arrays are really “one size fits all”.</p>
+<h2>So, why collections?</h2>
+<p>Each collection object solves a specific problem. When you need to have a collection of unique values you should use a Set. If you need a mini data storage that you refer to with keys, you probably should use a Map.</p>
+<p>Using collection objects have multiple benefits over the PHP array:</p>
+<ul>
+<li>Better performance because the collection objects can be cached more aggressively.</li>
+<li>PHP arrays are not objects they will be copied each time you pass them as a function parameter. Objects are passed by reference.</li>
+<li>You may use the type checker with the collection objects</li>
+<li>Collection object have function like filter(), map(), contains() etc to make them easier to work with.</li>
+</ul>
+<h2>Immutable instances</h2>
+<p>Most of the collection objects have an immutable version. Say that you have a Map that you have populated with some data. At some point in the Map object’s lifecycle you know that it should not be changed any more. Then you may create an ImmMap that does not allow any changes.</p>
+<p>[php]</p>
+<p>function getFruits()<br />
+{<br />
+  $basket = Map {'apples'=&gt;4, 'oranges'=&gt;8, 'peaches'=&gt;2};<br />
+  $basket['bananas']=12;</p>
+<p>  return $basket;<br />
+}</p>
+<p>function askAStrangerToHoldBasket($basket)<br />
+{<br />
+  // ...<br />
+  return $basket;<br />
+}</p>
+<p>$basket=getFruits();<br />
+$returnedBasket = askAStrangerToHoldBasket($basket-&gt;toImmMap());</p>
+<p>//you can be sure that the stranger has not added or removed anything.</p>
+<p>[/php]</p>
+<p>Immutable objects can be cached more aggressively because we know for sure that they will not change its state. They are also thread safe. But the most obvious reason is simplicity. They are easier to understand and predict. </p>
+<p>If you design a card game, you could have each card being a immutable object since you know the cards are not going to change their values or suits… You will, however, never encounter a situation where you are required to use immutable objects. You could easily design the card game with mutable objects. </p>
+<h2>Vector</h2>
+<p>A Vector is an object with keys and values. The keys are integers starting from zero. Like in Java and C# you may access each element in the array on O(1) (constant time). You may also insert elements in the end of the vector at O(1).</p>
+<p>[php]</p>
+<p>function foobar()<br />
+{<br />
+  $v = Vector {'Foo', 'Bar'};<br />
+  $v[]='Baz';</p>
+<p>  echo $v[1].&quot;\n\n&quot;;</p>
+<p>  $v-&gt;add('Biz');<br />
+  var_dump($v);<br />
+}</p>
+<p>foobar();</p>
+<p>[/php]</p>
+<p>Output:</p>
+<p>[shell]</p>
+<p>Bar</p>
+<p>object(HH\Vector)#1 (4) {<br />
+ [0]=&gt;<br />
+ string(3) &quot;Foo&quot;<br />
+ [1]=&gt;<br />
+ string(3) &quot;Bar&quot;<br />
+ [2]=&gt;<br />
+ string(3) &quot;Baz&quot;<br />
+ [3]=&gt;<br />
+ string(3) &quot;Biz&quot;<br />
+}</p>
+<p>[/shell]</p>
+<p>As you can see you may use square bracket syntax or the get/set functions. The square bracket syntax is preferable because it is faster and they are familiar to PHP developers.</p>
+<p>Use a vector when you need any collection of elements where the index key is not important. This is the common replacement for a non-associative PHP array.</p>
+<p>Be warned though. When removing elements from the Vector, the elements will get updated keys. If you try to access an element with a key that do not exist you will get an OutOfBoundsException.</p>
+<p>[php]</p>
+<p>function foobar()<br />
+{<br />
+ $v = Vector {'Foo', 'Bar', 'Baz'};<br />
+ echo $v[2].&quot;\n\n&quot;;<br />
+ var_dump($v);</p>
+<p> echo &quot;\n -- \n&quot;;</p>
+<p> $v-&gt;removeKey(0);<br />
+ var_dump($v);</p>
+<p>//Throws an OutOfBoundsException<br />
+ echo $v[2].&quot;\n&quot;;<br />
+}</p>
+<p>foobar();</p>
+<p>[/php]</p>
+<p>Outputs:</p>
+<p>[shell]</p>
+<p>Baz</p>
+<p>object(HH\Vector)#1 (3) {<br />
+[0]=&gt;<br />
+ string(3) &quot;Foo&quot;<br />
+[1]=&gt;<br />
+ string(3) &quot;Bar&quot;<br />
+[2]=&gt;<br />
+ string(3) &quot;Baz&quot;<br />
+}</p>
+<p>--<br />
+ object(HH\Vector)#1 (2) {<br />
+ [0]=&gt;<br />
+ string(3) &quot;Bar&quot;<br />
+[1]=&gt;<br />
+ string(3) &quot;Baz&quot;<br />
+}</p>
+<p>[/shell]</p>
+<h2>Map</h2>
+<p>A Map is like a Vector but you are in control of the keys. At the time of writing you may only use strings and integers as keys but you will eventually be able to use any object. Accessing an element in a Map is slower than in a Vector. Hack internal has to search for the key and then access the value. It has a time complexity of O(lg n).</p>
+<p>[php]<br />
+function foobar()<br />
+{<br />
+    $v = Map {'Foo'=&gt;'Good', 'Bar'=&gt;'Better'};<br />
+    $v['Biz'] = 'Okey';<br />
+    var_dump($v);<br />
+    echo &quot;\n\n&quot;;</p>
+<p>    $v-&gt;removeKey('Foo');<br />
+    var_dump($v);</p>
+<p>    //Throws an OutOfBoundsException<br />
+    //echo $v['Baz'].&quot;\n&quot;;<br />
+}</p>
+<p>foobar();<br />
+[/php]</p>
+<p>Outputs:<br />
+[shell]</p>
+<p>object(HH\Map)#1 (3) {<br />
+[&quot;Foo&quot;]=&gt;<br />
+  string(4) &quot;Good&quot;<br />
+[&quot;Bar&quot;]=&gt;<br />
+  string(6) &quot;Better&quot;<br />
+[&quot;Biz&quot;]=&gt;<br />
+  string(4) &quot;Okey&quot;<br />
+}</p>
+<p>object(HH\Map)#1 (2) {<br />
+[&quot;Bar&quot;]=&gt;<br />
+  string(6) &quot;Better&quot;<br />
+[&quot;Biz&quot;]=&gt;<br />
+  string(4) &quot;Okey&quot;<br />
+}</p>
+<p>[/shell]</p>
+<h2>Set</h2>
+<p>A Set is a group of values without any keys. You may only store strings and integers more data types will be implemented later. Access in a Set has the time complexity of O(lg n) because Hack has to do a search for the element within the Set. You may create a Set from a Map or Vector by running the function toSet(). </p>
+<p>The special feature with Sets is that it can’t contain doublets. Each value is unique. If you try to assign the same value twice it will just be ignored.<br />
+ You might have used an array like this before:</p>
+<p>[php]<br />
+//php<br />
+function getFruits(array $stores)<br />
+{<br />
+    $fruits=array();<br />
+    foreach ($stores as $store) {<br />
+      foreach ($store-&gt;getFruits() as $fruit) {<br />
+        if (/* condition */) {<br />
+            $fruits[$fruit-&gt;getName()]=true;<br />
+        }<br />
+    }</p>
+<p>    //return a list of unique fruit names that will meet the conditions<br />
+    return array_keys($fruits);<br />
+}<br />
+[/php]</p>
+<p>This is where you should use a Set.</p>
+<p>[php]<br />
+//hack<br />
+function getFruits(array $stores)<br />
+{<br />
+    $fruits=Set{};<br />
+    foreach ($stores as $store) {<br />
+      foreach ($store-&gt;getFruits() as $fruit) {<br />
+        if (/* condition */) {<br />
+            $fruits[]=$fruit-&gt;getName();<br />
+        }<br />
+    }</p>
+<p>    //return a list of unique fruit names that will meet the conditions<br />
+    return $fruits;<br />
+}<br />
+[/php]</p>
+<p>When you are working with Sets you may use intersect.</p>
+<p>[php]function foobar()<br />
+{<br />
+    $foo=Set{'A', 'B', 'C'};<br />
+    $bar=Set{'B', 'D', 'A'};</p>
+<p>    $baz=array_intersect($foo, $bar);<br />
+    var_dump($baz);<br />
+}</p>
+<p>foobar();<br />
+[/php]<br />
+Outputs:<br />
+[shell]<br />
+array(2) {<br />
+    [&quot;A&quot;]=&gt;<br />
+  string(1) &quot;A&quot;<br />
+    [&quot;B&quot;]=&gt;<br />
+  string(1) &quot;B&quot;<br />
+}</p>
+<p>[/shell]</p>
+<h2>Pair</h2>
+<p>A Par is like an immutable vector with 2 elements. I’ve not jet figured out any good use case for a Pair. In many cases it will be better to use a tuple or a shape.</p>

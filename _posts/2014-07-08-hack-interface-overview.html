@@ -1,0 +1,69 @@
+---
+layout: post
+status: publish
+published: true
+title: Hack interface overview
+author:
+  display_name: Tobias Nyholm
+  login: Tobias Nyholm
+  email: tobias@happyr.com
+  url: ''
+author_login: Tobias Nyholm
+author_email: tobias@happyr.com
+wordpress_id: 646
+wordpress_url: http://developer.happyr.com/?p=646
+date: '2014-07-08 11:26:36 +0200'
+date_gmt: '2014-07-08 09:26:36 +0200'
+categories:
+- Hack
+tags: []
+comments:
+- id: 758
+  author: Tobias Sjösten
+  author_email: tobias@tobiassjosten.net
+  author_url: http://vvv.tobiassjosten.net/
+  date: '2014-07-08 16:10:25 +0200'
+  date_gmt: '2014-07-08 14:10:25 +0200'
+  content: Haha, <code>Indexish</code>, really? Would have been useful to see the
+    interfaces' definitions along with the name.
+- id: 759
+  author: Tobias Nyholm
+  author_email: tobias@happyr.com
+  author_url: ''
+  date: '2014-07-08 16:27:56 +0200'
+  date_gmt: '2014-07-08 14:27:56 +0200'
+  content: "The implementation of Indexish looks like this: \r\n[php]\r\ninterface
+    Indexish&lt;Tk, Tv&gt; extends KeyedContainer&lt;Tk, Tv&gt; {}\r\n[/php]\r\nSource:
+    http://docs.hhvm.com/manual/en/class.hack.indexishtktv.php\r\n\r\nI actually don't
+    know how it works. Look att the function signatures for <a href=\"https://github.com/facebook/hhvm/blob/master/hphp/hack/hhi/ImmMap.hhi\"
+    rel=\"nofollow\">ImmMap</a>. This interface might only be for parameter annotation
+    and not for creating your own Indexish objects."
+- id: 60123
+  author: modernmonks
+  author_email: sgsgupta07@gmail.com
+  author_url: http://www.modernmonkslab.com/
+  date: '2014-12-09 09:56:51 +0100'
+  date_gmt: '2014-12-09 08:56:51 +0100'
+  content: "Hello Tobias Nyholm,\r\n\r\nI am not getting exactly what it is ? and
+    where we can you use this ?\r\n\r\nThanks"
+---
+<p>&nbsp;</p>
+<p><a href="http://developer.happyr.com/wp-content/uploads/2014/07/HackInterfaces.jpg"><img class="alignnone size-full wp-image-647" src="http://developer.happyr.com/wp-content/uploads/2014/07/HackInterfaces.jpg" alt="HackInterfaces" width="920" height="446" /></a>There are a number of predefined interfaces in Hack. This post is going to give you an overview about the interfaces that are a subtype of Traversable.</p>
+<h2>Traversable&lt;Tv&gt;</h2>
+<p>This is an abstract interface. Each an every class that implements this interface may be use with foreach()</p>
+<h2>KeyedTraversable&lt;Tk, Tv&gt;</h2>
+<p>This is an abstract interface. When implementing this you may use your object with a foreach with keyes. Like foreach($c as $k =&gt; $v)</p>
+<h2>IteratorAggregate&lt;Tv&gt;</h2>
+<p>This interface requires you to have a getIterator() function that will return an external iterator.</p>
+<h2>Iterable&lt;Tv&gt;</h2>
+<p>Interface to create an iterable object that will work with foreach()</p>
+<h2>KeyedIterable&lt;Tk, Tv&gt;</h2>
+<p>Interface to create an iterable object that will work with foreach() with keyes. Like foreach($c as $k =&gt; $v).</p>
+<h2>Indexish&lt;Tk, Tv&gt;</h2>
+<p>Allows you to use the bracket syntax.</p>
+<h2>Iterator&lt;Tv&gt;</h2>
+<p>Interface for external iterators or objects that can be iterated themselves internally.</p>
+<h2>KeyedIterator&lt;Tk, Tv&gt;</h2>
+<p>Same as Iterator but with keys.</p>
+<h2>Continuation&lt;Tv&gt;</h2>
+<p>This object is return from generators. The manual has an excellent <a href="http://docs.hhvm.com/manual/en/hack.continuations.php">example</a> of how to use Continuation.</p>
