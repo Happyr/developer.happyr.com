@@ -1,43 +1,54 @@
 # Welcome to Jekyll!
 #
 # This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
+# which you are expected to set up once and rarely need to edit after that.
 # For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+# 'jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
-title: Your awesome title
-email: your-email@example.com
-description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+title: Happyr developer blog
+description: > # this means to ignore newlines until "baseurl:"
+ Happyr developer blog
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: jekyllrb
-github_username:  jekyll
+url: "http://developer.happyr.com"
+permalink: :title/
+full-url: "http://developer.happyr.com" # the base hostname & protocol for your site
+
+
+# CSS
+sass:
+  style: compressed
+
+# Comments - Go to Disqus.com > sign up > get the short-name > insert it here
+disqus-shortname:
+
+# Tracker
+analytics:  UA-41078113-3
+
+
+# Site version
+version: 0.9
+
+
+# Post date background - This will change the background of the post date and tag ribbon according to the theme. If set to no default green background will be used. If yes then the theme color scheme is used.
+
+change-date-bg: no
+
 
 # Build settings
 markdown: kramdown
-theme: ashwath
-plugins:
-  - jekyll-feed
 
-# Exclude from processing.
-# The following items will not be processed, by default. Create a custom list
-# to override the default setting.
-# exclude:
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+include: [_pages] # Includes files inside _pages directory [Do not remove this]
+
+exclude: [.idea]
+#author:
+#  name: Ashwathama
+#  image: ashwat.jpg # The author image will be shown on the header. Place this image in /images/ folder.
+#  about: Ashwathama is a sage who wrote Mahabharatha. He is the son of Drona. He fought on the Kaurava side against the Pandavas. He put up a pretty good fight with mighty Bhima.
+#  twitter: webjeda  # https://twitter.com/ is automatically added
+#  facebook: webjeda # https://facebook.com/ is automatically added
+#  email: hello@webjeda.com # mailto: is automatically added
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-paginate
