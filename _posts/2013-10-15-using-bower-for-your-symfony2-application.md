@@ -1,15 +1,7 @@
 ---
-
-status: publish
-published: true
 title: Using Bower for your Symfony2 application
 author: Tobias Nyholm
-author_login: Tobias Nyholm
-author_email: tobias@happyr.com
-wordpress_id: 306
-wordpress_url: http://developer.happyr.com/?p=306
 date: '2013-10-15 21:36:55 +0200'
-date_gmt: '2013-10-15 19:36:55 +0200'
 categories:
 - Symfony2
 - Bower

@@ -1,15 +1,7 @@
 ---
-
-status: publish
-published: true
 title: Choose owning side in OneToOne relation
 author: Tobias Nyholm
-author_login: Tobias Nyholm
-author_email: tobias@happyr.com
-wordpress_id: 623
-wordpress_url: http://developer.happyr.com/?p=623
 date: '2014-06-26 12:16:41 +0200'
-date_gmt: '2014-06-26 10:16:41 +0200'
 categories:
 - Symfony2
 - Performance

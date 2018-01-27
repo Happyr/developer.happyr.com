@@ -1,15 +1,7 @@
 ---
-
-status: publish
-published: true
 title: Hack Lambda expressions
 author: Tobias Nyholm
-author_login: Tobias Nyholm
-author_email: tobias@happyr.com
-wordpress_id: 580
-wordpress_url: http://developer.happyr.com/?p=580
 date: '2014-06-05 06:13:07 +0200'
-date_gmt: '2014-06-05 04:13:07 +0200'
 categories:
 - Happyr
 tags: []

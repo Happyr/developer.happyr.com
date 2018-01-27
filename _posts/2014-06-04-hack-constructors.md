@@ -1,15 +1,7 @@
 ---
-
-status: publish
-published: true
 title: Hack constructors
 author: Tobias Nyholm
-author_login: Tobias Nyholm
-author_email: tobias@happyr.com
-wordpress_id: 576
-wordpress_url: http://developer.happyr.com/?p=576
 date: '2014-06-04 06:21:31 +0200'
-date_gmt: '2014-06-04 04:21:31 +0200'
 categories:
 - Hack
 tags: []

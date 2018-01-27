@@ -1,15 +1,7 @@
 ---
-
-status: publish
-published: true
 title: Coveralls with Github and Travis
 author: Tobias Nyholm
-author_login: Tobias Nyholm
-author_email: tobias@happyr.com
-wordpress_id: 651
-wordpress_url: http://developer.happyr.com/?p=651
 date: '2014-07-15 09:19:38 +0200'
-date_gmt: '2014-07-15 07:19:38 +0200'
 categories:
 - Developing
 tags: []

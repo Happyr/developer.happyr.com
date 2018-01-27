@@ -1,15 +1,7 @@
 ---
-
-status: publish
-published: true
 title: Try Hack and HHVM
 author: Tobias Nyholm
-author_login: Tobias Nyholm
-author_email: tobias@happyr.com
-wordpress_id: 483
-wordpress_url: http://developer.happyr.com/?p=483
 date: '2014-05-08 12:17:24 +0200'
-date_gmt: '2014-05-08 10:17:24 +0200'
 categories:
 - HHVM
 - Hack

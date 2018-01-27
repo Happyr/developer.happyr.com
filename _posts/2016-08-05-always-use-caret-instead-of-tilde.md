@@ -1,14 +1,8 @@
 ---
-status: publish
-published: true
+
 title: Always use caret instead of tilde
 author: Tobias Nyholm
-author_login: Tobias Nyholm
-author_email: tobias@happyr.com
-wordpress_id: 733
-wordpress_url: http://developer.happyr.com/?p=733
 date: '2016-08-05 08:23:47 +0200'
-date_gmt: '2016-08-05 06:23:47 +0200'
 categories:
 - Happyr
 tags: []

@@ -1,15 +1,7 @@
 ---
-
-status: publish
-published: true
 title: Hack modes
 author: Tobias Nyholm
-author_login: Tobias Nyholm
-author_email: tobias@happyr.com
-wordpress_id: 569
-wordpress_url: http://developer.happyr.com/?p=569
 date: '2014-06-03 06:18:16 +0200'
-date_gmt: '2014-06-03 04:18:16 +0200'
 categories:
 - Hack
 tags: []

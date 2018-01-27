@@ -1,15 +1,7 @@
 ---
-
-status: publish
-published: true
 title: Hack types
 author: Tobias Nyholm
-author_login: Tobias Nyholm
-author_email: tobias@happyr.com
-wordpress_id: 534
-wordpress_url: http://developer.happyr.com/?p=534
 date: '2014-05-28 12:06:05 +0200'
-date_gmt: '2014-05-28 10:06:05 +0200'
 categories:
 - Hack
 tags: []

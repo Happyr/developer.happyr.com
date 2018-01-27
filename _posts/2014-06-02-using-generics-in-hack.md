@@ -1,15 +1,7 @@
 ---
-
-status: publish
-published: true
 title: Using generics in Hack
 author: Tobias Nyholm
-author_login: Tobias Nyholm
-author_email: tobias@happyr.com
-wordpress_id: 563
-wordpress_url: http://developer.happyr.com/?p=563
 date: '2014-06-02 06:32:06 +0200'
-date_gmt: '2014-06-02 04:32:06 +0200'
 categories:
 - Happyr
 tags: []

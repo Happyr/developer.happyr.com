@@ -1,15 +1,7 @@
 ---
-
-status: publish
-published: true
 title: User as a service in Symfony2
 author: Tobias Nyholm
-author_login: Tobias Nyholm
-author_email: tobias@happyr.com
-wordpress_id: 688
-wordpress_url: http://developer.happyr.com/?p=688
 date: '2015-04-21 14:54:47 +0200'
-date_gmt: '2015-04-21 12:54:47 +0200'
 categories:
 - Symfony2
 tags: []

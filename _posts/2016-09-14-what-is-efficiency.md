@@ -1,14 +1,8 @@
 ---
-status: publish
-published: true
+
 title: What is efficiency?
 author: Tobias Nyholm
-author_login: Tobias Nyholm
-author_email: tobias@happyr.com
-wordpress_id: 742
-wordpress_url: http://developer.happyr.com/?p=742
 date: '2016-09-14 09:35:00 +0200'
-date_gmt: '2016-09-14 07:35:00 +0200'
 categories:
 - Developing
 tags: []

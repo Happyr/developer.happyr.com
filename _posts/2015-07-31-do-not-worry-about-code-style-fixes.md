@@ -1,15 +1,7 @@
 ---
-
-status: publish
-published: true
 title: Do not worry about code style fixes
 author: Tobias Nyholm
-author_login: Tobias Nyholm
-author_email: tobias@happyr.com
-wordpress_id: 711
-wordpress_url: http://developer.happyr.com/?p=711
 date: '2015-07-31 16:14:03 +0200'
-date_gmt: '2015-07-31 14:14:03 +0200'
 categories:
 - Happyr
 - Developing

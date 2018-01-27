@@ -1,15 +1,7 @@
 ---
-
-status: publish
-published: true
 title: Authenticate user with LinkedIn API from your PHP application
 author: Tobias Nyholm
-author_login: Tobias Nyholm
-author_email: tobias@happyr.com
-wordpress_id: 375
-wordpress_url: http://developer.happyr.com/?p=375
 date: '2014-01-18 13:26:05 +0100'
-date_gmt: '2014-01-18 12:26:05 +0100'
 categories:
 - Library
 tags: []

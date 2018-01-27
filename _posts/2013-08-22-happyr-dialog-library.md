@@ -1,15 +1,7 @@
 ---
-
-status: publish
-published: true
 title: HappyR Dialog library
 author: Tobias Nyholm
-author_login: Tobias Nyholm
-author_email: tobias@happyr.com
-wordpress_id: 285
-wordpress_url: http://developer.happyr.com/?p=285
 date: '2013-08-22 15:29:14 +0200'
-date_gmt: '2013-08-22 13:29:14 +0200'
 categories:
 - Happyr
 tags: []

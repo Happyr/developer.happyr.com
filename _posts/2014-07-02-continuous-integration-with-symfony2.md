@@ -1,15 +1,7 @@
 ---
-
-status: publish
-published: true
 title: Continuous integration with Symfony2
 author: Tobias Nyholm
-author_login: Tobias Nyholm
-author_email: tobias@happyr.com
-wordpress_id: 203
-wordpress_url: http://developer.happyr.com/?p=203
 date: '2014-07-02 13:50:36 +0200'
-date_gmt: '2014-07-02 11:50:36 +0200'
 categories:
 - Developing
 - Symfony2

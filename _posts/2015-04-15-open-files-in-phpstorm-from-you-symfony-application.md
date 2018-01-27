@@ -1,15 +1,7 @@
 ---
-
-status: publish
-published: true
 title: Open files in PHPStorm from you Symfony application
 author: Tobias Nyholm
-author_login: Tobias Nyholm
-author_email: tobias@happyr.com
-wordpress_id: 676
-wordpress_url: http://developer.happyr.com/?p=676
 date: '2015-04-15 08:55:00 +0200'
-date_gmt: '2015-04-15 06:55:00 +0200'
 categories:
 - Developing
 - Symfony2

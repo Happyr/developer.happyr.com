@@ -1,15 +1,7 @@
 ---
-
-status: publish
-published: true
 title: Symfony bundle using Hack
 author: Tobias Nyholm
-author_login: Tobias Nyholm
-author_email: tobias@happyr.com
-wordpress_id: 491
-wordpress_url: http://developer.happyr.com/?p=491
 date: '2014-05-12 09:47:52 +0200'
-date_gmt: '2014-05-12 07:47:52 +0200'
 categories:
 - Symfony2
 - HHVM

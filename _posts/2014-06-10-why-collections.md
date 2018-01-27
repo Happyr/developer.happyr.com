@@ -1,15 +1,7 @@
 ---
-
-status: publish
-published: true
 title: Why collections?
 author: Tobias Nyholm
-author_login: Tobias Nyholm
-author_email: tobias@happyr.com
-wordpress_id: 584
-wordpress_url: http://developer.happyr.com/?p=584
 date: '2014-06-10 16:52:59 +0200'
-date_gmt: '2014-06-10 14:52:59 +0200'
 categories:
 - Hack
 tags: []

@@ -1,15 +1,7 @@
 ---
-
-status: publish
-published: true
 title: Real asynchronous events with Symfony2
 author: Tobias Nyholm
-author_login: Tobias Nyholm
-author_email: tobias@happyr.com
-wordpress_id: 507
-wordpress_url: http://developer.happyr.com/?p=507
 date: '2014-05-15 19:33:15 +0200'
-date_gmt: '2014-05-15 17:33:15 +0200'
 categories:
 - Library
 - Symfony2

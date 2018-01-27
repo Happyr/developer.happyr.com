@@ -1,15 +1,7 @@
 ---
-
-status: publish
-published: true
 title: 'Hack: Asynchronous programming'
 author: Tobias Nyholm
-author_login: Tobias Nyholm
-author_email: tobias@happyr.com
-wordpress_id: 614
-wordpress_url: http://developer.happyr.com/?p=614
 date: '2014-06-19 22:18:24 +0200'
-date_gmt: '2014-06-19 20:18:24 +0200'
 categories:
 - Happyr
 tags: []

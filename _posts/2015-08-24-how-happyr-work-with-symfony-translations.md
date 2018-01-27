@@ -1,15 +1,7 @@
 ---
-
-status: publish
-published: true
 title: How Happyr work with Symfony translations
 author: Tobias Nyholm
-author_login: Tobias Nyholm
-author_email: tobias@happyr.com
-wordpress_id: 714
-wordpress_url: http://developer.happyr.com/?p=714
 date: '2015-08-24 12:50:59 +0200'
-date_gmt: '2015-08-24 10:50:59 +0200'
 categories:
 - Happyr
 - Symfony2

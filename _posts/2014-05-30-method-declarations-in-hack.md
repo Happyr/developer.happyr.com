@@ -1,15 +1,7 @@
 ---
-
-status: publish
-published: true
 title: Method declarations in Hack
 author: Tobias Nyholm
-author_login: Tobias Nyholm
-author_email: tobias@happyr.com
-wordpress_id: 544
-wordpress_url: http://developer.happyr.com/?p=544
 date: '2014-05-30 07:17:10 +0200'
-date_gmt: '2014-05-30 05:17:10 +0200'
 categories:
 - Hack
 tags: []

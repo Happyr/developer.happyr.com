@@ -1,22 +1,12 @@
 ---
-
-status: publish
-published: true
 title: Hack interface overview
 author: Tobias Nyholm
-author_login: Tobias Nyholm
-author_email: tobias@happyr.com
-wordpress_id: 646
-wordpress_url: http://developer.happyr.com/?p=646
 date: '2014-07-08 11:26:36 +0200'
-date_gmt: '2014-07-08 09:26:36 +0200'
 categories:
 - Hack
 tags: []
 redirect_from: "/hack-interface-overview/"
 ---
-
-
 ![Hack interfaces]({{ "/assets/images/HackInterfaces.jpg" | absolute_url }})
 
 There are a number of predefined interfaces in Hack. This post is going to give you an overview about the interfaces that are a subtype of Traversable.

@@ -1,15 +1,7 @@
 ---
-
-status: publish
-published: true
 title: Rename dump from AsseticBundle
 author: Tobias Nyholm
-author_login: Tobias Nyholm
-author_email: tobias@happyr.com
-wordpress_id: 350
-wordpress_url: http://developer.happyr.com/?p=350
 date: '2013-12-23 11:35:54 +0100'
-date_gmt: '2013-12-23 10:35:54 +0100'
 categories:
 - Symfony2
 tags: []
