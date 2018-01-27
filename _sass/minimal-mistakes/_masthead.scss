@@ -46,6 +46,9 @@
   align-items: center;
   font-weight: bold;
   z-index: 20;
+  img {
+    max-height: 2rem;
+  }
 }
 
 .masthead__menu {
