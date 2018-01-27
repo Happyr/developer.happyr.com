@@ -4,8 +4,6 @@ author: Tobias Nyholm
 date: '2013-08-22 15:29:14 +0200'
 categories:
 - Happyr
-tags: []
-comments: []
 ---
 
 I know there is plenty of javascript libraries that help you show dialogs. I've used a handful of them and I've read the documentation of many more. Many of them was okey but none was awesome. That's why I built my own.

@@ -6,7 +6,6 @@ categories:
 - Symfony2
 - Performance
 - Doctrine
-tags: []
 ---
 
 Many times I've come got to a situation where I have a unusual high query count. When I inspect the queries in the Symfony profiler I can see that Doctrine is fetching objects I have not requested. To give you a clear image of the problem I'll show an example of the database mapping.

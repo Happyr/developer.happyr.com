@@ -4,7 +4,6 @@ author: Tobias Nyholm
 date: '2014-06-04 06:21:31 +0200'
 categories:
 - Hack
-tags: []
 ---
 
 Hack got a lot of features and improvements of different kinds. It comes with some syntactic sugar. The constructor is a subject for a syntactic sugar improvement.

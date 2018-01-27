@@ -5,8 +5,6 @@ date: '2015-07-31 16:14:03 +0200'
 categories:
 - Happyr
 - Developing
-tags: []
-comments: []
 ---
 
 Earlier this year I installed Fabiens <a href="https://packagist.org/packages/fabpot/php-cs-fixer">php-cs-fixer</a> on my continuous integration server. So at each build I checked if there were any code style errors, if so I failed the build. Easy as pie and our source code were always nice and clean. But this new feature changed my workflow. My new workflow looks like this:

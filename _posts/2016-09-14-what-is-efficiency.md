@@ -5,8 +5,6 @@ author: Tobias Nyholm
 date: '2016-09-14 09:35:00 +0200'
 categories:
 - Developing
-tags: []
-comments: []
 ---
 
 <strong>The answer may be trivial. Efficiency is when you work as hard as you can and as quick as possible to complete a

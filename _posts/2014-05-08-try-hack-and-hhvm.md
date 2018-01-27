@@ -5,8 +5,6 @@ date: '2014-05-08 12:17:24 +0200'
 categories:
 - HHVM
 - Hack
-tags: []
-comments: []
 ---
 
 Lately there has been a lot of talk about HHVM and the new programming language Hack. It all looks great, to bad it does not run your code. The HHVM team is doing their very best to make it 100% backwards compatible with PHP. So at the moment there is very few project that can run on HHVM. But that should not stop you from learning all about HHVM and Hack.

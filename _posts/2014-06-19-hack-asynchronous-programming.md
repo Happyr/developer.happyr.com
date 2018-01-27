@@ -4,7 +4,6 @@ author: Tobias Nyholm
 date: '2014-06-19 22:18:24 +0200'
 categories:
 - Happyr
-tags: []
 ---
 
 Hack has introduced asynchronous programming. This is really great but it is not really documented at the moment. Not at all actually... I’ve done some experimenting and I will try to introduce you to the new concept.

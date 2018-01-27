@@ -4,7 +4,6 @@ author: Tobias Nyholm
 date: '2014-01-18 13:26:05 +0100'
 categories:
 - Library
-tags: []
 ---
 
 Recently I wanted to let my users authenticate with LinkedIn. We had just added a Facebook and Twitter authentication, so why not LinkedIn. To my big surprise there were no <strong>LinekdIn API clients for PHP</strong>. At least no good ones. And the code samples from <a href="https://developer.linkedin.com/documents/code-samples">developer.linkedin.com</a> where lookting pretty nasty. So, as a good open source developer I decided to build one and share it.

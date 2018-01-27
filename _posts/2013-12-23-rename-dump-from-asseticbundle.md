@@ -4,7 +4,6 @@ author: Tobias Nyholm
 date: '2013-12-23 11:35:54 +0100'
 categories:
 - Symfony2
-tags: []
 ---
 
 In your main template you <span style="text-decoration: line-through;">probably</span> should have assetic to manage your assets. In the production environment you would like to dump this to static files.

@@ -4,7 +4,6 @@ author: Tobias Nyholm
 date: '2014-05-30 07:17:10 +0200'
 categories:
 - Hack
-tags: []
 ---
 
 This post will go more in details of my <a title="Hack types" href="http://developer.happyr.com/hack-types">last post about types</a>. After reading that last post you know that a method declaration in Hack will look like this:

@@ -5,7 +5,6 @@ date: '2015-04-15 08:55:00 +0200'
 categories:
 - Developing
 - Symfony2
-tags: []
 ---
 
 If you want to open files in PHPStorm8 directly from the Symfony debug toolbar there is a neat trick you can use. This is very helpful when you quickly want to find a controller or when you got an exception.

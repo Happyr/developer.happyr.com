@@ -4,7 +4,6 @@ author: Tobias Nyholm
 date: '2014-07-15 09:19:38 +0200'
 categories:
 - Developing
-tags: []
 ---
 
 The other day when I was making a PR to a Github project I got a comment like this:

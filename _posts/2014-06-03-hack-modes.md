@@ -4,8 +4,6 @@ author: Tobias Nyholm
 date: '2014-06-03 06:18:16 +0200'
 categories:
 - Hack
-tags: []
-comments: []
 ---
 
 When you are using Hack you are running in one of 3 different modes. The modes are telling the type checker how strict (or forgiving) it should be when checking the code. The modes are strict, partial and decl. In addition to this there modes, there is a declaration called unsafe that is used to disable the type checker.

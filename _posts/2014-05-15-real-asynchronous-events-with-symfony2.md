@@ -7,7 +7,6 @@ categories:
 - Symfony2
 - Performance
 - Java
-tags: []
 ---
 
 PHP is a great language but there are some drawbacks. One thing I miss the most is multi-threading. Wouldn't it be great to be able to do some calculations in a separate thread? Or start some background task and don't care when it finish. I've found a solution that does that very thing with PHP.

@@ -4,7 +4,6 @@ author: Tobias Nyholm
 date: '2014-06-02 06:32:06 +0200'
 categories:
 - Happyr
-tags: []
 ---
 
 Hack has introduced some new collection objects that will be a replacement for the array(). But what if you feel that something is missing? What if you have a problem that is easiest solved with another type of object? This is where we use generics.

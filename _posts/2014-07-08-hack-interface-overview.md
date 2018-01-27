@@ -4,7 +4,6 @@ author: Tobias Nyholm
 date: '2014-07-08 11:26:36 +0200'
 categories:
 - Hack
-tags: []
 redirect_from: "/hack-interface-overview/"
 ---
 ![Hack interfaces]({{ "/assets/images/HackInterfaces.jpg" | absolute_url }})

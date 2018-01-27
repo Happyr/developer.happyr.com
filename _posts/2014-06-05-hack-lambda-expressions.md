@@ -4,8 +4,6 @@ author: Tobias Nyholm
 date: '2014-06-05 06:13:07 +0200'
 categories:
 - Happyr
-tags: []
-comments: []
 ---
 
 Hack is all about making it easier for the developer to write good code. There has been some improvement of the PHP anonymous function or closer as they also are called.

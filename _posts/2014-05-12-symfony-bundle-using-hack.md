@@ -6,7 +6,6 @@ categories:
 - Symfony2
 - HHVM
 - Hack
-tags: []
 ---
 
 I've been working with the <a href="http://www.symfony.se">Symfony.se</a> website the last couple of weeks. In a discussion on Github we argued how a nice excerpt should look like. We decided that the excerpt twig filter should take a HTML string as input and make it shorter without breaking the HTML. It should also remove tables and convert headings.

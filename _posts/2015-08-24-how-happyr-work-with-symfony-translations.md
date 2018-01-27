@@ -5,7 +5,6 @@ date: '2015-08-24 12:50:59 +0200'
 categories:
 - Happyr
 - Symfony2
-tags: []
 ---
 
 You probably follow the Symfony best practices when you develop web applications. That is great but there is no much information about translation. The <a href="http://symfony.com/doc/current/best_practices/i18n.html">official documentation</a> tell you about file format, file location and something about translations keys. But then what?

@@ -5,7 +5,6 @@ date: '2013-10-15 21:36:55 +0200'
 categories:
 - Symfony2
 - Bower
-tags: []
 ---
 
 I recently switched to Bower for managing my frontend third party libraries. First I defined some packages that I needed in a bower.json file and put it in the Symfony2 root directory.

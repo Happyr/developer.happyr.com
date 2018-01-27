@@ -4,7 +4,6 @@ author: Tobias Nyholm
 date: '2014-05-28 12:06:05 +0200'
 categories:
 - Hack
-tags: []
 ---
 
 The biggest difference between Hack and PHP is that PHP is using dynamic typing and Hack is statically typed. Java and C# is other languages that is statically typed. This means that the type on variables must be defined before runtime. Example of types are string, int, bool, array. There are even types like MyObject, Vector&lt;int&gt; and mixed. It is good practice to annotate all class variables, function parameters and function return types. There is no need to annotate local variables.

@@ -4,7 +4,6 @@ author: Tobias Nyholm
 date: '2014-06-10 16:52:59 +0200'
 categories:
 - Hack
-tags: []
 ---
 
 Hack has introduced some new object to replace the PHP array. These collections are Vector, Set, Map, Pair and some more. If you are familiar with Java or C# you probably know the benefits of each of these collections already. You might be thinking:
