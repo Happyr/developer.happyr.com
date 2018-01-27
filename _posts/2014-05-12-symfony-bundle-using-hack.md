@@ -15,32 +15,6 @@ categories:
 - HHVM
 - Hack
 tags: []
-comments:
-- id: 295
-  author: Tobias Sjösten
-  author_email: tobias@tobiassjosten.net
-  author_url: http://vvv.tobiassjosten.net/
-  date: '2014-05-13 23:21:10 +0200'
-  date_gmt: '2014-05-13 21:21:10 +0200'
-  content: "Very cool! Definitely makes me want to try it out as well.\r\n\r\nAnything
-    you feel yet have been weird or annoying in Hack?"
-- id: 300
-  author: Tobias Nyholm
-  author_email: tobias@happyrecruiting.se
-  author_url: ''
-  date: '2014-05-14 08:39:20 +0200'
-  date_gmt: '2014-05-14 06:39:20 +0200'
-  content: "Actually no. Everything made perfectly sense. But you really have to know
-    what you are doing. If you know Java or C# you will have no trouble learning Hack.
-    \r\n\r\nOne thing that was weird before I understood what I was doing was when
-    I tried to implement an Interface. \r\n\r\n{% highlight php %}\r\n//PHP file\r\ninterface Foo
-    { public function baz($text); }\r\n//Hack file\r\nclass Bar implements Foo { public
-    function baz(string $text): void {} }{% endhighlight %}\r\n\r\nThe code above is invalid.
-    At a first glance i thought that Hack classes could not implement PHP interfaces.
-    But that is wrong. They can. The problem here is that Foo::baz only takes string.
-    That is a narrower declaration then what the interface states. You have to change
-    it to:\r\n{% highlight php %}//Hack file\r\nclass Bar implements Foo { public function baz(mixed
-    $text): void {} }{% endhighlight %}"
 ---
 
 I've been working with the <a href="http://www.symfony.se">Symfony.se</a> website the last couple of weeks. In a discussion on Github we argued how a nice excerpt should look like. We decided that the excerpt twig filter should take a HTML string as input and make it shorter without breaking the HTML. It should also remove tables and convert headings.

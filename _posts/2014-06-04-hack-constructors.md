@@ -13,28 +13,6 @@ date_gmt: '2014-06-04 04:21:31 +0200'
 categories:
 - Hack
 tags: []
-comments:
-- id: 635
-  author: Josh Watzman
-  author_email: jwatzman@fb.com
-  author_url: ''
-  date: '2014-07-03 20:14:12 +0200'
-  date_gmt: '2014-07-03 18:14:12 +0200'
-  content: "&gt; The “problem” with this is that the spelling error on line 7 might
-    get undetected. The type checker will not tell you and it might take a while in
-    production before anyone detects this bug.\r\n\r\nThis will get detected if your
-    class is in partial or strict mode, and all of its recursive superclasses are
-    all in Hack files (any mode -- but not PHP files). With a superclass in a PHP
-    file, we have to assume that \"cuont\" is defined somewhere there -- but if it's
-    Hack all the way up, we can know that member doesn't exist and yell about it."
-- id: 636
-  author: Tobias Nyholm
-  author_email: tobias@happyr.com
-  author_url: ''
-  date: '2014-07-03 21:09:46 +0200'
-  date_gmt: '2014-07-03 19:09:46 +0200'
-  content: "I might have to rewrite that a little bit. I meant to say that the spelling
-    error might get undetected when writing PHP. \r\nThank you for noticing."
 ---
 
 Hack got a lot of features and improvements of different kinds. It comes with some syntactic sugar. The constructor is a subject for a syntactic sugar improvement.

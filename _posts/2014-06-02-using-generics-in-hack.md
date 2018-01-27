@@ -13,49 +13,6 @@ date_gmt: '2014-06-02 04:32:06 +0200'
 categories:
 - Happyr
 tags: []
-comments:
-- id: 451
-  author: romain
-  author_email: kurt_le_punk922@hotmail.com
-  author_url: http://noneyet
-  date: '2014-06-15 21:02:43 +0200'
-  date_gmt: '2014-06-15 19:02:43 +0200'
-  content: "Hello. Thank you for this post. It was of great help to me. I first thought
-    of using templates.. generic type just as in C++ or Java. But you just have to
-    write a variable and it uses its type as the generic type... Not bad after all
-    ! \r\nthank you again and good luck !"
-- id: 589
-  author: Josh Watzman
-  author_email: jwatzman@fb.com
-  author_url: ''
-  date: '2014-07-01 19:05:11 +0200'
-  date_gmt: '2014-07-01 17:05:11 +0200'
-  content: In your second example, you still have an untyped Map -- I think you could
-    make it even more type safe by typing it as "private Map&lt;Trow, Map&gt; $map"!
-- id: 590
-  author: Tobias Nyholm
-  author_email: tobias@happyr.com
-  author_url: ''
-  date: '2014-07-01 19:27:37 +0200'
-  date_gmt: '2014-07-01 17:27:37 +0200'
-  content: Thank you @Josh.
-- id: 609
-  author: Tobias Nyholm
-  author_email: tobias@happyr.com
-  author_url: ''
-  date: '2014-07-02 14:34:36 +0200'
-  date_gmt: '2014-07-02 12:34:36 +0200'
-  content: Thanks. I'm glad you like it.
-- id: 108051
-  author: Prabhu
-  author_email: e75026h7k@gmail.com
-  author_url: http://www.facebook.com/profile.php?id=100003469600338
-  date: '2016-02-14 13:31:59 +0100'
-  date_gmt: '2016-02-14 12:31:59 +0100'
-  content: This is not strictly ovaloreding but similar.public class Loading { public
-    static <A> A test() {      System.out.println("String");      return null;    }    public
-    static <B> B test() {      System.out.println("Number");     return null;  }  public
-    static void main(String[] args) {  Loading.test();  Loading.test(); }}
 ---
 
 Hack has introduced some new collection objects that will be a replacement for the array(). But what if you feel that something is missing? What if you have a problem that is easiest solved with another type of object? This is where we use generics.

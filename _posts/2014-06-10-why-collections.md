@@ -13,25 +13,6 @@ date_gmt: '2014-06-10 14:52:59 +0200'
 categories:
 - Hack
 tags: []
-comments:
-- id: 1270
-  author: Mathias Verraes
-  author_email: mathias@verraes.net
-  author_url: http://verraes.net
-  date: '2014-07-28 09:36:14 +0200'
-  date_gmt: '2014-07-28 07:36:14 +0200'
-  content: "\"You will, however, never encounter a situation where you need to use
-    immutable objects.\"\r\n\r\nCould you clarify this?"
-- id: 1271
-  author: Tobias Nyholm
-  author_email: tobias@happyr.com
-  author_url: ''
-  date: '2014-07-28 09:40:51 +0200'
-  date_gmt: '2014-07-28 07:40:51 +0200'
-  content: "What I mean is that you will never face a problem that can't be solved
-    with mutable objects but the problem is solvable with immutable objects. No situation
-    *require* you to use immutable objects, but there is (of course) situations where
-    it is beneficial. \r\n\r\nI will rewrite that sentence to make it more clear."
 ---
 
 Hack has introduced some new object to replace the PHP array. These collections are Vector, Set, Map, Pair and some more. If you are familiar with Java or C# you probably know the benefits of each of these collections already. You might be thinking:

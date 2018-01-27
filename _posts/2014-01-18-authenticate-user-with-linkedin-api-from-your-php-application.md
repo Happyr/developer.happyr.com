@@ -13,43 +13,6 @@ date_gmt: '2014-01-18 12:26:05 +0100'
 categories:
 - Library
 tags: []
-comments:
-- id: 68740
-  author: Đuro Mandinić
-  author_email: djuro.mandinic@gmail.com
-  author_url: ''
-  date: '2014-12-25 23:35:45 +0100'
-  date_gmt: '2014-12-25 22:35:45 +0100'
-  content: "I get this error. I am using Symfony 2.6.1.\r\n\r\nFatal error: Uncaught
-    Exception: CSRF state token does not match one provided. thrown in /home4/dmandini/public_html/statsdata/vendor/happyr/linkedin-api-client/src/HappyR/LinkedIn/LinkedIn.php
-    on line 300"
-- id: 87842
-  author: parisa
-  author_email: parisa.entezami@yahoo.com
-  author_url: ''
-  date: '2015-04-19 14:28:23 +0200'
-  date_gmt: '2015-04-19 12:28:23 +0200'
-  content: "Hi\r\nDid you wrote any integration with fosuserbundle? (I saw your smaples
-    for symfony2 integration.)\r\nI have problem loging in user in my symfony2 application.
-    do i have to wrote userprovider or something like that?\r\n\r\nthanks for your
-    help"
-- id: 87897
-  author: Tobias Nyholm
-  author_email: tobias@happyr.com
-  author_url: ''
-  date: '2015-04-19 21:51:20 +0200'
-  date_gmt: '2015-04-19 19:51:20 +0200'
-  content: 'No I have not written anything like that. What you retrieve from LinkedIn
-    are user data like email and name. What you should do is to create a user object
-    from that information and store it in database. Then, to authenticate the user
-    you might want to do something like this: http://stackoverflow.com/questions/9550079/how-to-programmatically-login-authenticate-a-user'
-- id: 110863
-  author: ahmad
-  author_email: solehinjr@gmail.com
-  author_url: http://www.layanon9.pw/2015/09/jalan-singkat-ke-syurga-2015.html
-  date: '2017-03-03 05:00:53 +0100'
-  date_gmt: '2017-03-03 04:00:53 +0100'
-  content: hello.. . im not using symphony.. can i use this code in normal php ...?
 ---
 
 Recently I wanted to let my users authenticate with LinkedIn. We had just added a Facebook and Twitter authentication, so why not LinkedIn. To my big surprise there were no <strong>LinekdIn API clients for PHP</strong>. At least no good ones. And the code samples from <a href="https://developer.linkedin.com/documents/code-samples">developer.linkedin.com</a> where lookting pretty nasty. So, as a good open source developer I decided to build one and share it.

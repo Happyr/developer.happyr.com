@@ -13,16 +13,6 @@ date_gmt: '2013-12-23 10:35:54 +0100'
 categories:
 - Symfony2
 tags: []
-comments:
-- id: 69
-  author: Marcus
-  author_email: marcus.malka@gmail.com
-  author_url: ''
-  date: '2014-01-14 14:52:38 +0100'
-  date_gmt: '2014-01-14 13:52:38 +0100'
-  content: "Thanks for this, this was a useful reference.\r\n\r\nI implemented a similar
-    system that creates version.yml dynamically. In our case the assetic_version is
-    fetched from our automatically created git tag."
 ---
 
 In your main template you <span style="text-decoration: line-through;">probably</span> should have assetic to manage your assets. In the production environment you would like to dump this to static files.

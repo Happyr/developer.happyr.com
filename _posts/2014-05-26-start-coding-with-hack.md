@@ -14,16 +14,6 @@ categories:
 - HHVM
 - Hack
 tags: []
-comments:
-- id: 388
-  author: Tobias Sjösten
-  author_email: tobias@tobiassjosten.net
-  author_url: http://vvv.tobiassjosten.net/
-  date: '2014-05-28 19:44:55 +0200'
-  date_gmt: '2014-05-28 17:44:55 +0200'
-  content: "Very cool, Tobias! Still haven't found the time to play around with Hack
-    myself but you keep pushing me with these posts. :)\r\n\r\n(Btw, the very last
-    word of the article has a typo.)"
 ---
 
 If you like to take your PHP to the next level there is an excellent option for you: Hack. It is a programming language develop by Facebook. They have been using it for a couple of years now. In the spring of 2014 they decided to remove all ”Facebook stuff” from Hack and release the language as open source.

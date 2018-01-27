@@ -13,24 +13,6 @@ date_gmt: '2014-06-19 20:18:24 +0200'
 categories:
 - Happyr
 tags: []
-comments:
-- id: 1193
-  author: Josh Watzman
-  author_email: jwatzman@fb.com
-  author_url: ''
-  date: '2014-07-21 20:01:20 +0200'
-  date_gmt: '2014-07-21 18:01:20 +0200'
-  content: "&gt; I think this feature need some more work before anyone should use
-    it in production. We also need some more documentation on hacklang.org.\r\n\r\nYep
-    -- as of this writing, Facebook is using it extensively, but are relying on some
-    special WaitHandle objects that are specific to our caching system (and so don't
-    make sense to open source). I think we may also have some bindings to MySQL and
-    memcache, not sure what the status of those are. But the async ecosystem is definitely
-    very incomplete, and releasing more of that is something we intend to do in the
-    future, last I heard.\r\n\r\nThat said, there are some docs on async at http://docs.hhvm.com/manual/en/hack.async.php
-    including an example of coalesced fetching using RescheduleWaitHandle that you
-    can use right now. The folks at PocketRent have also successfully used async functions
-    in their beatbox framework: https://github.com/PocketRent/beatbox"
 ---
 
 Hack has introduced asynchronous programming. This is really great but it is not really documented at the moment. Not at all actually... I’ve done some experimenting and I will try to introduce you to the new concept.

@@ -14,36 +14,6 @@ categories:
 - Symfony2
 - Bower
 tags: []
-comments:
-- id: 70591
-  author: Tommy
-  author_email: pusle@pusle.com
-  author_url: ''
-  date: '2014-12-29 20:48:04 +0100'
-  date_gmt: '2014-12-29 19:48:04 +0100'
-  content: Thank you for this, I find it cleaner to seperate front-end from back-end.
-    Using bower bundles in symfony just don't feel right.
-- id: 109872
-  author: Gintare
-  author_email: g.statkute@gmail.com
-  author_url: ''
-  date: '2016-11-01 15:53:10 +0100'
-  date_gmt: '2016-11-01 14:53:10 +0100'
-  content: Thank you. It was useful.
-- id: 110428
-  author: Edgar KAMDEM
-  author_email: briceouabo@gmail.com
-  author_url: ''
-  date: '2016-12-27 13:43:46 +0100'
-  date_gmt: '2016-12-27 12:43:46 +0100'
-  content: Thx Tobias, very useful.
-- id: 111340
-  author: Richard
-  author_email: rileyrg@gmail.com
-  author_url: ''
-  date: '2017-04-27 06:59:27 +0200'
-  date_gmt: '2017-04-27 04:59:27 +0200'
-  content: A bit late to the party but where does the .bowerrc go in a symfony project?
 ---
 
 I recently switched to Bower for managing my frontend third party libraries. First I defined some packages that I needed in a bower.json file and put it in the Symfony2 root directory.

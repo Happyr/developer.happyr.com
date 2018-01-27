@@ -13,35 +13,6 @@ date_gmt: '2014-05-30 05:17:10 +0200'
 categories:
 - Hack
 tags: []
-comments:
-- id: 528
-  author: Josh Watzman
-  author_email: jwatzman@fb.com
-  author_url: ''
-  date: '2014-06-27 21:11:00 +0200'
-  date_gmt: '2014-06-27 19:11:00 +0200'
-  content: "A general note -- what you call \"wider scope\" and \"narrower scope\"
-    are usually called \"supertype\" and \"subtype\". In particular, \"scope\" has
-    a very different meaning than the way you intend it there; it typically refers
-    to the lifetime and accessibility of variable.\r\n\r\n&gt; [Overloading] is a
-    feature not available in Hack.\r\n\r\nIt isn't available because it could only
-    work if your code was 100% strict Hack -- with partial typing, we couldn't always
-    know which method to invoke! See a longer explanation here: https://github.com/facebook/hhvm/issues/2532\r\n\r\n&gt;
-    More about scopes\r\n\r\nThe limitation described here is an HHVM issue, due to
-    its PHP lineage. It actually behaves differently if you don't implement the interface
-    -- it will work in that case! But interfaces and abstract methods cause different
-    PHP behavior with regards to how you can override them, and so HHVM applies those
-    rules to Hack. Eventually we'll want to relax those restrictions in Hack, so what
-    you write will work, but haven't gotten around to it yet."
-- id: 608
-  author: Tobias Nyholm
-  author_email: tobias@happyr.com
-  author_url: ''
-  date: '2014-07-02 14:25:08 +0200'
-  date_gmt: '2014-07-02 12:25:08 +0200'
-  content: "Great. Thanks for the comments and the link. \r\nI've updated the text
-    with the correct words for subtypes and supertypes. \r\n\r\nOkej, I did not know.
-    Interesting."
 ---
 
 This post will go more in details of my <a title="Hack types" href="http://developer.happyr.com/hack-types">last post about types</a>. After reading that last post you know that a method declaration in Hack will look like this:
