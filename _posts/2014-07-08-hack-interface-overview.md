@@ -13,35 +13,7 @@ date_gmt: '2014-07-08 09:26:36 +0200'
 categories:
 - Hack
 tags: []
-comments:
-- id: 758
-  author: Tobias Sjösten
-  author_email: tobias@tobiassjosten.net
-  author_url: http://vvv.tobiassjosten.net/
-  date: '2014-07-08 16:10:25 +0200'
-  date_gmt: '2014-07-08 14:10:25 +0200'
-  content: Haha, <code>Indexish</code>, really? Would have been useful to see the
-    interfaces' definitions along with the name.
-- id: 759
-  author: Tobias Nyholm
-  author_email: tobias@happyr.com
-  author_url: ''
-  date: '2014-07-08 16:27:56 +0200'
-  date_gmt: '2014-07-08 14:27:56 +0200'
-  content: "The implementation of Indexish looks like this: \r\n{% highlight php %}\r\ninterface
-    Indexish&lt;Tk, Tv&gt; extends KeyedContainer&lt;Tk, Tv&gt; {}\r\n{% endhighlight %}\r\nSource:
-    http://docs.hhvm.com/manual/en/class.hack.indexishtktv.php\r\n\r\nI actually don't
-    know how it works. Look att the function signatures for <a href=\"https://github.com/facebook/hhvm/blob/master/hphp/hack/hhi/ImmMap.hhi\"
-    rel=\"nofollow\">ImmMap</a>. This interface might only be for parameter annotation
-    and not for creating your own Indexish objects."
-- id: 60123
-  author: modernmonks
-  author_email: sgsgupta07@gmail.com
-  author_url: http://www.modernmonkslab.com/
-  date: '2014-12-09 09:56:51 +0100'
-  date_gmt: '2014-12-09 08:56:51 +0100'
-  content: "Hello Tobias Nyholm,\r\n\r\nI am not getting exactly what it is ? and
-    where we can you use this ?\r\n\r\nThanks"
+redirect_from: "/hack-interface-overview/"
 ---
 
 

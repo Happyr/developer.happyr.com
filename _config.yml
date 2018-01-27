@@ -193,6 +193,7 @@ plugins:
   - jekyll-gist
   - jekyll-feed
   - jekyll-archives
+  - jekyll-redirect-from
   - jemoji
 
 # mimic GitHub Pages with --safe
