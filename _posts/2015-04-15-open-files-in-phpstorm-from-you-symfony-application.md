@@ -1,0 +1,84 @@
+---
+
+status: publish
+published: true
+title: Open files in PHPStorm from you Symfony application
+author: Tobias Nyholm
+author_login: Tobias Nyholm
+author_email: tobias@happyr.com
+wordpress_id: 676
+wordpress_url: http://developer.happyr.com/?p=676
+date: '2015-04-15 08:55:00 +0200'
+date_gmt: '2015-04-15 06:55:00 +0200'
+categories:
+- Developing
+- Symfony2
+tags: []
+comments:
+- id: 87855
+  author: Zz
+  author_email: Zz@ze.zz
+  author_url: ''
+  date: '2015-04-19 17:57:34 +0200'
+  date_gmt: '2015-04-19 15:57:34 +0200'
+  content: Nice feature, but shouldn't be defined in config_dev?
+- id: 87889
+  author: Piero Recchia
+  author_email: piero.recchia@gmail.com
+  author_url: http://recchia.blogspot.com
+  date: '2015-04-19 21:20:12 +0200'
+  date_gmt: '2015-04-19 19:20:12 +0200'
+  content: Great trick, do you know if work on linux (Ubuntu)?
+- id: 87893
+  author: Tobias Nyholm
+  author_email: tobias@happyr.com
+  author_url: ''
+  date: '2015-04-19 21:38:17 +0200'
+  date_gmt: '2015-04-19 19:38:17 +0200'
+  content: I'm not sure. <a href="https://youtrack.jetbrains.com/issue/IDEA-65879#comment=27-419527"
+    rel="nofollow">An old comment from Alexey Gopachenko</a> says that it is way more
+    complicated. Give it a try and let me know!
+- id: 87896
+  author: Tobias Nyholm
+  author_email: tobias@happyr.com
+  author_url: ''
+  date: '2015-04-19 21:46:58 +0200'
+  date_gmt: '2015-04-19 19:46:58 +0200'
+  content: I don't think it really matters though. The framework.ide only sets a parameter
+    called 'templating.helper.code.file_link_format' which tells what format to use.
+    You can accomplish the same in php.ini with 'xdebug.file_link_format'.
+- id: 100055
+  author: Gladhon
+  author_email: marc@mitravectar.ch
+  author_url: https://github.com/Gladhon
+  date: '2015-09-03 14:24:56 +0200'
+  date_gmt: '2015-09-03 12:24:56 +0200'
+  content: "i use xdebug, so i just can use an php.ini configuration\r\n\r\nxdebug.file_link_format=\"phpstorm://open?file=%f&amp;line=%l\""
+- id: 109551
+  author: Justinas
+  author_email: justinasu@gmail.com
+  author_url: ''
+  date: '2016-07-21 09:02:55 +0200'
+  date_gmt: '2016-07-21 07:02:55 +0200'
+  content: "you need to expose protocol in firefox in order for this to work:\r\nType
+    about:config into the Location Bar (address bar) and press Enter.\r\nRight-click
+    -&gt; New -&gt; Boolean -&gt; Name: network.protocol-handler.expose.phpstorm -&gt;
+    Value -&gt; false \r\n\r\nthen specify a phpstorm.exe file. But it does not work
+    if you are using vagrant, as file paths are different in a VM"
+---
+
+If you want to open files in PHPStorm8 directly from the Symfony debug toolbar there is a neat trick you can use. This is very helpful when you quickly want to find a controller or when you got an exception.
+
+
+{% highlight javascript %}
+// /app/config/config.yml
+framework:
+  ide: &quot;phpstorm://open?file=%%f&amp;line=%%l&quot;
+{% endhighlight %}
+
+
+And that is pretty much it. You dont need to install PhpStormOpener, LinCastor or any other Apple script. This will work with PHPStorm8, Symfony2.6 and Mac OSX. Below is a picture to show where you should click to make PHPStorm open the controller used in this request.
+
+
+<a href="http://developer.happyr.com/wp-content/uploads/2015/04/phpstorm8_exception.png">
+</a><a href="http://developer.happyr.com/wp-content/uploads/2015/04/phpstorm8_debugtoolbar.png"><img class="alignnone wp-image-683 size-full" src="http://developer.happyr.com/wp-content/uploads/2015/04/phpstorm8_debugtoolbar.png" alt="PHPStorm8 Symfony debug toolbar" width="705" height="179" /></a></pre>

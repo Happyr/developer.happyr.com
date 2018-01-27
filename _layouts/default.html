@@ -1,30 +1,42 @@
 ---
-layout: compress
 ---
 
-<!DOCTYPE html>
-<html>
-{% include head.html %}
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.9.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="{{ site.locale | slice: 0,2 | default: "en" }}" class="no-js">
+  <head>
+    {% include head.html %}
+    {% include head/custom.html %}
+  </head>
 
-<body>
-   <div class="container">
+  <body class="layout--{{ page.layout | default: layout.layout }}{% if page.classes or layout.classes %}{{ page.classes | default: layout.classes | join: ' ' | prepend: ' ' }}{% endif %}">
 
-    <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->   
-        <div id="main">
+    {% include browser-upgrade.html %}
+    {% include masthead.html %}
 
-             {% include header.html %}
-                    <div class="page-content">
-                        <div class="wrapper">
-                            {{ content }}
-                        </div>
-                    {% include footer.html %}
-                    </div>
-                {% if site.analytics %}
-                    {% include analytics.html %}
-                {% endif %}  
-        </div>
+    <div class="initial-content">
+      {{ content }}
+    </div>
 
-</div>            
-        
-</body>
+    {% if site.search == true %}
+      <div class="search-content">
+        {% include search_form.html %}
+      </div>
+    {% endif %}
+
+    <div class="page__footer">
+      <footer>
+        {% include footer/custom.html %}
+        {% include footer.html %}
+      </footer>
+    </div>
+
+    {% include scripts.html %}
+
+  </body>
 </html>

@@ -1,0 +1,21 @@
+---
+
+status: publish
+published: true
+title: First version of the Api client completed
+author: Tobias Nyholm
+author_login: Tobias Nyholm
+author_email: tobias@happyr.com
+wordpress_id: 160
+wordpress_url: http://developer.happyr.com/?p=160
+date: '2013-07-08 14:41:34 +0200'
+date_gmt: '2013-07-08 12:41:34 +0200'
+categories:
+- Library
+tags:
+- New packet
+comments: []
+---
+
+If you got a public API you really should provide a client or two. Our Api client has been online for a while now and available for download. Today I've completed the documentation and a short example. You will find the docs and the Api client <a title="Happyrecruiting API Client" href="http://developer.happyr.com/php-libraries/happyrecruiting-api-client">here</a>.
+
