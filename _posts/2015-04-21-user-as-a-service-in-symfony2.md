@@ -119,7 +119,7 @@ This works and it is excellent. We only encounter a problem when we consider the
 The current_user service will still be <strong>null</strong> in step 4. So let's change the scope of <em>current_user</em> to <em>prototype</em>. Now the service will be created every time it is used. This is exactly what we want! But when you declare <em>current_user</em> in scope <em>prototype</em> you will get this nasty exception:
 
 
-![]({{ "/assets/images/scope_prototype_exception.png" | absolute_url }})
+![]({{ "/images/posts/scope_prototype_exception.png" | absolute_url }})
 
 You may remember back in Symfony 2.3 when you tried to inject the <em>@request</em> into a service, then you got a similar exception. So how did Symfony solve this it? They introduced the <a href="http://symfony.com/blog/new-in-symfony-2-4-the-request-stack">RequestStack in 2.4</a>. This is just a service that you could push and pop Requests on. Yes, like a normal stack.
 

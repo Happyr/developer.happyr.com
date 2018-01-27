@@ -6,7 +6,7 @@ categories:
 - Hack
 redirect_from: "/hack-interface-overview/"
 ---
-![Hack interfaces]({{ "/assets/images/HackInterfaces.jpg" | absolute_url }})
+![Hack interfaces]({{ "/images/posts/HackInterfaces.jpg" | absolute_url }})
 
 There are a number of predefined interfaces in Hack. This post is going to give you an overview about the interfaces that are a subtype of Traversable.
 

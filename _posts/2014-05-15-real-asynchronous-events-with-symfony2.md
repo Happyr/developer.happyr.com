@@ -14,7 +14,7 @@ PHP is a great language but there are some drawbacks. One thing I miss the most 
 
 It is quite strait forward but it might be little tricky to understand. Here is a picture that will make everything crystal clear.
 
-![]({{ "/assets/images/symfony2events.jpg" | absolute_url }})
+![]({{ "/images/posts/symfony2events.jpg" | absolute_url }})
 
 <h2>Symfony2 events</h2>
 

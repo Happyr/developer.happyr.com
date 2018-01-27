@@ -20,7 +20,7 @@ framework:
 And that is pretty much it. You dont need to install PhpStormOpener, LinCastor or any other Apple script. This will work with PHPStorm8, Symfony2.6 and Mac OSX. Below is a picture to show where you should click to make PHPStorm open the controller used in this request.
 
 
-![]({{ "/assets/images/phpstorm8_exception.png" | absolute_url }})
-![PHPStorm8 Symfony debug toolbar]({{ "/assets/images/phpstorm8_debugtoolbar.png" | absolute_url }})
+![]({{ "/images/posts/phpstorm8_exception.png" | absolute_url }})
+![PHPStorm8 Symfony debug toolbar]({{ "/images/posts/phpstorm8_debugtoolbar.png" | absolute_url }})
 
 
