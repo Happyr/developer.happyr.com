@@ -80,5 +80,7 @@ framework:
 And that is pretty much it. You dont need to install PhpStormOpener, LinCastor or any other Apple script. This will work with PHPStorm8, Symfony2.6 and Mac OSX. Below is a picture to show where you should click to make PHPStorm open the controller used in this request.
 
 
-<a href="http://developer.happyr.com/wp-content/uploads/2015/04/phpstorm8_exception.png">
-</a><a href="http://developer.happyr.com/wp-content/uploads/2015/04/phpstorm8_debugtoolbar.png"><img class="alignnone wp-image-683 size-full" src="http://developer.happyr.com/wp-content/uploads/2015/04/phpstorm8_debugtoolbar.png" alt="PHPStorm8 Symfony debug toolbar" width="705" height="179" /></a></pre>
+![]({{ "/assets/images/phpstorm8_exception.png" | absolute_url }})
+![PHPStorm8 Symfony debug toolbar]({{ "/assets/images/phpstorm8_debugtoolbar.png" | absolute_url }})
+
+

@@ -124,7 +124,9 @@ comments:
 PHP is a great language but there are some drawbacks. One thing I miss the most is multi-threading. Wouldn't it be great to be able to do some calculations in a separate thread? Or start some background task and don't care when it finish. I've found a solution that does that very thing with PHP.
 
 
-It is quite strait forward but it might be little tricky to understand. Here is a picture that will make everything crystal clear.<img class="alignnone wp-image-509 size-large" src="http://developer.happyr.com/wp-content/uploads/2014/05/symfony2events-1024x519.jpg" alt="symfony2events" width="1024" height="519" />
+It is quite strait forward but it might be little tricky to understand. Here is a picture that will make everything crystal clear.
+
+![]({{ "/assets/images/symfony2events.jpg" | absolute_url }})
 
 <h2>Symfony2 events</h2>
 

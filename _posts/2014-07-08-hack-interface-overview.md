@@ -44,10 +44,10 @@ comments:
     where we can you use this ?\r\n\r\nThanks"
 ---
 
-&nbsp;
 
+![Hack interfaces]({{ "/assets/images/HackInterfaces.jpg" | absolute_url }})
 
-<a href="http://developer.happyr.com/wp-content/uploads/2014/07/HackInterfaces.jpg"><img class="alignnone size-full wp-image-647" src="http://developer.happyr.com/wp-content/uploads/2014/07/HackInterfaces.jpg" alt="HackInterfaces" width="920" height="446" /></a>There are a number of predefined interfaces in Hack. This post is going to give you an overview about the interfaces that are a subtype of Traversable.
+There are a number of predefined interfaces in Hack. This post is going to give you an overview about the interfaces that are a subtype of Traversable.
 
 <h2>Traversable&lt;Tv&gt;</h2>
 
