@@ -2,11 +2,11 @@
 title: Always use caret instead of tilde
 author: Tobias Nyholm
 date: '2016-08-05 08:23:47 +0200'
-header:
-  image: "images/lost-1.jpg"
-  teaser: images/lost-2.jpg
-  image_description: "A description of the image"
-  caption: "Photo credit: [**Unsplash**](https://unsplash.com)"
+#header:
+#  image: "images/lost-1.jpg"
+#  teaser: images/lost-2.jpg
+#  image_description: "A description of the image"
+#  caption: "Photo credit: [**Unsplash**](https://unsplash.com)"
 categories:
 - Happyr
 ---
