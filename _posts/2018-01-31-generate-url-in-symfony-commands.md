@@ -3,8 +3,8 @@ title: Generate URLs in Symfony commands
 author: Tobias Nyholm
 date: '2018-01-31 08:23:47 +0200'
 header:
-  image: "images/post/little-man-hacker.jpg"
-  teaser: images/post/little-man-hacker.jpg
+  image: "images/posts/little-man-hacker.jpg"
+  teaser: images/posts/little-man-hacker.jpg
   image_description: "A description of the image"
   caption: "Photo credit: [**The Preiser Project**](https://www.flickr.com/photos/thepreiserproject/)"
 categories:
