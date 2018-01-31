@@ -43,19 +43,13 @@ class RequestProvider implements RequestProviderInterface
 {
     const DEFAULT_LOCALE = 'sv';
 
-    /**
-     * @var string siteUrl
-     */
-    protected $siteHost;
+    /** @var string siteUrl */
+    private $siteHost;
 
-    /**
-     * @var string siteSchema
-     */
-    protected $siteSchema;
+    /** @var string siteSchema */
+    private $siteSchema;
     
-    /**
-     * @var EntityManagerInterface
-     */
+    /** @var EntityManagerInterface */
     private $em;
 
     public function __construct(EntityManagerInterface $em, $siteHost, $siteSchema)
