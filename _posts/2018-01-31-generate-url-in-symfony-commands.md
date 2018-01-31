@@ -5,7 +5,6 @@ date: '2018-01-31 08:23:47 +0200'
 header:
   image: "images/posts/little-man-hacker.jpg"
   teaser: images/posts/little-man-hacker.jpg
-  image_description: "A description of the image"
   caption: "Photo credit: [**The Preiser Project**](https://www.flickr.com/photos/thepreiserproject/)"
 categories:
 - Symfony
