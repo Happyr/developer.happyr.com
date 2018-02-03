@@ -7,15 +7,15 @@ categories:
 - Developing
 ---
 
-Earlier this year I installed Fabiens <a href="https://packagist.org/packages/fabpot/php-cs-fixer">php-cs-fixer</a> on my continuous integration server. So at each build I checked if there were any code style errors, if so I failed the build. Easy as pie and our source code were always nice and clean. But this new feature changed my workflow. My new workflow looks like this:
+Earlier this year I installed Fabien's <a href="https://packagist.org/packages/friendsofphp/php-cs-fixer">php-cs-fixer</a> on my continuous integration server. So at each build I checked if there were any code style errors, if so I failed the build. Easy as pie and our source code were always nice and clean. But this new feature changed my workflow. My new workflow looks like this:
 
 <ul>
 <li>Write code</li>
-<li>Commit &amp; push code</li>
+<li>Commit & push code</li>
 <li>[some time later]</li>
 <li>Received a build error report</li>
 <li>I ran php-cs-fixer</li>
-<li>Commit &amp; Push</li>
+<li>Commit & Push</li>
 </ul>
 
 I always seams to forget the to run php-cs-fixer before I push my code. The solution is call <a href="https://git-scm.com/book/it/v2/Customizing-Git-Git-Hooks">git hooks</a>. I can tell git that "For this repository, run this script before each commit". I edit the file .git/hooks/pre-commit and add the following line:
@@ -27,7 +27,7 @@ I always seams to forget the to run php-cs-fixer before I push my code. The solu
 #!/bin/sh
 
 
-git diff --name-only --diff-filter=MA HEAD~1 | grep -e &quot;\.php\|\.sh\|\.twig\|\.js\|\.css\|\.md$&quot; | xargs -L1 php-cs-fixer --fixers=-phpdoc_to_comment --level=symfony -q fix
+git diff --name-only --diff-filter=MA HEAD~1 | grep -e "\.php\|\.sh\|\.twig\|\.js\|\.css\|\.md$" | xargs -L1 php-cs-fixer --fixers=-phpdoc_to_comment --level=symfony -q fix
 
 
 {% endhighlight %}
