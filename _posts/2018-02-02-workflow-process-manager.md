@@ -68,7 +68,8 @@ class ProcessManager
 {% endhighlight %}
 
 A workflow is very similar to a state machine, containing places and transitions, where places refer to "states".
-To read more about configuring and setting up your own workflow, please see the Symfony documentation: [here](https://symfony.com/doc/current/components/workflow.html) 
+
+To read more about configuring and setting up your own workflow, please see the [Symfony documentation](https://symfony.com/doc/current/components/workflow.html)
 
 ## Solution 
 The first thing to do in your controller would be to retrieve your state machine from the service container:
@@ -92,6 +93,7 @@ if ($stateMachine->can($order, 'pay')) {
 
 Now comes the interesting part:
 After applying the new state, you would also want to redirect the user to the next step. This is where the __ProcessManager__ comes in.
+
 Before you can start using the __ProcessManager__ you have to declare it in services.yml:
 {% highlight php%}
 services:
@@ -111,7 +113,7 @@ services:
 The argument sent to the __ProcessManager__ is the specific workflow that we want our __ProcessManager__ to handle.
 
 As we can see in the declaration above, each state has a route name assigned to it. For an example: 
-The state <mark>create_account</mark> is mapped to the <mark>'register'</mark> route name.  
+The state <mark>create_account</mark> is mapped to the <mark>'account_register'</mark> route name.  
 
 Each route name refers to a specific
 controller action, and this is handled by [annotations](http://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/annotations/routing.html).
