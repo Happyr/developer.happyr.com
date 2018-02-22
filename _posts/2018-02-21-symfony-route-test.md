@@ -28,10 +28,9 @@ If you want to know how the new router works, read Nicolas Grekas [post](https:/
 * Dynamic routes: 350
 
 ## The test process 
-The process in it self is quite simple. Since the router performance is based on the priority of the routes we have
-to test a sample that contains routes with difference priorities. 
-We chose to test against the first route, five random routes, and the last route. This was done for both the static
-and the dynamic routes. 
+The process in it self is quite simple. Since the performance of the matcher is based on the amount of configured routes that we have, 
+we want to test against the first route, five random routes, and the last route, to get a realistic test case. 
+This was done for both the static and the dynamic routes. 
 
 {% highlight php%}
 class RouteTestCommand extends BaseCommand
@@ -48,12 +47,7 @@ class RouteTestCommand extends BaseCommand
         parent::__construct();
         $this->router = $router;
     }
-
-    protected function configure()
-    {
-        $this->setDescription('Test the route speed');
-    }
-
+    
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('First static route: '.$this->matchRoutes(['/admin/statistics/index']));        
@@ -65,7 +59,7 @@ class RouteTestCommand extends BaseCommand
         $output->writeln('Not Found: '.$this->matchRoutes(['/foo/bar/baz']));
     }
 
-    private function matchRoutes(array $routes)
+    private function matchRoutes(array $routes): float
     {
         $startTime = microtime(true);
         foreach ($routes as $route) {
