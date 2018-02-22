@@ -1,5 +1,5 @@
 ---
-title: Testing the new symfony router
+title: Testing the Symfony 4.1 router
 author: Georgos Landin Xanthopoulos
 date: '2018-02-02 15:06:47 +0200'
 header:
@@ -17,8 +17,7 @@ categories:
 A few days ago we received the fantastic news that the Symfony router had been improved significantly. Of course we wanted to see how
 the changes would affect our application, so we decided to test it against our own routes. 
 
-If you somehow missed the news you can read the official announcement here: 
-<https://symfony.com/blog/new-in-symfony-4-1-fastest-php-router>
+If you somehow missed the news you can read the [official announcement](https://symfony.com/blog/new-in-symfony-4-1-fastest-php-router).
 
 If you want to know how the new router works, read Nicolas Grekas [post](https://medium.com/@nicolas.grekas/making-symfonys-router-77-7x-faster-1-2-958e3754f0e1) where he dives more into detail about the new changes.  
 
@@ -72,6 +71,7 @@ class RouteTestCommand extends BaseCommand
 
 ### Symfony 3.4
 In Symfony 3.4, the matcher has to iterate through all/most of the configured routes and try to find the route for the given url. 
+There are some optimizations like checking group of routes that has the same static prefix, and thereafter the routes in that subset. 
 Trying to match a url towards the end of the list will result in an increased matching time, due to the number of comparisons 
 being done before the route is found. 
 
@@ -82,6 +82,8 @@ before drawing the conclusion that our route does not exist.
 ### Symfony 4.1
 Instead of making separate `preg_match()` calls for each route, it combines all the regular expressions into a single regular expression.
 This means that we only have to call `preg_match()` once, and that is the biggest factor for faster matching. 
+
+If you'd like to read more about the regular expression optimization check out [part 2 of Nicolas Grekas medium post](https://medium.com/p/making-symfony-router-lightning-fast-2-2-19281dcd245b) 
 
 ## Results
 The table below shows how long it took to match the given routes 50.000 times. 
@@ -108,5 +110,5 @@ run `composer update`.
 
 Remember that this is our results on our application. 
 
-Your results will probably not be the same since the percentage difference is highly dependant on the amount of routes
-that your application has. What results did you get?
+Your results will probably not be the same since the performance is highly dependent on the amount of routes
+that your application has and on the tree structure of the routes. What results did you get?
