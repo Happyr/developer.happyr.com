@@ -14,13 +14,13 @@ categories:
 
 ## An improved router
 
-A few days ago we received the fantastic news that the Symfony router had been improved significantly, of course we wanted to see how
+A few days ago we received the fantastic news that the Symfony router had been improved significantly. Of course we wanted to see how
 the changes would affect our application, so we decided to test it against our own routes. 
 
-If you somehow missed the exciting news you can read the official announcement here: 
+If you somehow missed the news you can read the official announcement here: 
 <https://symfony.com/blog/new-in-symfony-4-1-fastest-php-router>
 
-If you want to know how the new router works, read Nicolas Grekas [post](https://medium.com/@nicolas.grekas/making-symfonys-router-77-7x-faster-1-2-958e3754f0e1) where he dives more into detail about the new Symfony router. 
+If you want to know how the new router works, read Nicolas Grekas [post](https://medium.com/@nicolas.grekas/making-symfonys-router-77-7x-faster-1-2-958e3754f0e1) where he dives more into detail about the new changes.  
 
 ## Our setup 
 * PHP version: 7.1.13
@@ -28,18 +28,15 @@ If you want to know how the new router works, read Nicolas Grekas [post](https:/
 * Dynamic routes: 350
 
 ## The test process 
-The process in it self is quite simple. Since the performance of the matcher is based on the amount of configured routes that we have, 
-we want to test against the first route, five random routes, and the last route, to get a realistic test case. 
+The process in itself is quite simple. Since the performance of the matcher is based on the amount of configured routes that we have, 
+we want to test against the first route, some random routes, and the last route, to get a realistic test case. 
 This was done for both the static and the dynamic routes. 
 
 {% highlight php%}
 class RouteTestCommand extends BaseCommand
 {
     const NR_OF_MATCHES = 50000;
-
     protected static $defaultName = 'route:test';
-
-    /** @var Router */
     private $router;
 
     public function __construct(RouterInterface $router)
@@ -73,27 +70,6 @@ class RouteTestCommand extends BaseCommand
     }
 {% endhighlight %}
 
-## Results
-The table below shows how long it took to match our given routes 50.000 times. 
-
-The __Diff__ column displays how much faster the new Symfony router was, compared to our current one (3.4).  
-
-
-| Routes(ms)            | 3.4    | 4.1 (7d29a4d) | Diff  |
-| ----------------------|--------|---------------|-------|
-| First static route    | 448ms  | 382ms         | -17%  |
-| Random static route   | 1621ms | 474ms         | -242% | 
-| Last static route     | 1826ms | 544ms         | -234% | 
-|                       |        |               |       |
-| First dynamic route   | 746ms  | 527ms         | -41%  |
-| Random dynamic route  | 1454ms | 531ms         | -174% |
-| Last dynamic route    | 2039ms | 524ms         | -289% |
-|                       |        |               |       |
-| Not Found             | 2112ms | 522ms         | -304% | 
-
-As we can see, all of our routes were matched faster than previously. We especially see a significant gain in matching speed for 
-the random, last, and when the route was not found.  
-
 ### Symfony 3.4
 In Symfony 3.4, the matcher has to iterate through all/most of the configured routes and try to find the route for the given url. 
 Trying to match a url towards the end of the list will result in an increased matching time, due to the number of comparisons 
@@ -104,11 +80,30 @@ The routes that were not found will take the most amount of time to match, since
 before drawing the conclusion that our route does not exist. 
 
 ### Symfony 4.1
-This however is solved nicely in Symfony 4.1. 
 Instead of making separate `preg_match()` calls for each route, it combines all the regular expressions into a single regular expression.
-This means that we only have to call `preg_match()` once, and that is the biggest factor for faster matching times. 
+This means that we only have to call `preg_match()` once, and that is the biggest factor for faster matching. 
 
-We are extremely happy with these results, since the only thing we have to do once it is released is to 
+## Results
+The table below shows how long it took to match the given routes 50.000 times. 
+
+The __Diff__ column displays how much faster the new Symfony router was, compared to our current one (3.4).  
+
+| Routes(ms)            | 3.4    | 4.1 (7d29a4d) | Diff  |
+| ----------------------|--------|---------------|-------|
+| First static route    | 448 ms | 382 ms        | -17%  |
+| Random static route   | 1621 ms| 474 ms        | -242% | 
+| Last static route     | 1826 ms| 544 ms        | -234% | 
+|                       |        |               |       |
+| First dynamic route   | 746 ms | 527 ms        | -41%  |
+| Random dynamic route  | 1454 ms| 531 ms        | -174% |
+| Last dynamic route    | 2039 ms| 524 ms        | -289% |
+|                       |        |               |       |
+| Not Found             | 2112 ms| 522 ms        | -304% | 
+
+As we can see, all of our routes were matched faster than previously. We especially see a gain in matching speed for 
+the random, last, and when the route was not found.  
+
+We are happy with these results, since the only thing we have to do once it is released is to 
 run `composer update`.    
 
 Remember that this is our results on our application. 
