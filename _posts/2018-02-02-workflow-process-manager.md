@@ -9,7 +9,7 @@ categories:
 - Symfony
 ---
 
-<b>This post will cover how to use a ProcessManger class together with Symfony's workflow component. </b> 
+<b>This post will cover how to use a ProcessManager class together with Symfony's workflow component. </b> 
 
 ## The Process Manager
 The ProcessManager is responsible for mapping states with controller routes. This makes it easy for you to know which
