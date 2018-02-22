@@ -80,7 +80,7 @@ The routes that were not found will take the most amount of time to match, since
 before drawing the conclusion that our route does not exist. 
 
 ### Symfony 4.1
-Instead of making separate `preg_match()` calls for each route, it combines all the regular expressions into a single regular expression.
+Instead of making separate comparisons or  `preg_match()` calls for each route, it combines all the regular expressions into a single regular expression.
 This means that we only have to call `preg_match()` once, and that is the biggest factor for faster matching. 
 
 If you'd like to read more about the regular expression optimization, check out [part 2 of Nicolas Grekas medium post](https://medium.com/p/making-symfony-router-lightning-fast-2-2-19281dcd245b) 
