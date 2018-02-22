@@ -67,6 +67,7 @@ class RouteTestCommand extends BaseCommand
 
         return number_format(1000 * $time / count($routes), 2);
     }
+}
 {% endhighlight %}
 
 ### Symfony 3.4
