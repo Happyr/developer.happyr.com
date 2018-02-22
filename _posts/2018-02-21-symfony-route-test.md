@@ -91,7 +91,7 @@ The table below shows how long it took to match the given routes 50.000 times.
 
 The __Diff__ column displays how much faster the new Symfony router was, compared to our current one (3.4).  
 
-| Routes(ms)            | 3.4    | 4.1 (7d29a4d) | Diff  |
+| Routes.               | 3.4    | 4.1 (7d29a4d) | Diff  |
 | ----------------------|--------|---------------|-------|
 | First static route    | 448 ms | 382 ms        | -17%  |
 | Random static route   | 1621 ms| 474 ms        | -242% | 
@@ -109,7 +109,7 @@ the random, last, and when the route was not found.
 We are happy with these results, since the only thing we have to do once it is released is to 
 run `composer update`.    
 
-Remember that this is our results on our application. 
+Remember that this is our results on our application. Your results will probably not be the same since the performance is highly dependent on the amount of routes
+that your application has and on the tree structure of the routes. 
 
-Your results will probably not be the same since the performance is highly dependent on the amount of routes
-that your application has and on the tree structure of the routes. What results did you get?
+What results did you get?
