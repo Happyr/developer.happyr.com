@@ -71,7 +71,7 @@ class RouteTestCommand extends BaseCommand
 
 ### Symfony 3.4
 In Symfony 3.4, the matcher has to iterate through all/most of the configured routes and try to find the route for the given url. 
-There are some optimizations like checking group of routes that has the same static prefix, and thereafter the routes in that subset. 
+There are some optimizations like checking group of routes that have the same static prefix, and thereafter the routes in that subset. 
 Trying to match a url towards the end of the list will result in an increased matching time, due to the number of comparisons 
 being done before the route is found. 
 
@@ -83,7 +83,7 @@ before drawing the conclusion that our route does not exist.
 Instead of making separate `preg_match()` calls for each route, it combines all the regular expressions into a single regular expression.
 This means that we only have to call `preg_match()` once, and that is the biggest factor for faster matching. 
 
-If you'd like to read more about the regular expression optimization check out [part 2 of Nicolas Grekas medium post](https://medium.com/p/making-symfony-router-lightning-fast-2-2-19281dcd245b) 
+If you'd like to read more about the regular expression optimization, check out [part 2 of Nicolas Grekas medium post](https://medium.com/p/making-symfony-router-lightning-fast-2-2-19281dcd245b) 
 
 ## Results
 The table below shows how long it took to match the given routes 50.000 times. 
