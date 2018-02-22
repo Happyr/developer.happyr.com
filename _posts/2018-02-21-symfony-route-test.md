@@ -3,8 +3,8 @@ title: Testing the new symfony router
 author: Georgos Landin Xanthopoulos
 date: '2018-02-02 15:06:47 +0200'
 header:
-  teaser: images/posts/teaser2.jpg
-  caption: "Photo credit: [**The Preiser Project**](https://www.flickr.com/photos/thepreiserproject/)"
+  teaser: images/posts/routelarge.jpg
+  caption: "Photo credit: [**Flickr**](https://www.flickr.com/photos/rockys_photos/355216949/in/photolist-6enFxo-KGos4s-bziePy-91523N-TpGWrG-dvMSg3-6ZREpd-xozCa-3CVfrH-4r4Dz7-pkqvKY-5CL4FN-fHW3WW-8vvEYu-4KfNRw-6xwQuD-6xHB5q-8xo6sb-7dphxn-7KgWrr-342fEp-6xX2tf-6dBTjp-9nB8TA-8xk5pz-P61pjV-dNXAvC-5n8o7A-u7GL9y-6jzRhi-MGt7o1-7A7jLS-i4tC8C-4hDeBQ-3eX22G-dvGvj4-7A3gUD-5b6sLw-5yjxW2-8hxfmE-4cTxKp-Cq8sKM-tQg5e-7A7m1d-6ygJN3-avLA1p-9mQJiX-8ZtQtV-rpFoVZ-7A1DLZ)"
 categories:
 - Symfony
 ---
