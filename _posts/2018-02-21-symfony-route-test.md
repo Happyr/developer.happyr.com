@@ -8,14 +8,21 @@ header:
 categories:
 - Symfony
 ---
+<b> How much faster is the new Symfony router? 
+We ran some tests to find out.</b>
+
 ## An improved router
 
 A few days ago we received the fantastic news that the Symfony router had been improved significantly, of course we wanted to see how
 the changes would affect our application, so we decided to test it against our own routes. 
+
 If you somehow missed the exciting news you can read this [post](https://medium.com/@nicolas.grekas/making-symfonys-router-77-7x-faster-1-2-958e3754f0e1) from Nicolas Grekas. 
 
 ## Our setup 
-Our application uses PHP 7.1.13, it has 635 routes, 285 of those are static, the rest are dynamic. 
+* PHP version: 7.1.13
+* Routes: 635
+* Static routes: 285
+* Dynamic routes: 350
 
 ## Test 
 During the test process we followed this [example](https://gist.github.com/nikic/9049180) made by Nikita Popov. 
@@ -47,12 +54,10 @@ class RouteTestCommand extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('First static route: '.$this->matchRoutes(['/admin/statistics/index']));
-        
+        $output->writeln('First static route: '.$this->matchRoutes(['/admin/statistics/index']));        
         // Add random/last static routes..
 
         $output->writeln('First dynamic route: '.$this->matchRoutes(['/admin/statistics/3aa63971-1f61-4b28-bd60-5bb1c9582c8a/show']));
-        
         // Add random/last dynamic routes..
 
         $output->writeln('Not Found: '.$this->matchRoutes(['/foo/bar/baz']));
@@ -65,7 +70,6 @@ class RouteTestCommand extends BaseCommand
             for ($i = 0; $i < self::NR_OF_MATCHES; ++$i) {
                 $this->router->match($route);
             }
-            
         }
         $time = microtime(true) - $startTime;
 
@@ -75,7 +79,9 @@ class RouteTestCommand extends BaseCommand
 {% endhighlight %}
 
 ## Results
-The table below shows the difference in matching time, when using our current router(3.4) and the new Symfony 4.1 router. 
+The table below shows how long each router took to match our given routes. 
+
+The __Diff__ column displays how much faster the new Symfony router was, compared to our current one (3.4).  
 
 
 | Routes(ms)            | 3.4    | 4.1   | Diff  |
@@ -90,8 +96,11 @@ The table below shows the difference in matching time, when using our current ro
 |                       |        |       |       |
 | Not Found             | 2112   | 522   | -304% | 
 
-As we can see all of our routes were matched faster than previously. We see a significant gain in matching speed for 
-the random and the last routes, which is quite logical. 
+As we can see all of our routes were matched faster than previously, some faster than others. We especially see a significant gain in matching speed for 
+the random and the last routes. 
 
-This is our results on our application. Your results will probably not be the same since the performance increase is highly dependant on the amount of routes
+We are extremely happy with these results, since the only thing we have to do once it is released is to 
+run `composer update`    
+
+Remember that this is our results on our application. Your results will probably not be the same since the percentage difference is highly dependant on the amount of routes
 that your application has. What results did you get?
