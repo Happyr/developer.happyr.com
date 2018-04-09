@@ -9,155 +9,49 @@ categories:
 - Symfony
 ---
 
-This post will cover how you can add additional data to your events using a middleware class.
+This post will cover how you can add additional data to your events using a simple bus middleware. 
 
 Events are great due to the fact that they are very versatile and can be very useful in most cases.
 Maybe you want to log something specific in your system, or maybe you are building a gamification application that gives
-users experience points based on their actions. Then events might just be right for you.
+users experience points based on their actions. Then events might just be right for you. 
 
 ## How it works
-Classes needed:
-* Middleware - dispatches an event, that the decorators listen to
-* ExtractSimpleBusMessage - The event to be dispatched
-* DataContainer - can manipulate the array given to it. Such as adding data.
-* A decorator class for each event - adds data to the event it's assigned to
-
-In most cases, your middleware will accumulate a number of events, also known as messages. 
-When your application terminates, the middleware will dispatch a SimpleBusMessage event for each accumulated message.  
-
-
-The decorator classes are event subscribers and listen to the ExtractSimpleBusMessage event, they check the simple bus message
-for their assigned event, and if there is a match, they add some more data to it.
-This was just a quick summary of the process, further down you will see the implementation.
-
-## Example of a decorator
-Lets see an example of a decorator class.
-This example refers to when a new user has registered to your application.
-A decorator class listens to a simble bus message. When the specific message is dispatched, it will run the
-decorate() function.
-
-The purpose of the decorator is to add specific data to your message. In this case, lets say that 
-your message is missing the users age and address, and that you need those values for later use,
-therefore, you decorate the message, and add the data that you need.  
+The main point is to do some kind event manipulation on those events that have already been dispatched inside your application. 
+Maybe you want to save the events to a log, or maybe add some more data to the events before passing them on to another 
+application.
+Your middleware will accumulate these existing events, and dispatch a new event, that passes on the existing ones.
+Below is a section of the middleware class, the entire middleware is shown at the bottom of this post. 
 
 {% highlight php %}
+$eventData = [
+    // .. Add some event data
+]
+// Add the data to a DataContainer object
+$container = new DataContainer($eventData);
 
-class UserHasRegisteredDecorator implements EventSubscriberInterface
-{
-    public static function getSubscribedEvents()
-    {
-        return [
-            Middleware::EXTRACT_SIMPLEBUS_MESSAGE => 'decorate',
-        ];
-    }
-    /**
-     * Populates the event with more specific data based on what is needed for the specific event.
-     *
-     * @param ExtractSimpleBusMessage $event
-     */
-    public function decorate(ExtractSimpleBusMessage $event)
-    {
-        // Retrieve the DataContainer object
-        $container = $event->getContainer();
-
-        // Check if the message and assigned event match
-        if ($event->getSimpleBusMessage() instanceof UserHasRegistered) {
-
-            // Add the data you want
-            $container->addData('age', '23');
-            $container->addData('address', 'foobarbaz');
-        }
-    }
-}
+$this->eventDispatcher->dispatch('foo', new Foo($event, $container));
 {% endhighlight %}
 
-## The middleware
-Down below you can see the middleware class. As you can see, it is an event subscriber that listens for
-the symfony 'kernel.terminate' event. 
-
-{% highlight php %}
-
-class Middleware implements MessageBusMiddleware, EventSubscriberInterface
-{
-    const EXTRACT_SIMPLEBUS_MESSAGE = 'extract.simplebus.message';
-    private $eventDispatcher;
-    private $messages = [];
-
-    public function __construct(EventDispatcherInterface $eventDispatcher)
-    {
-        $this->eventDispatcher = $eventDispatcher;
-    }
-
-    public static function getSubscribedEvents()
-    {
-        return [
-            KernelEvents::TERMINATE => 'publish',
-        ];
-    }
-
-    public function handle($message, callable $next)
-    {
-        $this->messages[] = ['message' => $message, 'time' => time()];
-
-        $next($message);
-    }
-
-    public function publish()
-    {
-        // Iterate through all messages
-        foreach ($this->messages as $message) {
-
-            // Add some message data
-            $messageData = [
-                'class' => get_class($message),
-                'time' => $message['time']
-            ]
-
-            // Add the data to a DataContainer object
-            $container = new DataContainer($messageData);
-
-            // Dispatches the new ExtractSimpleBusMessage event
-            try {
-                // Dispatches the message and the DataContainer object
-                $this->eventDispatcher->dispatch(self::EXTRACT_SIMPLEBUS_MESSAGE, new ExtractSimpleBusMessage($message, $container));
-            } catch (\Throwable $e) {
-                $this->log('alert', '', ['exception' => $e]);
-            }
-        }
-        $this->messages = [];
-    }
-}
-
-{% endhighlight %}
-
-Upon the 'kernel.terminate' event the middleware dispatches the ExtractSimpleBusMessage event, and you will need to pass the message, and the DataContainer.
-This way we can access the message and the DataContainer inside our decorators with the use of the getter functions that are set
-inside the ExtractSimpleBusMessage class.   
-
-The ExtractSimpleBusMessage class uses the DataContainer object instead of a
+### The dispatched event
+The Foo event class uses the DataContainer object instead of a
 simple array, since an array is passed by value and not by reference.
 
-Below you can see the ExtractSimpleBusMessage class.
-
 {% highlight php %}
 
-class ExtractSimpleBusMessage extends Event
+class Foo extends Event
 {
-    /** @var object */
-    private $simpleBusMessage;
-
-    /** @var DataContainer */
+    private $event;
     private $container;
 
-    public function __construct($simpleBusMessage, DataContainer $container)
+    public function __construct($event, DataContainer $container)
     {
-        $this->simpleBusMessage = $simpleBusMessage;
+        $this->event = $event;
         $this->container = $container;
     }
 
-    public function getSimpleBusMessage()
+    public function getEvent()
     {
-        return $this->simpleBusMessage;
+        return $this->event;
     }
 
     public function getContainer(): DataContainer
@@ -167,9 +61,8 @@ class ExtractSimpleBusMessage extends Event
 }
 {% endhighlight %}
 
-## The DataContainer class
-Below is an example of how the DataContainer class could look like, as mentioned earlier, it's up to you to modify it
-to your needs.
+### The DataContainer class
+Below is the DataContainer class, used to add some new data to the existing event. 
 
 {% highlight php %}
 
@@ -189,4 +82,105 @@ class DataContainer
     }
 }
 
+{% endhighlight %}
+
+## Manipulate the event
+Now you will need something that can manipulate the existing event. Creating an event subscriber that subscribes to the 'foo'
+event is a good start. Now it's up to you to decide what your subscriber should do.   
+In this case imagine that we need a users age and address for later use, but they are both missing in the event data that
+was provided from our application. This means that we somehow want to add these values to the event, before it gets passed
+on to another application. This will be done by the decorator class, which is a simple event subscriber. 
+
+### Example of a decorator class
+This example refers to when a new user has registered to your application.
+A decorator class listens to the event that was dispatched by your middleware. 
+
+The purpose of this event subscriber is to add specific data to your event. 
+
+{% highlight php %}
+
+class UserHasRegisteredDecorator implements EventSubscriberInterface
+{
+    public static function getSubscribedEvents()
+    {
+        return [
+            'foo' => 'decorate',
+        ];
+    }
+    /**
+     * Populates the event with more specific data based on what is needed for the specific event.
+     *
+     * @param Foo $event
+     */
+    public function decorate(Foo $event)
+    {
+        // Retrieve the DataContainer object
+        $container = $event->getContainer();
+
+        // Check if the message and assigned event match
+        if ($event->getEvent() instanceof UserHasRegistered) {
+
+            // Add the data you want
+            $container->addData('age', '23');
+            $container->addData('address', 'foobarbaz');
+        }
+    }
+}
+{% endhighlight %}
+
+Now we have successfully added age and address to the specific event data before it gets passed on to another application. 
+
+## The middleware
+Down below you can see the entire middleware class. 
+{% highlight php %}
+
+class Middleware implements MessageBusMiddleware, EventSubscriberInterface
+{
+    private $eventDispatcher;
+    private $events = [];
+
+    public function __construct(EventDispatcherInterface $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
+    public static function getSubscribedEvents()
+    {
+        return [
+            KernelEvents::TERMINATE => 'publish',
+        ];
+    }
+
+    public function handle($event, callable $next)
+    {
+        $this->events[] = ['event' => $event, 'time' => time()];
+
+        $next($event);
+    }
+
+    public function publish()
+    {
+        // Iterate through all events
+        foreach ($this->events as $event) {
+
+            // Add some message data
+            $eventData = [
+                'class' => get_class($event),
+                'time' => $event['time']
+            ]
+
+            // Add the data to a DataContainer object
+            $container = new DataContainer($eventData);
+
+            // Dispatches the new ExtractSimpleBusMessage event
+            try {
+                // Dispatches the message and the DataContainer object
+                $this->eventDispatcher->dispatch('foo', new Foo($event, $container));
+            } catch (\Throwable $e) {
+                $this->log('alert', '', ['exception' => $e]);
+            }
+        }
+        $this->events = [];
+    }
+}
 {% endhighlight %}
