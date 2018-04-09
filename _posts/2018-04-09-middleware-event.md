@@ -1,7 +1,7 @@
 ---
 title: Manipulate events using a middleware
 author: Georgos Landin Xanthopoulos
-date: '2018-04-09 15:06:47 +0200'
+date: '2018-04-09 13:39:40 +0200'
 header:
   teaser: images/posts/events.jpg
   caption: "Photo credit: [**Flickr**](https://www.flickr.com/photos/jone_vasaitis/16022260923/in/photolist-qpQgXZ-asu2YH-63NQ3W-85Gk4g-aEUFCZ-4YvJCc-7pTvgs-7LmUC9-eHjnFV-8E6J8V-hXw713-5DudKc-4VxoHr-9PD8vo-8FHkig-bAACjP-6tpDjd-ab2WT-54tSFr-pqLvEd-dL7Ksg-24g6kGj-ov9pFN-aBQ4zJ-8byiTm-atRt3o-ygkPwT-6SfG7U-24BjkTY-WyZ1Jx-ejbULs-8HjSq7-65nqnz-6G5nvX-22K5Rei-yjR3d-sDFU8-abosaA-cSdMUo-vCuvY-4jKtyC-22wib-cd2Bm3-FkXEeW-6MucmN-dd9ak6-78nBuc-SFNBS8-YYf8G3-5RLXMQ)"
@@ -9,11 +9,11 @@ categories:
 - Symfony
 ---
 
+This post will cover how you can add additional data to your events using a middleware class.
+
 Events are great due to the fact that they are very versatile and can be very useful in most cases.
 Maybe you want to log something specific in your system, or maybe you are building a gamification application that gives
 users experience points based on their actions. Then events might just be right for you.
-
-This post will cover how you can add additional data to your events using a middleware class.
 
 ## How it works
 Classes needed:
@@ -23,16 +23,22 @@ Classes needed:
 * A decorator class for each event - adds data to the event it's assigned to
 
 In most cases, your middleware will accumulate a number of events, also known as messages. 
-When your application terminates, the middleware will dispatch a SimpleBusMessage event for each accumulated message.
+When your application terminates, the middleware will dispatch a SimpleBusMessage event for each accumulated message.  
+
+
 The decorator classes are event subscribers and listen to the ExtractSimpleBusMessage event, they check the simple bus message
 for their assigned event, and if there is a match, they add some more data to it.
 This was just a quick summary of the process, further down you will see the implementation.
 
 ## Example of a decorator
-Now lets see an example of a decorator class.
+Lets see an example of a decorator class.
 This example refers to when a new user has registered to your application.
-The decorator class listens to the ExtractSimpleBusMessage event. When it is dispatched, it will run the
+A decorator class listens to a simble bus message. When the specific message is dispatched, it will run the
 decorate() function.
+
+The purpose of the decorator is to add specific data to your message. In this case, lets say that 
+your message is missing the users age and address, and that you need those values for later use,
+therefore, you decorate the message, and add the data that you need.  
 
 {% highlight php %}
 
@@ -67,7 +73,7 @@ class UserHasRegisteredDecorator implements EventSubscriberInterface
 
 ## The middleware
 Down below you can see the middleware class. As you can see, it is an event subscriber that listens for
-the symfony 'kernel.terminate' event.
+the symfony 'kernel.terminate' event. 
 
 {% highlight php %}
 
@@ -124,9 +130,11 @@ class Middleware implements MessageBusMiddleware, EventSubscriberInterface
 
 {% endhighlight %}
 
-As you can see, when dispatching the ExtractSimpleBusMessage event, you will need to pass the message, and the DataContainer.
+Upon the 'kernel.terminate' event the middleware dispatches the ExtractSimpleBusMessage event, and you will need to pass the message, and the DataContainer.
 This way we can access the message and the DataContainer inside our decorators with the use of the getter functions that are set
-inside the ExtractSimpleBusMessage class. The ExtractSimpleBusMessage class uses an the DataContainer object instead of a
+inside the ExtractSimpleBusMessage class.   
+
+The ExtractSimpleBusMessage class uses the DataContainer object instead of a
 simple array, since an array is passed by value and not by reference.
 
 Below you can see the ExtractSimpleBusMessage class.
@@ -182,6 +190,3 @@ class DataContainer
 }
 
 {% endhighlight %}
-
-If the message provided by the ExtractSimpleBusMessage event was an UserHasRegistered event, then the decorator will add
-'age' and 'address' to the container. This way you can add any data that you want for your events.
