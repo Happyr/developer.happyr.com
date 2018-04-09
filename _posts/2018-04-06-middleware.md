@@ -27,6 +27,7 @@ The decorator classes are event subscribers and listen to the ExtractSimpleBusMe
 for their assigned event, and if there is a match, they add some more data to it.
 This was just a quick summary of the process, further down you will see the implementation.
 
+## The middleware
 Down below you can see the middleware class. As you can see, it is an event subscriber that dispatches an ExtractSimpleBusMessage
 event for each accumulated message once the symfony 'kernel.terminate' event is dispatched.
 
@@ -138,6 +139,7 @@ class ExtractSimpleBusMessage extends Event
 }
 {% endhighlight %}
 
+## The DataContainer class
 Below is an example of how the DataContainer class could look like, as mentioned earlier, it's up to you to modify it
 to your needs.
 
@@ -164,6 +166,7 @@ class DataContainer
 
 {% endhighlight %}
 
+## Example of a decorator
 Now lets see an example of a decorator class.
 This example refers to when a new user has registered to your application.
 The decorator class listens to the ExtractSimpleBusMessage event. When it is dispatched, it will run the
