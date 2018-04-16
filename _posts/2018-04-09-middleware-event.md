@@ -9,36 +9,24 @@ categories:
 - Symfony
 ---
 
-This post will cover how you can add additional data to your events using a SimpleBus middleware. 
+This post will cover how you can add additional data to your SimpleBus events using a SimpleBus middleware. 
 
 Using SimpleBus in your hexagonal architecture is great, due to the versatility it gives you when working with events/commands. 
 If you would like to read more about the event bus or the command bus and their associated handlers/subscribers, see 
-the [documentation](http://docs.simplebus.io/en/latest/index.html). 
+the [documentation](http://docs.simplebus.io/en/latest/index.html).  
+
 Maybe you want to log something specific in your system, or maybe you are building a gamification application that gives
-users experience points based on their actions. Then using SimpleBus, together with your events and commands might be just
-right for you. 
+users experience points based on their actions. Then using SimpleBus might be just right for you. 
 
 ## How it works
 The main point is to do some kind event manipulation on those events that have already been dispatched inside your application. 
 Maybe you want to save the events to a log, or maybe add some more data to the events before passing them on to another 
 application.
-Below is a section of the middleware class, the entire middleware is shown at the bottom of this post. 
-
-{% highlight php %}
-$eventData = [
-    // .. Add some event data
-]
-// Add the data to a DataContainer object
-$container = new DataContainer($eventData);
-
-$this->eventDispatcher->dispatch('foo', new Foo($event, $container));
-{% endhighlight %}
 
 ### The dispatched event
-The Foo event class uses the DataContainer object instead of a
-simple array, since an array is passed by value and not by reference. Therefore by using the DataContainer object we can 
-make sure that the passed parameter has the correct value, since objects are passed by reference, which means that if the 
-variable gets modified, the value will be updated for both parties using it. 
+The event class will take the DataContainer object as a parameter instead of an array, 
+since an array is passed by value and not by reference. Therefore by using the DataContainer object we can 
+make sure that the passed parameter has the correct value. 
 
 {% highlight php %}
 
@@ -91,12 +79,12 @@ class DataContainer
 {% endhighlight %}
 
 ## Manipulate the event
-Now you will need something that can manipulate the existing event. Creating an event subscriber that subscribes to the 'foo'
+Now you will need something that can manipulate the existing event. Creating an symfony event subscriber that subscribes to the 'foo'
 event is a good start. Now it's up to you to decide what your subscriber should do.     
 
 In this case imagine that we need a users age and address for later use, but they are both missing in the SimpleBus event data that
 was provided from our application. This means that we somehow want to add these values to the event, before it gets passed
-on to another application. This will be done by the decorator class, which is a simple event subscriber. 
+on to another application. This will be done by the decorator class displayed below. 
 
 ### Example of a decorator class
 This example refers to when a new user has registered to your application.
@@ -133,7 +121,7 @@ class UserHasRegisteredDecorator implements EventSubscriberInterface
 }
 {% endhighlight %}
 
-Now we have successfully added age and address to the specific event data before it gets passed on to another application. 
+Now we have successfully added age and address to the event data before it gets passed on to another application. 
 
 ## The middleware
 Down below you can see the entire middleware class. 
