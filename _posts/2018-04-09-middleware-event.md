@@ -150,6 +150,11 @@ class Middleware implements MessageBusMiddleware, EventSubscriberInterface
             } catch (\Throwable $e) {
                 $this->log('alert', '', ['exception' => $e]);
             }
+            
+            $eventData = $container->toArray();
+            // We can now access the age and the address 
+            $age = $eventData['age']; 
+            $address = $eventData['address']; 
         }
         $this->events = [];
     }
@@ -157,8 +162,12 @@ class Middleware implements MessageBusMiddleware, EventSubscriberInterface
 {% endhighlight %}
 
 When the <b>Foo</b> event has been dispatched, our decorator class will pick it up, and add some additional data to it. 
-As you can see, to add data to the event a DataContainer class is used, this is just an implementation detail and not 
+To add data to the event a DataContainer class is used, this is just an implementation detail and not 
 a mandatory requirement. 
+
+As you can see towards the bottom of the middleware class, you can now access the age and address that was added
+by our decorator.
+
 Below is an explanation of the DataContainer class, and why it's used. 
 
 ## The DataContainer class
