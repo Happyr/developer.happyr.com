@@ -16,7 +16,7 @@ If you would like to read more about the event bus or the command bus and their 
 the [documentation](http://docs.simplebus.io/en/latest/index.html).  
 
 Maybe you want to log something specific in your system, or maybe you are building a gamification application that gives
-users experience points based on their actions. Then using SimpleBus might be just right for you. 
+users experience points based on their actions, then using SimpleBus might be just right for you. 
 
 ## How it works
 The main point is to do some kind event manipulation on those events that have already been dispatched inside your application. 
@@ -24,9 +24,6 @@ Maybe you want to save the events to a log, or maybe add some more data to the e
 application.
 
 ### The dispatched event
-The event class will take the DataContainer object as a parameter instead of an array, 
-since an array is passed by value and not by reference. Therefore by using the DataContainer object we can 
-make sure that the passed parameter has the correct value. 
 
 {% highlight php %}
 
@@ -53,40 +50,19 @@ class Foo extends Event
         return $this->container;
     }
 }
-{% endhighlight %}
-
-### The DataContainer class
-Below is the DataContainer class, used to add some new data to the existing event. 
-
-{% highlight php %}
-
-class DataContainer
-{
-    /** @var array */
-    private $data;
-
-    public function __construct(array $data)
-    {
-        $this->data = $data;
-    }
-
-    public function addData(string $key, $value)
-    {
-        $this->data[$key] = $value;
-    }
-}
 
 {% endhighlight %}
 
-## Manipulate the event
-Now you will need something that can manipulate the existing event. Creating an symfony event subscriber that subscribes to the 'foo'
-event is a good start. Now it's up to you to decide what your subscriber should do.     
+## Manipulate the event using a decorator
+You will need something that can manipulate the existing event. Creating a symfony event subscriber that subscribes to the <b>Foo</b>
+event is a good start. Now it's up to you to decide what your subscriber should do. In this case, the subscriber will add 
+some additional data to the event. 
 
+### Example of a decorator class
 In this case imagine that we need a users age and address for later use, but they are both missing in the SimpleBus event data that
 was provided from our application. This means that we somehow want to add these values to the event, before it gets passed
 on to another application. This will be done by the decorator class displayed below. 
 
-### Example of a decorator class
 This example refers to when a new user has registered to your application.
 
 {% highlight php %}
@@ -125,6 +101,8 @@ Now we have successfully added age and address to the event data before it gets 
 
 ## The middleware
 Down below you can see the entire middleware class. 
+For each event that the middleware is aware of, it will dispatch the <b>Foo</b> event, and add some basic data to each event. 
+
 {% highlight php %}
 
 class Middleware implements MessageBusMiddleware, EventSubscriberInterface
@@ -176,4 +154,37 @@ class Middleware implements MessageBusMiddleware, EventSubscriberInterface
         $this->events = [];
     }
 }
+{% endhighlight %}
+
+When the <b>Foo</b> event has been dispatched, our decorator class will pick it up, and add some additional data to it. 
+As you can see, to add data to the event a DataContainer class is used, this is just an implementation detail and not 
+a mandatory requirement. 
+Below is an explanation of the DataContainer class, and why it's used. 
+
+## The DataContainer class
+The event class will take the DataContainer object as a parameter instead of an array, 
+since an array is passed by value and not by reference. Therefore by using the DataContainer object we can 
+make sure that the data added to the event is still there when we try to reach the data from a different scope.  
+
+Below is the DataContainer class, used to add some new data to the existing event. 
+It's a very simple class that basically adds some kind of value to an array key. 
+
+{% highlight php %}
+
+class DataContainer
+{
+    /** @var array */
+    private $data;
+
+    public function __construct(array $data)
+    {
+        $this->data = $data;
+    }
+
+    public function addData(string $key, $value)
+    {
+        $this->data[$key] = $value;
+    }
+}
+
 {% endhighlight %}
