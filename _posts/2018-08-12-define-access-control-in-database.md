@@ -21,18 +21,18 @@ We need to do something smarter.
 
 ## Using Symfony voters
 
-Symfony is using voters [LINK] to decide access to URL and resources. One of the voters
-that comes with the security component [LINK] is configured with the `security.access_control`
-configuration key.
+Symfony is using voters [LINK] to decide access to URL and resources. There are many
+voters that come with the security component [LINK] that are using the configuration
+in `security.access_control` to decide if the request should be granted or not. 
 
 What we want to do is to create a new voter that access the database. How you create
 a Voter is covered by the Symfony documentation [LINK].   
 
 {% highlight php %}
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Doctrine\ORM\EntityManagerInterface;
 
 class MyDynamicAccessVoter implements VoterInterface
 {
