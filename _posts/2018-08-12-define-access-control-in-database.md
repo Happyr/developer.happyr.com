@@ -21,12 +21,13 @@ We need to do something smarter.
 
 ## Using Symfony voters
 
-Symfony is using voters [LINK] to decide access to URL and resources. There are many
-voters that come with the security component [LINK] that are using the configuration
-in `security.access_control` to decide if the request should be granted or not. 
+Symfony is using voters to decide access to URL and resources. There are many
+voters that come with the [security component](https://github.com/symfony/symfony/tree/4.1/src/Symfony/Component/Security/Core/Authorization/Voter) 
+that are using the configuration in `security.access_control` to decide if the request
+should be granted or not. 
 
 What we want to do is to create a new voter that access the database. How you create
-a Voter is covered by the Symfony documentation [LINK].   
+a Voter is covered by the [Symfony documentation](https://symfony.com/doc/current/security/voters.html).   
 
 {% highlight php %}
 use Doctrine\ORM\EntityManagerInterface;
