@@ -3,9 +3,9 @@ title: Define Symfony access control rules in a database
 author: Tobias Nyholm
 date: '2018-08-12 22:23:47 +0200'
 header:
-  image: "images/posts/little-man-hacker.jpg"
-  teaser: images/posts/little-man-hacker.jpg
-  caption: "Photo credit: [**The Preiser Project**](https://www.flickr.com/photos/thepreiserproject/)"
+  image: "images/posts/voting.jpg"
+  teaser: images/posts/voting.jpg
+  caption: "Photo credit: [**Keith Ivey**](https://www.flickr.com/photos/kcivey/)"
 categories:
 - Symfony
 ---
