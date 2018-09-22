@@ -13,7 +13,7 @@ If you want to open files in PHPStorm8 directly from the Symfony debug toolbar t
 {% highlight javascript %}
 // /app/config/config.yml
 framework:
-  ide: &quot;phpstorm://open?file=%%f&amp;line=%%l&quot;
+  ide: "phpstorm://open?file=%%f&line=%%l"
 {% endhighlight %}
 
 
