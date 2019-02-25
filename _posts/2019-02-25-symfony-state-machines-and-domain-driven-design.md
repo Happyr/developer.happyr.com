@@ -28,9 +28,9 @@ Only it should have the knowledge how to move from one state to another. The pro
 with the workflow component is that you are defining the workflow's configuration
 in a Yaml file. See example from [Symfony documentation](https://symfony.com/doc/current/workflow/usage.html#creating-a-workflow).
 
-There is a way you can work around this though with some help of [service factories](https://symfony.com/doc/current/service_container/factories.html). 
+There is a way you can work around this though with some help from [service factories](https://symfony.com/doc/current/service_container/factories.html). 
 
-Here is your model. It is a blog post that could have a few different states: 
+Here is an example of a model. It is a blog post that could have a few different states: 
 "draft", "published" and "trashed". I've created a static method on my model that 
 will return a WorkflowDefinition. 
 
@@ -87,7 +87,7 @@ class WorkflowFactory
 {% endhighlight %}
 
 The final piece of the puzzle is to glue everything together and create your service
-definition. Not that our WorkflowFactory is generic and could be reused for other 
+definition. Note that our WorkflowFactory is generic and could be reused for other 
 workflows, not just the BlogPost.
 
 {% highlight yaml %}
