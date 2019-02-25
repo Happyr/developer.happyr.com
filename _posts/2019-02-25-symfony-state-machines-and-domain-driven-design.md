@@ -18,12 +18,12 @@ optimizations.
 
 I often get questions how to work with the Workflow component and questions like
 "what should I do in this really specific scenario". One question I do get a lot
-is how one should work with the component when doing domain driven design.  
+is how one should work with the component when doing Domain Driven Design.  
 
 Since I'm no expert in DDD I imminently put myself on very deep water writing 
 this blog post. But here are my thoughts. 
 
-In domain driven design the model (or entity) should be responsible for itself.  
+In Domain Driven Design the model (or entity) should be responsible for itself.  
 Only it should have the knowledge how to move from one state to another. The problem
 with the workflow component is that you are defining the workflow's configuration
 in a Yaml file. See example from [Symfony documentation](https://symfony.com/doc/current/workflow/usage.html#creating-a-workflow).
@@ -107,4 +107,4 @@ workflows, not just the BlogPost.
 {% endhighlight %}
 
 I hope this small post has given you an idea how to be successful with the workflow
-component when doing domain driven design. 
+component when doing Domain Driven Design. 
