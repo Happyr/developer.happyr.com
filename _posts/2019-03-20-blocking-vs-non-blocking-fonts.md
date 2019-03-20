@@ -10,7 +10,7 @@ categories:
 ---
 
 Just the other day I found out about the [font-display: swap;](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display)
-css directive. It basically allows you do configure the browser to load the webpage
+css directive. It basically allows you to configure the browser to load the webpage
 first and then add the correct fonts when they are loaded. 
 
 Note that you can only add `font-display: swap;` on `@font-face`. That is an issue 
@@ -36,4 +36,4 @@ a video illustrating the differences.  I have throttled the network to "regular 
 I reload the page as soon as the video starts. The non-blocking version shows the 
 content almost instantly. This is a way better user experience.  
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/QUBX2a6m82Y" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/T62gzrxvTz8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
