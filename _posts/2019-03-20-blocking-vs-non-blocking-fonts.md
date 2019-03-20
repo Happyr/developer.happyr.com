@@ -36,4 +36,4 @@ a video illustrating the differences.  I have throttled the network to "regular 
 I reload the page as soon as the video starts. The non-blocking version shows the 
 content almost instantly. This is a way better user experience.  
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/T62gzrxvTz8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nBQ9HkokvOc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
