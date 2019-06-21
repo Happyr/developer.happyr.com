@@ -3,8 +3,8 @@ title: Using NewRelic with Bref on AWS Lambda
 author: Tobias Nyholm
 date: '2019-06-21 18:18:47 +0200'
 header:
-  image: "images/posts/non-blocking-fonts.png"
-  teaser: images/posts/non-blocking-fonts.png
+  image: "images/posts/bref-newrelic.png"
+  teaser: images/posts/bref-newrelic.png
 categories:
 - Bref
 ---
