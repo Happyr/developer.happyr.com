@@ -108,5 +108,11 @@ rm bref/etc/php-fpm.conf
 
 Now we are finally done. Just rebuild your php docker, package your zip files and publish them on AWS. 
 
-To accomplish this took me way more hours then I want to admit. So I hope this small post could help someone to be a litte
-faster than I was. 
+When everything is deployed, you need to make sure that your lambda function can reach internet. The NewRelic 
+daemon must be able to send data to NewRelic's servers. You should also add `newrelic_start_transaction` and 
+`newrelic_end_of_transaction` on appropriate places in your application. Or else NewRelic will log really 
+long response times. If you are using Symfony and EkinoNewRelic bundle, you should configure it as you were
+using Symfony HTTP Cache. 
+
+To accomplish this setup took me way more hours then I want to admit. So I hope this small post could help 
+someone to be a little faster than I was. 
