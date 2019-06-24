@@ -17,7 +17,7 @@ serverless is super cool since you can scale up and down, it is cheap bla bla bl
 you dont need to care about dev ops once it all up and running. We've been using [Bref](https://bref.sh) and I can highly 
 recommend it. 
 
-When running your application on Lambda, most things works just as normal but there are one thing in particular to be aware
+When running your application on Lambda, most things work just as normal but there is one thing in particular to be aware
 of. Lambda is not meant to be running and pull on a queue. But that is exactly what is expected when using Symfony's Messenger
 component with async messages. You are expected to run `bin/console messenger:consume` and keep that alive with Supervisord. 
 Instead, the queue should make sure to start a Lambda function. 
