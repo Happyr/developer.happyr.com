@@ -19,7 +19,7 @@ recommend it.
 
 When running your application on Lambda, most things works just as normal but there are one thing in particular to be aware
 of. Lambda is not meant to be running and pull on a queue. But that is exactly what is expected when using Symfony's Messenger
-component with async messages. You are expected to run `bin/console messenger:consome` and keep that alive with Supervisord. 
+component with async messages. You are expected to run `bin/console messenger:consume` and keep that alive with Supervisord. 
 Instead, the queue should make sure to start a Lambda function. 
 
 So on AWS there are two major queue like services: SQS and SNS. They are pretty similar but SQS is more of a classic queue
