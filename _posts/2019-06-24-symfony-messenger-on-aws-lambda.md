@@ -24,7 +24,7 @@ Instead, the queue should make sure to start a Lambda function.
 
 So on AWS there are two major queue like services: SQS and SNS. They are pretty similar but SQS is more of a classic queue
 like RabbitMQ. SNS is more of a publish-subscribe system. We've decided to use SNS because pub-sub is pretty much what we 
-want to do. We dont have the issue that "the server might get too busy" which you would have if you ran on a normal server. 
+want to do. We don't have the issue that "the server might get too busy" which you would have if you ran on a normal server. 
 This is Lambda, resources are indefinite. 
 
 So the first thing I did was to configure my Messenger transport. We have to use php-enqueue to integrate with SNS and
