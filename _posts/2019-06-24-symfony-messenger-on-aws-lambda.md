@@ -3,8 +3,8 @@ title: Symfony Messenger on AWS Lambda
 author: Tobias Nyholm
 date: '2019-03-24 09:13:00 +0200'
 header:
-  image: "images/posts/non-blocking-fonts.png"
-  teaser: images/posts/non-blocking-fonts.png
+  image: "images/posts/sns-symfony-messenger.png"
+  teaser: images/posts/sns-symfony-messenger.png
 categories:
 - Bref
 - Messenger
@@ -102,7 +102,7 @@ lambda(static function (array $event) {
     $consumer = $container->get(SnsConsumer::class);
 
     foreach ($event['Records'] as $record) {
-        if (!isset($record['Sns']) && !isset($record['Sns']['Message'])) {
+        if (!isset($record['Sns']['Message'])) {
             continue;
         }
 
