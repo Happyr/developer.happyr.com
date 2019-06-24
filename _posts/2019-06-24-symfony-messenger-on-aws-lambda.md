@@ -80,7 +80,7 @@ Resources:
 This will invoke a a script att `bin/consumer` for every message pushed to "my_sns_topic". The job of this script is to 
 read the SNS event and give it back to the SNS transformer. 
 
-Let start with defining the `bin/consume` script:
+Lets start by defining the `bin/consume` script:
 
 {% highlight php %}
 #!/usr/bin/env php
