@@ -14,7 +14,7 @@ categories:
 For the past 4 years we have developed web applications with a message bus. The Symfony Messenger component was released
 around a year ago and I've loved it since. In the past few weeks we've been deploying applications on AWS Lambda. Going
 serverless is super cool since you can scale up and down, it is cheap bla bla bla. The major selling point to me is that 
-you dont need to care about dev ops once it all up and running. We've been using [Bref](https://bref.sh) and I can highly 
+you don't need to care about dev ops once it all up and running. We've been using [Bref](https://bref.sh) and I can highly 
 recommend it. 
 
 When running your application on Lambda, most things work just as normal but there is one thing in particular to be aware
