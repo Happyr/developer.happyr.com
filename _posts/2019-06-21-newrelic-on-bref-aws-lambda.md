@@ -69,7 +69,7 @@ a new `bootstrap` file with the following contents:
 /opt/bootstrap-php
 {% endhighlight %}
 
-Now I add a line in `bootstrap-php` to make sure NewRelic is not consider my requests as background jobs:
+Now I add a line in `bootstrap-php` to make sure NewRelic is not considering my requests as background jobs:
 
 {% highlight php %}
 // bootstrap-php
@@ -107,6 +107,27 @@ rm bref/etc/php-fpm.conf
 {% endhighlight %}
 
 Now we are finally done. Just rebuild your php docker, package your zip files and publish them on AWS. 
+
+{% highlight shell %}
+cd runtime/php
+make build
+make distribution
+aws lambda publish-layer-version --layer-name bref-php-73 --profile happyr --zip-file fileb://../export/php-73.zip
+aws lambda publish-layer-version --layer-name bref-php-73-fpm --profile happyr --zip-file fileb://../export/php-73-fpm.zip
+{% endhighlight %}
+
+In the response to the `aws lambda publish-layer-version` you will see the new ARN to use. 
+
+{% highlight yaml %}
+Resources:
+    Website:
+        Type: AWS::Serverless::Function
+        Properties:
+            FunctionName: 'my website'
+            Runtime: provided
+            Layers:
+                - 'arn:aws:lambda:eu-central-1:123456789:layer:bref-php-73-fpm:1'
+{% endhighlight %}
 
 When everything is deployed, you need to make sure that your lambda function can reach internet. The NewRelic 
 daemon must be able to send data to NewRelic's servers. You should also add `newrelic_start_transaction` and 
