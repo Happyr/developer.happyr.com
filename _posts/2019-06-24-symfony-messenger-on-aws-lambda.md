@@ -1,7 +1,7 @@
 ---
 title: Symfony Messenger on AWS Lambda
 author: Tobias Nyholm
-date: '2019-03-24 09:13:00 +0200'
+date: '2019-06-24 09:13:00 +0200'
 header:
   image: "images/posts/sns-symfony-messenger.jpg"
   teaser: images/posts/sns-symfony-messenger.jpg
