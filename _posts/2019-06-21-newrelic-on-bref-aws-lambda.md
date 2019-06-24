@@ -45,7 +45,7 @@ I disable logging since I run this on a read-only environment.
 
 This is great and it should have been working on a normal server. However, NewRelic is configured to automatically start
 with the PHP-FPM server. Since Bref has it custom implementation of PHP-FPM that will not work. We need to start the the
-newrelic-daemon manually every time we load or Lambda function. 
+newrelic-daemon manually every time we load our Lambda function. 
 
 Let's start with the `function` layer: 
 
