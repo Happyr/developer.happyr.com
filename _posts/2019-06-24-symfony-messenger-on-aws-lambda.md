@@ -176,4 +176,4 @@ framework:
                 serializer: 'Happyr\MessageSerializer\Serializer'
 {% endhighlight %}
             
-See more example in the [readme](https://github.com/Happyr/message-serializer).
+See more examples in the [readme](https://github.com/Happyr/message-serializer).
