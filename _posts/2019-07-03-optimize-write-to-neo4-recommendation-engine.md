@@ -146,11 +146,11 @@ and use our consumer as callback for batch RabbitMQ
 old_sound_rabbit_mq:
     connections:
         default:
-            ...
+            # ...
         advert_served_to_user:
             url: '%env(BATCH_MESSAGES_TRANSPORT_DSN)%'
     consumers:
-        ...
+        # ...
     	batch_consumers:
             advert_served_to_user:
                 connection:       advert_served_to_user
@@ -159,11 +159,6 @@ old_sound_rabbit_mq:
                 callback:         'App\Consumer\AdvertServedToUserToUserBatchConsumer'
                 qos_options:      {prefetch_size: 0, prefetch_count: 5000, global: false}
                 timeout_wait:     5
-                auto_setup_fabric: false
-                idle_timeout_exit_code: -2
-                keep_alive: false
-                graceful_max_execution:
-                    timeout: 60
 {% endhighlight %}
 
 After we’ve set all up and deployed the code the queue went empty in few days, the app continued running smoothly without clogging of the queue.
