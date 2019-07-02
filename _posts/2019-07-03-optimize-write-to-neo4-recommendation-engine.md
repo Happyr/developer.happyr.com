@@ -139,18 +139,18 @@ old_sound_rabbit_mq:
     consumers:
         ...
     	batch_consumers:
-        advert_served_to_user:
-            connection:       advert_served_to_user
-            exchange_options: {name: 'advert-served-to-user', type: fanout }
-            queue_options:    {name: 'advert-served-to-user'}
-            callback:         'app.consumer.batch'
-            qos_options:      {prefetch_size: 0, prefetch_count: 5000, global: false}
-            timeout_wait:     5
-            auto_setup_fabric: false
-            idle_timeout_exit_code: -2
-            keep_alive: false
-            graceful_max_execution:
-                timeout: 60
+            advert_served_to_user:
+                connection:       advert_served_to_user
+                exchange_options: {name: 'advert-served-to-user', type: fanout }
+                queue_options:    {name: 'advert-served-to-user'}
+                callback:         'app.consumer.batch'
+                qos_options:      {prefetch_size: 0, prefetch_count: 5000, global: false}
+                timeout_wait:     5
+                auto_setup_fabric: false
+                idle_timeout_exit_code: -2
+                keep_alive: false
+                graceful_max_execution:
+                    timeout: 60
 {% endhighlight %}
 
 After that we created a handler for our batch command that uses UNWIND query:
