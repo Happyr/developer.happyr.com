@@ -1,7 +1,7 @@
 ---
 title: Optimize write to neo4j recommendation engine 
 author: Radoje Albijanic
-date: '2019-07-03 11:24:00 +0200'
+date: '2019-07-03 08:00:00 +0200'
 header: 
   image: "images/posts/neo4j.jpg"
   teaser: images/posts/neo4j.jpg
