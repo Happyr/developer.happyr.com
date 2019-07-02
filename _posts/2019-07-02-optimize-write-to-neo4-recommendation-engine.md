@@ -13,11 +13,11 @@ categories:
 
 In today applications recommendations became quite necessary for better audience/customer targeting. So, as you could assume, we have our own recommendation engine for that, using Symfony and Neo4j as a database. Communication between the main application and the recommendation engine is done via messages sent to/consumed from RabbitMQ. We are sending some interesting events that happened on our website to the recommendation engine, and also pulling some suggestions from it.
 
-####The problem
+##The problem
 
 Over time we noticed something – our message queue got quite clogged, over 2 millions of messages were waiting to be written in the database! So we dug up a bit and found out that Neo4j is not quite optimized for writing, and we had large amounts of messages that were just coming andd coming in and waiting to be processed. So we needed to fix that, in order to have up to date recommendations for our system.
 
-####The investigation
+##The investigation
 
 After reading some articles, and Neo4j official docs, we found several guidelines:
 - don’t use the ORM
@@ -27,11 +27,11 @@ We decided to check how that really impacts the write queries to the database so
 
 ///something is wrong with my setup, have to fix neo4j and paste the results here
 
-The write query for 500 entries without ORM was 3 times faster than with ORM, but writing 10 times more (5000) entries to the database using UNWIND took the same amount of time as 500 for one by one query!
+The write query for 5000 entries with ORM took XXXXs, using CYPHER XXXs, using UNWIND took XXXs! X times faster than one by one insert with ORM!
 
-####The solution
+##The solution
 
-When checking the messages stuck on the queue we noticed one message (AdvertServedToUser) was 80% of the total messages. So we decided to move it out of ORM and use UNWIND. We created another queue for our batch messages, and when consuming them from the original queue – we just re-queued them to another. We were using https://github.com/php-amqplib/RabbitMqBundle for consuming messages from the queue and Symfony Messenger inside application.
+When checking the messages stuck on the queue we noticed one message (`AdvertServedToUser`) was 80% of the total messages. So we decided to move it out of ORM and use UNWIND. We created another queue for our batch messages, and when consuming them from the original queue – we just re-queued them to another. We were using [RabbitMqBundle](https://github.com/php-amqplib/RabbitMqBundle) for consuming messages from the queue and Symfony Messenger inside application.
 We had to change routing for the specific message in order to put it on the different queue:
 
 {% highlight yaml %}
@@ -39,9 +39,8 @@ We had to change routing for the specific message in order to put it on the diff
 framework:
     messenger:
         transports:
-            # Uncomment the following line to enable a transport named "amqp"
             batch_messages_amqp: '%env(BATCH_MESSAGES_TRANSPORT_DSN)%/advert-served-to-user
-        ---
+        ...
         routing:
             App\Message\Command\AdvertServedToUser: batch_messages_amqp
 
@@ -85,9 +84,6 @@ class AdvertServedToUserToUserBatchConsumer implements BatchConsumerInterface
             $command = new RunAdvertServedToUserBatch($messages);
             $this->commandBus->dispatch($command);
             return true;
-        } catch (\Exception $e) {
-            $this->logger->log('error', $e->getMessage(), ['exception' => $e]);
-            return false;
         } catch (\Throwable $e) {
             $this->logger->log('error', $e->getMessage(), ['exception' => $e]);
             return false;
@@ -101,10 +97,10 @@ registered class as a service:
 {% highlight yaml %}
 #config/services.yaml
 services:
-	---
-	app.consumer.batch:
-    		class: App\Consumer\AdvertServedToUserBatchConsumer
-    		arguments: ["@messenger.bus.command", '@logger']
+    ...
+    app.consumer.batch:
+        class: App\Consumer\AdvertServedToUserBatchConsumer
+        arguments: ["@messenger.bus.command", '@logger']
 {% endhighlight %}
 
 and use our consumer as callback for batch RabbitMQ
@@ -114,7 +110,7 @@ and use our consumer as callback for batch RabbitMQ
 old_sound_rabbit_mq:
     connections:
         default:
-            ---
+            ...
         advert_served_to_user:
             url: '%env(BATCH_MESSAGES_TRANSPORT_DSN)%'
             lazy:     true
@@ -125,7 +121,7 @@ old_sound_rabbit_mq:
             # requires php-amqplib v2.4.1+
             heartbeat: 0
     consumers:
-        ----
+        ...
     	batch_consumers:
         advert_served_to_user:
             connection:       advert_served_to_user
