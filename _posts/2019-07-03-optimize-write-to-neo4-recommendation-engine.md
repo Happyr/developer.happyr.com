@@ -55,7 +55,7 @@ We had to change routing for the specific message in order to put it on the diff
 framework:
     messenger:
         transports:
-            batch_messages_amqp: '%env(BATCH_MESSAGES_TRANSPORT_DSN)%/advert-served-to-user
+            batch_messages_amqp: '%env(BATCH_MESSAGES_TRANSPORT_DSN)%/advert-served-to-user'
         # ...
         routing:
             App\Message\Command\AdvertServedToUser: batch_messages_amqp
