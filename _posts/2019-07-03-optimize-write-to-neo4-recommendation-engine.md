@@ -56,7 +56,7 @@ framework:
     messenger:
         transports:
             batch_messages_amqp: '%env(BATCH_MESSAGES_TRANSPORT_DSN)%/advert-served-to-user
-        ...
+        # ...
         routing:
             App\Message\Command\AdvertServedToUser: batch_messages_amqp
 
