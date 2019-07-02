@@ -13,7 +13,7 @@ categories:
 
 In today applications recommendations became quite necessary for better audience/customer targeting. So, as you could assume, we have our own recommendation engine for that, 
 using Symfony with a Neo4j database. Communication between the main application and the recommendation engine is done via messages over RabbitMQ. 
-We are sending interesting events that happened on our website to the recommendation engine and then pulling some recommendations from it..
+We are sending interesting events that happened on our website to the recommendation engine and then pulling some recommendations from it.
 
 ## The problem
 
