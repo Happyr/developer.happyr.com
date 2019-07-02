@@ -41,7 +41,7 @@ Finished in 0 minutes and 4 seconds.
 
 {% endhighlight %}
 
-The write with ORM took 2 minutes and 21 second, using CYPHER 43 seconds, using UNWIND only 4 seconds!
+The write with ORM took 2 minutes and 21 seconds, using CYPHER 43 seconds, using UNWIND only 4 seconds!
 
 ## The solution
 
@@ -149,13 +149,6 @@ old_sound_rabbit_mq:
             ...
         advert_served_to_user:
             url: '%env(BATCH_MESSAGES_TRANSPORT_DSN)%'
-            lazy:     true
-            connection_timeout: 3
-            read_write_timeout: 3
-            # requires php-amqplib v2.4.1+ and PHP5.4+
-            keepalive: false
-            # requires php-amqplib v2.4.1+
-            heartbeat: 0
     consumers:
         ...
     	batch_consumers:
