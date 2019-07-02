@@ -154,7 +154,7 @@ old_sound_rabbit_mq:
     	batch_consumers:
             advert_served_to_user:
                 connection:       advert_served_to_user
-                exchange_options: {name: 'advert-served-to-user', type: fanout }
+                exchange_options: {name: 'advert-served-to-user', type: direct }
                 queue_options:    {name: 'advert-served-to-user'}
                 callback:         'App\Consumer\AdvertServedToUserToUserBatchConsumer'
                 qos_options:      {prefetch_size: 0, prefetch_count: 5000, global: false}
