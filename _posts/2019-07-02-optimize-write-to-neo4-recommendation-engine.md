@@ -11,11 +11,16 @@ categories:
 - Recommendation engine
 --- 
 
-In today applications recommendations became quite necessary for better audience/customer targeting. So, as you could assume, we have our own recommendation engine for that, using Symfony and Neo4j as a database. Communication between the main application and the recommendation engine is done via messages sent to/consumed from RabbitMQ. We are sending some interesting events that happened on our website to the recommendation engine, and also pulling some suggestions from it.
+In today applications recommendations became quite necessary for better audience/customer targeting. So, as you could assume, we have our own recommendation engine for that, 
+using Symfony and Neo4j as a database. Communication between the main application and the recommendation engine is done via messages sent to/consumed from RabbitMQ. 
+We are sending some interesting events that happened on our website to the recommendation engine, and also pulling some suggestions from it.
 
 ##The problem
 
-Over time we noticed something – our message queue got quite clogged, over 2 millions of messages were waiting to be written in the database! So we dug up a bit and found out that Neo4j is not quite optimized for writing, and we had large amounts of messages that were just coming andd coming in and waiting to be processed. So we needed to fix that, in order to have up to date recommendations for our system.
+Over time we noticed something – our message queue got quite clogged, over 2 millions of messages were waiting to be written in the database! So we dug up a bit and found out 
+that Neo4j is not quite optimized for one by one writing, it is recalculating relations after each insert, and we had large amounts of messages that were just coming and coming 
+in and waiting to be processed. So we needed to fix that, 
+in order to have up to date recommendations for our system.
 
 ##The investigation
 
@@ -23,15 +28,26 @@ After reading some articles, and Neo4j official docs, we found several guideline
 - don’t use the ORM
 - use [UNWIND](https://neo4j.com/docs/cypher-manual/current/clauses/unwind/)   
 
-We decided to check how that really impacts the write queries to the database so we made a little experiment. We ran the same insert with ORM, without ORM and using UNWIND:
+We decided to check how that really impacts the write queries to the database so we made a little experiment. We ran the insert of 500 entries with ORM, without ORM and using UNWIND:
 
-///something is wrong with my setup, have to fix neo4j and paste the results here
+{% highlight console %}
+Started writing 500 entries with ORM.
+ 500/500 [============================] 100%
+Started in 28 seconds.
+Starting writing 500 entries with connection.
+ 500/500 [============================] 100%
+Finished in 5 seconds.
+Started writing 500 entries with connection and UNWIND.
+Finished in 0 seconds.
+{% endhighlight %}
 
-The write query for 5000 entries with ORM took XXXXs, using CYPHER XXXs, using UNWIND took XXXs! X times faster than one by one insert with ORM!
+The write with ORM took 28, using CYPHER 5, using UNWIND took below 1s!
 
 ##The solution
 
-When checking the messages stuck on the queue we noticed one message (`AdvertServedToUser`) was 80% of the total messages. So we decided to move it out of ORM and use UNWIND. We created another queue for our batch messages, and when consuming them from the original queue – we just re-queued them to another. We were using [RabbitMqBundle](https://github.com/php-amqplib/RabbitMqBundle) for consuming messages from the queue and Symfony Messenger inside application.
+When checking the messages stuck on the queue we noticed one message (`AdvertServedToUser`) was 80% of the total messages. So we decided to move it out of ORM and use UNWIND. 
+We created another queue for our batch messages, and when consuming them from the original queue – we just re-queued them to another. We were using [RabbitMqBundle](https://github.com/php-amqplib/RabbitMqBundle) for consuming messages from the queue and Symfony Messenger inside application.
+
 We had to change routing for the specific message in order to put it on the different queue:
 
 {% highlight yaml %}
