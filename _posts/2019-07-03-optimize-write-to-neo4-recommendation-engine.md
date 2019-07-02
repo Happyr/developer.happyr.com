@@ -128,9 +128,9 @@ class AdvertServedToUserToUserBatchConsumer implements BatchConsumerInterface
             /** @var AdvertServedToUser $originalMessage */
             $originalMessage = $envelope->getMessage();
             $collection[] = [
-                    'advertUuid' => $originalMessage->getAdvertId(),
-                    'userUuid' => $originalMessage->getUserId(),
-                ];
+                'advertUuid' => $originalMessage->getAdvertId(),
+                'userUuid' => $originalMessage->getUserId(),
+            ];
         }
 
         return $collection;
