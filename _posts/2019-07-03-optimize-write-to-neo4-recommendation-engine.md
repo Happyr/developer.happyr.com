@@ -105,7 +105,7 @@ class AdvertServedToUserToUserBatchConsumer implements BatchConsumerInterface
         return true;
     }
     
-    public function runBatch(array $messages): void
+    private function runBatch(array $messages): void
     {
         $batchArray = $this->getBatchArray($messages);
         $this->em->createQuery('
