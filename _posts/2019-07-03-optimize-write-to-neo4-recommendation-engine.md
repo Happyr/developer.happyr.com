@@ -78,7 +78,7 @@ use Psr\Log\LoggerInterface;
 use GraphAware\Neo4j\OGM\EntityManager;
 use Symfony\Component\Messenger\Envelope;
 
-class AdvertServedToUserToUserBatchConsumer implements BatchConsumerInterface
+class AdvertServedToUserBatchConsumer implements BatchConsumerInterface
 {
     private $em;
     private $logger;
@@ -156,7 +156,7 @@ old_sound_rabbit_mq:
                 connection:       advert_served_to_user
                 exchange_options: {name: 'advert-served-to-user', type: direct }
                 queue_options:    {name: 'advert-served-to-user'}
-                callback:         'App\Consumer\AdvertServedToUserToUserBatchConsumer'
+                callback:         'App\Consumer\AdvertServedToUserBatchConsumer'
                 qos_options:      {prefetch_size: 0, prefetch_count: 5000, global: false}
                 timeout_wait:     5
 {% endhighlight %}
