@@ -14,51 +14,54 @@ like Guzzle, Buzz or clients from the HTTPlug organization. Symfony's HTTP clien
 asynchronous anything is strange in PHP but there is no magic. The asynchronous part in any PHP HTTP client is achieved 
 with help from cURL. 
 
-Asynchronous by default means that we are only making the request when we actually need data from the response. This
-allow us to start multiple requests and let cURL do them in parallel. 
+Asynchronous by default means that we are only making the HTTP request when we actually need data from the response. This
+allow us to start multiple requests and let cURL execute them in parallel. 
 
 Consider a server that take one second to reply. 
 
 {% highlight php %}
 use Symfony\Component\HttpClient\CurlHttpClient;
 
-// Start clock
 $client = new CurlHttpClient();
 $responses = [];
+
+// Start clock
 for ($i = 0; $i < 100; ++$i) {
-    $responses[] = $client->request('GET', 'https://slow-server.com/foobar');
+    $responses[] = $client->request('GET', 'https://slow-server.com/foobar/'.$i);
 }
 
 foreach ($responses as $response) {
     $content = $response->getContent();
 }
-// End clock: 1.5s
+// Stop clock. Result: 1.5s
 {% endhighlight %}
 
-The above code will take just more than one second. 
+The code above will take just more than one second to execute all the HTTP requests and read the response. . 
 
 The following code will make the requests in serial. 
 
 {% highlight php %}
 use Symfony\Component\HttpClient\CurlHttpClient;
 
-// Start clock
 $client = new CurlHttpClient();
 $responses = [];
+
+// Start clock
 for ($i = 0; $i < 100; ++$i) {
     $response = $client->request('GET', 'https://slow-server.com/foobar/'.$i);
     $responses[] = $response->getContent();
 }
 
-// End clock: 100+s
+// Stop clock. Result: 100+s
 {% endhighlight %}
 
-I hope this illustrate why this is super cool. 
+I hope this illustrate why Symfony's HTTP client is super cool. This is of course achievable in other clients but
+Symfony has built their client with asynchronous in its foundation.  
 
-## How about caching?
+## How about caching responses?
 
-If some of these 100 requests have been made previously, we could speed things up by using cache. How could we leverage 
-caching with these parallel requests?
+If some of these 100 requests have been executed previously, we could reduce the number of HTTP requests by using cache.
+How could we leverage caching with these parallel requests?
 
 The general idea is to first look in the cache, if there is a cache miss, we start the request. Then we loop over all the
 cache misses and fetch the response to store them in cache for later use. 
@@ -67,6 +70,7 @@ The full example looks like this.
 
 {% highlight php %}
 
+$ids = [0, 1, 2, /*...*/ 98, 99];
 $client = new CurlHttpClient();
 $cache = new MyPsr6CachePool();
 
@@ -105,8 +109,9 @@ if (!empty($responseUnions)) {
 // Assert: $responses is now an array with all the response bodies. 
 {% endhighlight %}
 
-At first, this might seam to be a complex setup with a lot of things happening. But one will get used to it. The 
-code above works as a good template for future customizations. In a real projects you would probably use different resonse
-types depending on what response you get. We would also need error handling and maybe response hydration. 
+At first, this might seam to be a complex setup with a lot of things happening. Im not yet sure how to simplify this and
+make the code more easy to read. . The code example works as a good template for future customizations. In a real world 
+project you would probably use different cache lengths types depending on what response code you get. We would also need 
+error handling and maybe response hydration. 
 
-I hope this post gave some inspiration. 
+I hope this post gave some inspiration what you could use with the Symfony HTTP client. 
