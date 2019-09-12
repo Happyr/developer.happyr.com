@@ -4,7 +4,7 @@ author: Tobias Nyholm
 date: '2014-07-02 13:50:36 +0200'
 categories:
 - Developing
-- Symfony2
+- Symfony
 ---
 
 <strong>There are many great articles that tells you why you should use continuous integration i.e. the one by <a href="http://martinfowler.com/articles/continuousIntegration.html">Martin Fowler</a> and the book This is Lean by Niklas Modig and Pär Ahlström. This article describes our workflow and what tools we use to achieve continuous integration and extreme programming. We are doing most of our developing in Symfony2 and we are using tools like Jenkins, Sonar, Ant and a bunch of homemade services and scripts. </strong>

@@ -3,7 +3,7 @@ title: Symfony bundle using Hack
 author: Tobias Nyholm
 date: '2014-05-12 09:47:52 +0200'
 categories:
-- Symfony2
+- Symfony
 - HHVM
 - Hack
 ---
