@@ -3,7 +3,7 @@ title: User as a service in Symfony2
 author: Tobias Nyholm
 date: '2015-04-21 14:54:47 +0200'
 categories:
-- Symfony2
+- Symfony
 ---
 
 To get the current logged in user in Symfony2 is kind of complicated. You have to do a lot for such simple task. First you have to get the TokenStorage to retrieve the token. The token may or may not exist. If the token exist you can get an user object or a string 'anon.'. It all looks like this:

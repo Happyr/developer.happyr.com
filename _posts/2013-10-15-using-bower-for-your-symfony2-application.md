@@ -3,7 +3,7 @@ title: Using Bower for your Symfony2 application
 author: Tobias Nyholm
 date: '2013-10-15 21:36:55 +0200'
 categories:
-- Symfony2
+- Symfony
 - Bower
 ---
 

@@ -4,7 +4,7 @@ author: Tobias Nyholm
 date: '2014-05-15 19:33:15 +0200'
 categories:
 - Library
-- Symfony2
+- Symfony
 - Performance
 - Java
 ---

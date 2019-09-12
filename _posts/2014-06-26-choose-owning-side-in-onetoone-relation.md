@@ -3,7 +3,7 @@ title: Choose owning side in OneToOne relation
 author: Tobias Nyholm
 date: '2014-06-26 12:16:41 +0200'
 categories:
-- Symfony2
+- Symfony
 - Performance
 - Doctrine
 ---
