@@ -3,8 +3,8 @@ title: Symfony HTTP Client and caching
 author: Tobias Nyholm
 date: '2019-09-12 14:35:00 +0200'
 header: 
-  image: "images/posts/neo4j.jpg"
-  teaser: images/posts/neo4j.jpg
+  image: "images/posts/containers.jpg"
+  teaser: images/posts/containers_thumb.jpg
 categories:
 - Symfony
 --- 
