@@ -64,8 +64,8 @@ If some of these 100 requests have been executed previously, we could reduce the
 How could we leverage caching with these parallel requests?
 
 The recommended way is to use the ``CachingHttpClient``, that will respect all cache headers sent by the server 
-([See tje documentation](https://symfony.com/doc/current/components/http_client.html#caching-requests-and-responses)). If 
-you want more control or ignore the servers header we must use a more custom approach. This could be a good idea when you
+([See the documentation](https://symfony.com/doc/current/components/http_client.html#caching-requests-and-responses)). If 
+you want more control or ignore the servers header we must use a more custom approach. This could be a good solution when you
 are caching responses from a paid API (ie Google Translate). 
 
 The general idea is to first look in the cache, if there is a cache miss, we start the request. Then we loop over all the
