@@ -16,15 +16,15 @@ Many times I've come got to a situation where I have a unusual high query count.
 
 class User {
   /**
-  * @ORM\Column(name=&quot;id&quot;, type=&quot;integer&quot;)
+  * @ORM\Column(name="id", type="integer")
   * @ORM\Id
-  * @ORM\GeneratedValue(strategy=&quot;AUTO&quot;)
+  * @ORM\GeneratedValue(strategy="AUTO")
   */
   private $id;
 
 
   /**
-  * @ORM\OneToOne(targetEntity=&quot;Resume&quot;, mappedBy=&quot;user&quot;)
+  * @ORM\OneToOne(targetEntity="Resume", mappedBy="user")
   */
   private $resume;
 }
@@ -32,15 +32,15 @@ class User {
 
 class Resume {
   /**
-  * @ORM\Column(name=&quot;id&quot;, type=&quot;integer&quot;)
+  * @ORM\Column(name="id", type="integer")
   * @ORM\Id
-  * @ORM\GeneratedValue(strategy=&quot;AUTO&quot;)
+  * @ORM\GeneratedValue(strategy="AUTO")
   */
   private $id;
 
 
   /**
-  * @ORM\OneToOne(targetEntity=&quot;User&quot;, inversedBy=&quot;resume&quot;)
+  * @ORM\OneToOne(targetEntity="User", inversedBy="resume")
   */
   private $user;
 }
@@ -88,6 +88,4 @@ So, the rule of thumb here is:
 <blockquote>
 The entity that owns the relation does not need the relation. The inverse side is depended on the relation and will fetch it's owner.
 </blockquote>
-
-&nbsp;
 
