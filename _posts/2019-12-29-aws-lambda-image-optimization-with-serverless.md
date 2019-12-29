@@ -2,6 +2,9 @@
 title: Optimize images on S3 with AWS Lambda and Serverless
 author: Tobias Nyholm
 date: '2019-12-29 21:40:47 +0200'
+header: 
+  image: "images/posts/containers.jpg"
+  teaser: images/posts/containers_thumb.jpg
 categories:
 - Serverless
 - Performance
@@ -9,8 +12,8 @@ categories:
 
 An image is uploaded on S3, that triggers a lambda that optimize that image and put it back. How hard can that be? 
 
-It was way more tricky than I thought, especially since Im not used to the Node world. So here I am sharing my research
-and result. I hope it can be useful. 
+It was way more tricky than I thought, especially since Im not used to the Node ecosystem. So here I am sharing my 
+research and result. I hope it can be useful. 
 
 ## Requirements
 
@@ -27,7 +30,7 @@ my PHP applications.
 ## The code
 
 The code is not too complicated. It is just about 100 lines and if you can stand reading this many anonymous functions
-you will be alright. I talk about it from top to bottom and you will see the full `index.js further down.
+you will be alright. I talk about it from top to bottom and later you will see the full `index.js`.
 
 First we require a bunch of stuff. We need ImageMagic and Imagemin + some plugins. Note that I change the `binPath`
 of ImageMagic... more about that later. 
@@ -56,15 +59,12 @@ const getEnableMemory = () => {
 };
 
 exports.handler = function (event, context, callback) {
-  // Read options from the event.
-  //console.log("Reading options from event:\n", util.inspect(event, {depth: 5}));
   var bucket = event.Records[0].s3.bucket.name;
 
   // Object key may have spaces or unicode non-ASCII characters.
   var filePath = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, " "));
   var dstFilePath = filePath.replace(/^uploads\//g, "optimized/");
 
-  // Infer the image type.
   var typeMatch = filePath.match(/\.([^.]*)$/);
   if (!typeMatch) {
     callback("Could not determine the image type.");
@@ -75,15 +75,13 @@ exports.handler = function (event, context, callback) {
 
 {% endhighlight %}
 
-Now I start the actual work. I use `async.waterfall` which will run each anonymous function in order. The next function
-will start after the `next` callback is executed. 
+Now I start the actual work. I use `async.waterfall` which will run each anonymous function in order. 
 
-I will start downloading the image from S3 and into a buffer. 
+I will start by downloading the image from S3 into a buffer. 
 
 {% highlight javascript %}
   async.waterfall([
     function download(next) {
-      // Download the image from S3 into a buffer.
       s3.getObject({
           Bucket: bucket,
           Key: filePath
@@ -117,7 +115,6 @@ I also tell ImageMagic not to use too much memory.
 
 {% endhighlight %}
 
-
 Now I optimize the image with imagemin. Nothing fancy. 
 
 {% highlight javascript %}
@@ -141,7 +138,7 @@ Now I optimize the image with imagemin. Nothing fancy.
 {% endhighlight %}
 
 Aaand it is time to upload the image again. I also set some cache control headers. I say that this image is good to 
-save for 10 year. I also say that this is `immutable` and will never change. 
+save for 10 years. I also say that this is "immutable" and will never change. 
 
 I upload the imag eto the same bucket but a different folder. 
 
@@ -159,7 +156,6 @@ I upload the imag eto the same bucket but a different folder.
   }
 
 {% endhighlight %}
-
 
 Here is the full `index.js` with some error handling:
 
@@ -306,7 +302,7 @@ This looks good and should work. However, when you run `npm install` on your loc
 specific to your system and OS. If we just copy them and add to Lambda we will get all kinds of weird errors about
 missing executables. 
 
-I solved that issue by using Docker. So I am building the image from an image very similar to what I use in production. 
+I solved that issue by using Docker. So I am building my image from an image very similar to what I use in production. 
 I install some dependencies and then run NPM install. When everything looks good inside the docker image I'm using 
 Serverless to deploy.  
 
@@ -327,9 +323,9 @@ CMD ./node_modules/.bin/serverless deploy
 
 {% endhighlight %}
 
-### ImageMagic
+### ImageMagic issues on Lambda nodejs10 and nodejs12
 
-On the Node8 Lambda runtime Amazon included ImageMagic, but that is not true for Node10 and later. So we need to 
+On the nodejs8 Lambda runtime Amazon included ImageMagic, but that is not true for nodejs10 and later. So we need to 
 provide an extra layer to our Lambda. (Using a "layer" is the AWS way to add libraries to your runtime). I found
 [this Gitbub repository](https://github.com/serverlesspub/imagemagick-aws-lambda-2) which provides [a layer you 
 can easily deploy](https://serverlessrepo.aws.amazon.com/applications/arn:aws:serverlessrepo:us-east-1:145266761615:applications~image-magick-lambda-layer).
@@ -392,4 +388,4 @@ docker run --rm -e AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY optmize-images
 Now when I upload a file to `my-image-bucket/uploads` the image will be optimized and added in `my-image-bucket/optimized`. 
 It will also work for subdirectories. 
 
-I hope this helped someone that are stuck with the same problems I've been stuck with. 
+Happy coding!
