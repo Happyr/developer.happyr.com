@@ -3,8 +3,8 @@ title: Optimize images on S3 with AWS Lambda and Serverless
 author: Tobias Nyholm
 date: '2019-12-29 21:40:47 +0200'
 header: 
-  image: "images/posts/image-optimization.jpg"
-  teaser: images/posts/image-optimization.jpg
+  image: "images/posts/image-optimization.png"
+  teaser: images/posts/image-optimization.png
 categories:
 - Serverless
 - Performance
