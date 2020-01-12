@@ -10,16 +10,15 @@ categories:
 --- 
 
 I think I am a decent PHP programmer, but I am lost when it comes to devops, C,
-Makefiles and compiling stuff. I just want to write ``brew upgrade php@74`` and
+Makefiles and compiling stuff. I just want to write ``brew upgrade php`` and
 be happy. If that doesn't work I have to google each small step to fix the issue. 
 
 I love writing bash for example, but I need to google the syntax of an if-statement
 for every bash script I write. 
 
-The RC for PHP 7.4.2 just came out this week. I decided to test them out. I downloaded
-them from the website http://qa.php.net/, unzipped them. I carefully followed some guide
-saying: 
-
+The RC for PHP 7.4.2 just came out this week. I decided to test it out. I downloaded
+the release from the website http://qa.php.net/, unzipped them. I carefully followed
+some guide saying: 
 
 {% highlight cli %}
 ./configure
@@ -28,7 +27,7 @@ make install
 
 {% endhighlight %}
 
-If course I run in to issues like: 
+If course I ran in to issues like: 
 
 {% highlight cli %}
 > #include <libxml/parser.h>
@@ -36,19 +35,21 @@ If course I run in to issues like:
 
 {% endhighlight %}
 
-Since OSX dont have standard paths where libraries are you need to provide them to the 
-``.configure`` call. In OSX version before Catalina (10.15) you could do some [trick](https://silvae86.github.io/sysadmin/mac/osx/mojave/beta/libxml2/2018/07/05/fixing-missing-headers-for-homebrew-in-mac-osx-mojave/), 
+Since OSX dont follow standard paths where libraries live you need to provide their 
+locations to the ``./configure`` command. In OSX versions before Catalina (10.15)
+you could do some [trick](https://silvae86.github.io/sysadmin/mac/osx/mojave/beta/libxml2/2018/07/05/fixing-missing-headers-for-homebrew-in-mac-osx-mojave/), 
 but that does not work any more.  
 
-And in PHP versions before 7.4 you could options like ``--with-libxml-dir``, but that is 
-[removed](https://externals.io/message/107846) in favor of ``pkg-config``.
+And in PHP versions before 7.4 you could use options like ``--with-libxml-dir``, 
+but that has been [removed](https://externals.io/message/107846) in favor of 
+``pkg-config``.
 
 ## What you should do
 
 So every time it complains, ie for libxml2, you should update the `PGK_CONFIG_PATH`
 environment variable. The value depends on the path to the library.
  
-To find the path, lets run ``brew info``
+To find the path, lets run ``brew info``:
  
 {% highlight cli %}
 ➜  brew info libxml2
@@ -83,7 +84,8 @@ PKG_CONFIG_PATH=/usr/local/Cellar/libxml2/2.9.9_2/lib/pkgconfig
 
 {% endhighlight %}
 
-For my machine, I had to run the following commands to successfully compile PHP.
+For my machine, I had to run the following three commands to successfully compile
+PHP.
 
 {% highlight cli %}
 
@@ -143,7 +145,7 @@ make install
 
 {% endhighlight %}
 
-I struggled for hours to compile PHP 7.4. My main mistake was that I didn't read the
-output of the ``./configure`` command. Please please please, make sure to read at least
-the last 20 lines. 
+I struggled for hours to compile PHP 7.4. My main mistake was that I didn't read 
+the output of the ``./configure`` command. Please please please, make sure to read
+at least the last 20 lines. 
  
