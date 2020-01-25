@@ -24,16 +24,16 @@ because it will work perfectly with the upcoming [Blackfire APM](https://hello.b
 ## The basics
 
 In the [Blackfire installation documentation](https://blackfire.io/docs/up-and-running/installation)
-you can read that Blackfire consists of 4 parts. First of course are the *Blackfire server*. 
+you can read that Blackfire consists of 4 parts. First of course are the **Blackfire server**. 
 They receive all data and creates a nice dashboard for you. 
 
-There is also an *Agent* than runs on our machine that prepare and [cleans the data](https://blackfire.io/docs/reference-guide/faq#what-data-is-sent-to-the-blackfire-servers) 
+There is also an **Agent** than runs on our machine that prepare and [cleans the data](https://blackfire.io/docs/reference-guide/faq#what-data-is-sent-to-the-blackfire-servers) 
 from sensitive information and sends it to the Blackfire servers. 
 
-Then there is a *PHP extension* that collects the metrics from your application
-and sends it to the *Agent*.
+Then there is a **PHP extension** that collects the metrics from your application
+and sends it to the **Agent**.
 
-Finally there is a *Client* that can start the profiling. There are two clients
+Finally there is a **Client** that can start the profiling. There are two clients
 that you are most likely to use; a browser extension and a CLI tool. The client
 is used to make sure that only authorized users (you) can start profiling. 
 
@@ -93,7 +93,7 @@ The agent is already configured to accept connections from any IP on port 8307.
 This is safe as long as port 8307 is not accessible from the internet. (Only port
 22 is accessible from the internet by default.)   
 
-We are now done, with the agent. Now we need to install the PHP extension and 
+We are done with the agent. Now we need to install the PHP extension and 
 configure it to send data to the agent on the private IP 172.31.84.248 and port 8307.
 
 ### Installing the PHP extension
@@ -108,7 +108,7 @@ to install the Blackfire extension.
 
 ### Configure the PHP extension
 
-We need to modify *php.ini* to add the following parameters: 
+We need to modify **php.ini** to add the following parameters: 
 
 {% highlight ini %}
 blackfire.agent_socket = tcp://172.31.84.248:8307
