@@ -12,9 +12,9 @@ categories:
 
 At Happyr, we have about 30 applications running across 14 Amazon EC2 servers and 
 a lot of Lambda functions. Most of them are small microservice applications that 
-are not regularly updated with new features. We've installed and configured the 
+are rarely updated with new features. We've installed and configured the 
 applications so we can run Blackfire's profiler on each of these applications. 
-Blackfire's internal architecture allows us to install the profiler in a bit more 
+Blackfire's internal architecture allows us to install the profiler in a
 clever way, compared to other profilers I've tried. 
 
 This article will go over how to install Blackfire when you have multiple servers
@@ -53,7 +53,7 @@ Ubuntu or something similar, search for "Blackfire" in the Community AMIs and se
 
 ![Select AMI]({{ "/images/posts/blackfire/select-ami.png" | absolute_url }})
 
-Then it is time to select the instance type. The agent does not need much computer
+Then it is time to select the instance type. The agent does not need much computing
 power, running with t2.micro is perfect. 
 
 ![Select instance type]({{ "/images/posts/blackfire/select-instance-type.png" | absolute_url }})
@@ -78,7 +78,7 @@ in the section "Configure the Agent" in the [Blackfire installation guide](https
 ![Login to agent instance]({{ "/images/posts/blackfire/login-to-agent.png" | absolute_url }})
  
 {% highlight cli %}
-sudo apt-get uppdate
+sudo apt-get update
 sudo apt-get upgrade
 
 {% endhighlight %}
