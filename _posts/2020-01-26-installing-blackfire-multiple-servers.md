@@ -12,22 +12,22 @@ categories:
 
 At Happyr, we have about 30 applications running across 14 Amazon EC2 servers and 
 a lot of Lambda functions. Most of them are small microservice applications that 
-are not regularly updated with new features. I've installed and configured so I 
-can run Blackfire's profiler on each of these applications. Blackfire's internal
-architecture allows me to install the profiler in a bit more clever way, compared
-to other profilers I've tried. 
+are not regularly updated with new features. We've installed and configured the 
+applications so we can run Blackfire's profiler on each of these applications. 
+Blackfire's internal architecture allows us to install the profiler in a bit more 
+clever way, compared to other profilers I've tried. 
 
 This article will go over how to install Blackfire when you have multiple servers
-and give very concrete examples with Amazon. I'm extra excited for this tutorial
+and give you very concrete examples with Amazon. I'm extra excited for this tutorial
 because it will work perfectly with the upcoming [Blackfire APM](https://hello.blackfire.io/apm).
 
 ## The basics
 
 In the [Blackfire installation documentation](https://blackfire.io/docs/up-and-running/installation)
 you can read that Blackfire consists of 4 parts. First of course are the **Blackfire server**. 
-They receive all data and creates a nice dashboard for you. 
+They receive all data and create a nice dashboard for you. 
 
-There is also an **Agent** than runs on our machine that prepare and [cleans the data](https://blackfire.io/docs/reference-guide/faq#what-data-is-sent-to-the-blackfire-servers) 
+There is also an **Agent** than runs on our cloud that prepares and [cleans the data](https://blackfire.io/docs/reference-guide/faq#what-data-is-sent-to-the-blackfire-servers) 
 from sensitive information and sends it to the Blackfire servers. 
 
 Then there is a **PHP extension** that collects the metrics from your application
@@ -39,8 +39,8 @@ is used to make sure that only authorized users (you) can start profiling.
 
 ## Install
 
-When installing Blackfire on multiple servers, you dont need to have multiple instances
-of the Agent. You may have one agent for all your application. You just need to
+When installing Blackfire on multiple servers, you do not need to have multiple instances
+of the Agent. You may have one agent for all your applications. You just need to
 install the PHP extension on all servers and configure the extension with the
 IP address to the machine that is running the Agent. 
 
@@ -59,21 +59,21 @@ power, running with t2.micro is perfect.
 ![Select instance type]({{ "/images/posts/blackfire/select-instance-type.png" | absolute_url }})
 
 Review and launch your instance. Use a SSH key pair that you that you have access to
-because next step is to SSH into the machine. 
+because you will need to SSH into the instance. 
 
 ![Review and Launch]({{ "/images/posts/blackfire/review.png" | absolute_url }})
 
-Now we wait a minute for the machine to be ready...
+Now we wait a minute for the instance to be ready...
 
-When instance state is "running" we can SSH into the machine. Find the machines
-public IP address. The instance in the screenshot below has public IP 54.172.34.219
-and private IP 172.31.84.248.
+When instance state is "running" we can SSH into the machine. You need the instance's
+public IP address for SSH, but note the private IP too. We will use it later. The 
+instance in the screenshot below has public IP 54.172.34.219 and private IP 172.31.84.248.
 
 ![Instance example]({{ "/images/posts/blackfire/instance-show.png" | absolute_url }})
 
-We need to SSH into the Agent instance to update it and configure it with the server 
-token related to your Blackfire account. You find the correct command in the section 
-"Configure the Agent" in the [Blackfire installation guide](https://blackfire.io/docs/up-and-running/installation). 
+When we have logged into the instance, we should update it and configure it with
+the server token related to your Blackfire account. You find the correct command 
+in the section "Configure the Agent" in the [Blackfire installation guide](https://blackfire.io/docs/up-and-running/installation). 
 
 ![Login to agent instance]({{ "/images/posts/blackfire/login-to-agent.png" | absolute_url }})
  
@@ -93,22 +93,24 @@ The agent is already configured to accept connections from any IP on port 8307.
 This is safe as long as port 8307 is not accessible from the internet. (Only port
 22 is accessible from the internet by default.)   
 
-We are done with the agent. Now we need to install the PHP extension and 
+We are done with the agent now. Next up, we need to install the PHP extension and 
 configure it to send data to the agent on the private IP 172.31.84.248 and port 8307.
 
 ### Installing the PHP extension
 
-There is nothing really special when installing the agent. The 
+There is nothing really special when installing the extension. The 
 [Blackfire installation guide](https://blackfire.io/docs/up-and-running/installation)
 covers this really well. 
 
 If you are using [Bref](https://bref.sh/) to deploy your application on AWL Lambda
-then you maybe interested in [this repository](https://github.com/brefphp/extra-php-extensions) 
+then you may be interested in [this repository](https://github.com/brefphp/extra-php-extensions) 
 to install the Blackfire extension.
 
 ### Configure the PHP extension
 
-We need to modify **php.ini** to add the following parameters: 
+We need to modify **php.ini** to add the following parameters to tell the extension
+where to send the data. We should use the private IP of the Agent's instance as 
+we noted before.  
 
 {% highlight ini %}
 blackfire.agent_socket = tcp://172.31.84.248:8307
@@ -120,7 +122,7 @@ And of course restart PHP-FPM to make the changes visible.
 
 ## Try it out
 
-Now you only need to install a client (eg Blackfire browser extension) and you
+Now you only need to install a client (eg Blackfire's browser extension) and you
 are ready to profile your production applications. 
 
 ## Troubleshoot
