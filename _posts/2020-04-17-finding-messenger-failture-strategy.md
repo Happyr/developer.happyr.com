@@ -1,7 +1,7 @@
 ---
 title: Finding the correct values for Symfony Messenger failure strategy 
 author: Tobias Nyholm
-date: '2020-04-17 10:44:00 +0200'
+date: '2020-05-04 10:44:00 +0200'
 header:
   image: "images/posts/blackfire/header.png"
   teaser: images/posts/blackfire/header.png
@@ -23,7 +23,7 @@ different.
 
 The parameters we can work with are: 
 
-- max_retires: How many times we will try to process a message.
+- max_retries: How many times we will try to process a message.
 - delay: A time unit in milliseconds. 
 - multiplier: Used with the ``delay`` to calculate the time to wait between retries.
 - max_delay: The longest time between retries.
@@ -61,7 +61,7 @@ why I use a multiplier of 4. But I also don't want it to wait too long. So I set
 
 After 4 retries the message is moved to the failure queue. 
 
-The failure queue is also configured with retries, but in it reties more slowly.
+The failure queue is also configured with retries, but it reties messages more slowly.
 Here I've configured the ``delay`` to 300.000 and a ``multiplier`` of 3. The ``max_delay``
 is configured to 86.400.000 (1 day). 
 
@@ -76,7 +76,7 @@ is configured to 86.400.000 (1 day).
 - Retry 9: 24 hours
 
 After 20 retries I've decided to remove the message completely. I assume (maybe incorrectly)
-that if an error has not been fixed after more than 2 weeks. Then there is no point
+that if an error has not been fixed after more than 2 weeks, then there is no point
 of continue to retry. 
 
 The Symfony configuration looks like this: 
