@@ -3,8 +3,8 @@ title: Finding the correct values for Symfony Messenger failure strategy
 author: Tobias Nyholm
 date: '2020-05-04 10:44:00 +0200'
 header:
-  image: "images/posts/blackfire/header.png"
-  teaser: images/posts/blackfire/header.png
+  image: images/posts/birds-in-line.jpg
+  teaser: images/posts/birds-in-line.jpg
 categories:
 - Symfony
 - Messenger
