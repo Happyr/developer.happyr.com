@@ -14,7 +14,7 @@ Symfony Messenger is great. It has so many features and is super flexible. I wan
 highlight one of these features in this small post: Failures and retries. 
 
 Over in the [Symfony docs](https://symfony.com/doc/current/messenger.html#retries-failures) 
-failures and retires are briefly mentioned and it explains what values you can configure.
+failures and retries are briefly mentioned and it explains what values you can configure.
 However, it does not give a good recommendation for what values to use. The simple 
 answer to "What values should I use?" is "It depends".
 
