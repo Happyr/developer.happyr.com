@@ -61,7 +61,7 @@ why I use a multiplier of 4. But I also don't want it to wait too long. So I set
 
 After 4 retries the message is moved to the failure queue. 
 
-The failure queue is also configured with retries, but it reties messages more slowly.
+The failure queue is also configured with retries, but it retries messages more slowly.
 Here I've configured the ``delay`` to 300.000 and a ``multiplier`` of 3. The ``max_delay``
 is configured to 86.400.000 (1 day). 
 
