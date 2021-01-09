@@ -4,7 +4,7 @@ author: Tobias Nyholm
 date: '2021-01-09 11:18:00 +0200'
 header:
   image: images/posts/woman-forest.jpg
-  teaser: images/posts/woman-forest.jpg
+  teaser: images/posts/woman-forest-thumb.jpg
   caption: "Photo credit: [**Chanh Duong**](https://unsplash.com/@lemoniron)"
 ---
 
