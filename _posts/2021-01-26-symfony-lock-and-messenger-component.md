@@ -127,3 +127,9 @@ class LockReleaseMiddleware implements MiddlewareInterface
 }
 
 {% endhighlight %}
+
+## Advanced topic
+
+Serialize the lock and release it later.
+
+TODO
