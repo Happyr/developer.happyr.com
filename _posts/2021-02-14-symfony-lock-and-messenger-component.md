@@ -15,8 +15,8 @@ categories:
 The lock component have saved me so many times. It helps me with race conditions,
 it makes my code simpler and my application more reliable. I'm using it to fix all
 kinds of problems and I've noticed that I use a few different methods. This article will
-try to explain these methods. My hope is to make it simpler for everybody else to
-implement Symfony lock component with Messenger.
+try to explain these methods or "strategies". My hope is to make life simpler for everybody else to
+implement Symfony Lock component with Messenger.
 
 ## No two messages handled at the same time
 
@@ -26,7 +26,7 @@ It is not the most efficient one and it required a predefined list of messages.
 The idea is that two message of the same class cannot be handled at the same time.
 One needs to wait for the other to finish.
 
-The handler ``CreateOrganization`` and ``StorePerformanceData`` will create an entity
+The handler for ``CreateOrganization`` and ``StorePerformanceData`` will create an entity
 if none exists. That is why I need a lock or the second message will complain that
 an object with id X already exists.
 
@@ -133,10 +133,10 @@ class LockMiddleware implements MiddlewareInterface
 
 {% endhighlight %}
 
-## Configurable locks
+## Configurable Locks
 
 To build on top of the previous strategy, one can create a ``LockConfig`` class
-that holds instruction for the ``LockMiddleware``. This strategy is more generic
+that holds instructions for the ``LockMiddleware``. This strategy is more generic
 and may be good for complex applications or as a reusable package.
 
 {% highlight php %}
@@ -285,7 +285,7 @@ class LockableMessageMiddleware implements MiddlewareInterface
 ## Lock acquired by the handler
 
 Sometimes you want all the logic in the handler, but you also want to make sure
-the lock is released after the database transaction is committed, ie after released
+the lock is released after the database transaction is committed, ie released
 after ``DoctrineTransactionMiddleware``.
 
 This can be done by telling the middleware: "If you see that this message has been
@@ -413,4 +413,4 @@ And yes, that is true. I just wish I read a blog post like this before I started
 implementing my solution.
 
 Also a big shout out to [Jérémy Derussé](https://twitter.com/jderusse) who created
-the Lock component and helped me with issues I had over the past years.
+the Lock component and helped me with issues I had over the past year.
