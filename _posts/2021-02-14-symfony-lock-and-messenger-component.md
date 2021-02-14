@@ -76,84 +76,9 @@ class LockMiddleware implements MiddlewareInterface
 
 {% endhighlight %}
 
-## Lock acquired by the handler
+## The message holds the resource ID
 
-Sometimes you want all the logic in the handler, but you also want to make sure
-the lock is released after the database transaction is committed, ie after released
-after ``DoctrineTransactionMiddleware``.
-
-This can be done by telling the middleware: "If you see that this message has been
-processed, please release the lock".
-
-{% highlight php %}
-use Symfony\Component\Lock\LockInterface;
-use Symfony\Component\Messenger\Envelope;
-use Symfony\Component\Messenger\Middleware\MiddlewareInterface;
-use Symfony\Component\Messenger\Middleware\StackInterface;
-
-class LockReleaseMiddleware implements MiddlewareInterface
-{
-    private static $locks = [];
-
-    public function handle(Envelope $envelope, StackInterface $stack): Envelope
-    {
-        try {
-            return $stack->next()->handle($envelope, $stack);
-        } finally {
-            $this->releaseLocks($envelope->getMessage());
-        }
-    }
-
-    public static function releaseLater(object $message, LockInterface $lock)
-    {
-        $hash = \spl_object_hash($message);
-        if (!isset(self::$locks[$hash])) {
-            self::$locks[$hash] = [];
-        }
-
-        self::$locks[$hash][] = $lock;
-    }
-
-    private function releaseLocks(object $message)
-    {
-        $hash = \spl_object_hash($message);
-        if (!isset(self::$locks[$hash])) {
-            return;
-        }
-
-        foreach (self::$locks[$hash] as $lock) {
-            $lock->release();
-        }
-    }
-}
-
-class CreateOrganizationHandler implements MessageHandlerInterface
-{
-    private LockFactory $lockFactory;
-
-    public function __construct(LockFactory $lockFactory)
-    {
-        $this->lockFactory = $lockFactory;
-    }
-
-    public function __invoke(CreateOrganization $command)
-    {
-        // ..
-        $lock = $this->lockFactory->createLock('create_organization_'.$command->getId(), 10);
-        $lock->acquire(true);
-        try {
-            $organization = // Find organization with id $command->getId()
-        } catch (EntityNotFoundException $e) {
-            $organization = new Organization($command->getId());
-        }
-        LockReleaseMiddleware::releaseLater($command, $lock);
-    }
-}
-{% endhighlight %}
-
-## The message holds the key
-
-This second strategy is a bit more efficient. It introduce an interface that is added
+This strategy is a bit more flexible. It introduces an interface that is added
 to the messages. We can now handle two messages from the same class at the same time
 as long as they have different keys. The key should contain some ID to avoid race
 conditions.
@@ -212,8 +137,7 @@ class LockMiddleware implements MiddlewareInterface
 
 To build on top of the previous strategy, one can create a ``LockConfig`` class
 that holds instruction for the ``LockMiddleware``. This strategy is more generic
-and may be good for complex applications or a third party package.
-
+and may be good for complex applications or as a reusable package.
 
 {% highlight php %}
 interface LockableMessageInterface
@@ -358,8 +282,135 @@ class LockableMessageMiddleware implements MiddlewareInterface
 }
 {% endhighlight %}
 
-## Advanced topic
+## Lock acquired by the handler
 
-Serialize the lock and release it later.
+Sometimes you want all the logic in the handler, but you also want to make sure
+the lock is released after the database transaction is committed, ie after released
+after ``DoctrineTransactionMiddleware``.
 
-TODO
+This can be done by telling the middleware: "If you see that this message has been
+processed, please release the lock".
+
+{% highlight php %}
+use Symfony\Component\Lock\LockInterface;
+use Symfony\Component\Messenger\Envelope;
+use Symfony\Component\Messenger\Middleware\MiddlewareInterface;
+use Symfony\Component\Messenger\Middleware\StackInterface;
+
+class LockReleaseMiddleware implements MiddlewareInterface
+{
+    private static $locks = [];
+
+    public function handle(Envelope $envelope, StackInterface $stack): Envelope
+    {
+        try {
+            return $stack->next()->handle($envelope, $stack);
+        } finally {
+            $this->releaseLocks($envelope->getMessage());
+        }
+    }
+
+    public static function releaseLater(object $message, LockInterface $lock)
+    {
+        $hash = \spl_object_hash($message);
+        if (!isset(self::$locks[$hash])) {
+            self::$locks[$hash] = [];
+        }
+
+        self::$locks[$hash][] = $lock;
+    }
+
+    private function releaseLocks(object $message)
+    {
+        $hash = \spl_object_hash($message);
+        if (!isset(self::$locks[$hash])) {
+            return;
+        }
+
+        foreach (self::$locks[$hash] as $lock) {
+            $lock->release();
+        }
+    }
+}
+
+class CreateOrganizationHandler implements MessageHandlerInterface
+{
+    private LockFactory $lockFactory;
+
+    public function __construct(LockFactory $lockFactory)
+    {
+        $this->lockFactory = $lockFactory;
+    }
+
+    public function __invoke(CreateOrganization $command)
+    {
+        // ..
+        $lock = $this->lockFactory->createLock('create_organization_'.$command->getId(), 10);
+        $lock->acquire(true);
+        try {
+            $organization = // Find organization with id $command->getId()
+        } catch (EntityNotFoundException $e) {
+            $organization = new Organization($command->getId());
+        }
+        LockReleaseMiddleware::releaseLater($command, $lock);
+    }
+}
+{% endhighlight %}
+
+
+## Bonus topic
+
+I discovered a hidden gem in the Lock component when I needed to acquire a
+``Lock`` in a controller and then release it in a background process. You can serialize
+the ``Key`` to the ``Lock``. Normally, the ``Key`` is automatically created in the
+``LockFactory``, but you can create the ``Key`` yourself.
+
+{% highlight php %}
+
+class MyController
+{
+    // ...
+    public function index($reportId)
+    {
+        $key = new Key('create-report-'.$reportId);
+        $lock = $this->lockFactory->createLockFromKey($key, 1800);
+        if (!$lock->acquire(false)) {
+            // We could not acquire the lock.
+
+            return new Response('The report is being generated, you cannot generate another report until the current one is finished');
+        }
+
+        $this->commandBus(new GenerateReport($reportId, serialize($key));
+    }
+}
+
+class GenerateReportHandler implements MessageHandlerInterface
+{
+    public function __invoke(GenerateReport $command)
+    {
+        // ..
+
+        $key = unserialize($command->getKey());
+        if ($key instanceof Key) {
+            $lock = $this->lockFactory->createLockFromKey($key);
+
+            $lock->release();
+        }
+        // ..
+    }
+}
+
+## Finally
+
+Now when I forced you to read plenty of code examples, you may wonder why there isn't
+a single solution that always work. Different applications may have different requirements
+and doing complicated/flexible solution should only be valid on complex applications
+or reusable code.
+
+I'm currently using all of these strategies in different application. One might
+argue that applications should be consistant with each other within the same company.
+And yes, that is true. I just wish I read a blog post like this before I started
+implementing my solution.
+
+Also a big shout out to [Jérémy Derussé](https://twitter.com/jderusse) who created
+the Lock component and helped me with issues I had over the past years.
