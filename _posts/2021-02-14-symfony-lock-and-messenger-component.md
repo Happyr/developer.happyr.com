@@ -399,6 +399,7 @@ class GenerateReportHandler implements MessageHandlerInterface
         // ..
     }
 }
+{% endhighlight %}
 
 ## Finally
 
