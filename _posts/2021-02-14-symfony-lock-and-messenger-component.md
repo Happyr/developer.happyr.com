@@ -412,8 +412,8 @@ a single solution that always work. Different applications may have different re
 and doing complicated/flexible solution should only be valid on complex applications
 or reusable code.
 
-I'm currently using all of these strategies in different application. One might
-argue that applications should be consistant with each other within the same company.
+I'm currently using all of these strategies in different applications. One might
+argue that applications should be consistent with each other within the same company.
 And yes, that is true. I just wish I read a blog post like this before I started
 implementing my solution.
 
