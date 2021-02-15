@@ -251,7 +251,7 @@ class LockableMessageMiddleware implements MiddlewareInterface
         }
         if (!$res) {
             $this->releaseLocks();
-            throw new LockConflictedException(\Safe\sprintf('Failed to acquire the lock for "%s".', $lockConfig->getResource()));
+            throw new LockConflictedException(\sprintf('Failed to acquire the lock for "%s".', $lockConfig->getResource());
         }
         $this->locks[$lockConfig->getResource()] = $lock;
     }
