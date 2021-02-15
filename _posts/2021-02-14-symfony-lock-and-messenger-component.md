@@ -282,6 +282,10 @@ class LockableMessageMiddleware implements MiddlewareInterface
 }
 {% endhighlight %}
 
+Note the use if ``RecoverableMessageHandlingException``. If we throw an instance
+of ``RecoverableExceptionInterface``, then the message will not go to the failure
+queue after 3 failed tries to handle the message.
+
 ## Lock acquired by the handler
 
 Sometimes you want all the logic in the handler, but you also want to make sure
