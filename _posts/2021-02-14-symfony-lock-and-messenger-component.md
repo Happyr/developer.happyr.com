@@ -377,7 +377,7 @@ class MyController
     public function index($reportId)
     {
         $key = new Key('create-report-'.$reportId);
-        $lock = $this->lockFactory->createLockFromKey($key, 1800);
+        $lock = $this->lockFactory->createLockFromKey($key, 1800, false);
         if (!$lock->acquire(false)) {
             // We could not acquire the lock.
 
