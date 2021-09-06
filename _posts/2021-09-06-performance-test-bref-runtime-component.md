@@ -38,7 +38,7 @@ From the table above one can see that normal HTTP request (warm Lambda) goes fro
 difficult to collect data from. But with 5 cold starts on each function we can see
 that they are pretty much the same.
 
-So what do these results really say? I do not expect that all application will
+So what do these results really say? I do not expect that all applications will
 run 50% faster with the Runtime component. But it is safe to assume that most
 application will do at least 2-3 ms better.
 
