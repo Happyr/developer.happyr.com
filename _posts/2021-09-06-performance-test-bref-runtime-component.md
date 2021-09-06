@@ -47,7 +47,7 @@ PHP threads and make sure that everything is clean when a new HTTP requests come
 in. The Bref/runtime is keeping the application loaded between requests. This is
 great for performance, but it also means that you application may share memory between
 requests. Ie, static variables etc. You must also make sure that your application
-does not leak memory. Symfony itself is very good to handle this using
-[resettable services](https://symfony.com/doc/current/reference/dic_tags.html#kernel-reset),
+does not leak memory. Symfony itself is very good to make sure no memory leaks by
+using [resettable services](https://symfony.com/doc/current/reference/dic_tags.html#kernel-reset),
 but your application may suffer from a memory leak. Just make sure your services
 dont hold state and you will be fine.
