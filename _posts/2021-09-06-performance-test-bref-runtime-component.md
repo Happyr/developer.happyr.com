@@ -23,14 +23,14 @@ and deploying applications this way.
 
 I did a small test if there is any performance difference between using Bref's FPM
 layer compared to using Bref with the runtime component. I tested with a small
-symfony app. The app is using Twig and the security. The data was collected from
-AWS CloudWatch while loading tne startpage, login page, some authenticated pages etc.
+symfony app. The app is using Twig and the security component. The data was collected from
+AWS CloudWatch while loading the startpage, login page, some authenticated pages etc.
 
 | Layer        | Type       | Count | Average | Min     | Max      |
 |--------------|------------|-------|---------|---------|----------|
 | Bref FPM     | Request    |    50 | 4.70 ms | 3.34 ms | 14.80 ms |
-| Bref FPM     | Cold start |     5 | 514 ms  | 484 ms  | 582 ms   |
 | Bref/runtime | Request    |    44 | 2.48 ms | 1.55 ms | 9.94 ms  |
+| Bref FPM     | Cold start |     5 | 514 ms  | 484 ms  | 582 ms   |
 | Bref/runtime | Cold start |     5 | 535 ms  | 464 ms  | 623 ms   |
 
 From the table above one can see that normal HTTP request (warm Lambda) goes from
@@ -45,7 +45,9 @@ application will do at least 2-3 ms better.
 There is however one major difference. The Bref FPM uses PHP-FPM to manage the
 PHP threads and make sure that everything is clean when a new HTTP requests comes
 in. The Bref/runtime is keeping the application loaded between requests. This is
-better for performance but it also means that you application may leak memory. Symfony
-itself is very good to handle this using [resettable services](https://symfony.com/doc/current/reference/dic_tags.html#kernel-reset),
+great for performance, but it also means that you application may share memory between
+requests. Ie, static variables etc. You must also make sure that your application
+does not leak memory. Symfony itself is very good to handle this using
+[resettable services](https://symfony.com/doc/current/reference/dic_tags.html#kernel-reset),
 but your application may suffer from a memory leak. Just make sure your services
 dont hold state and you will be fine.
