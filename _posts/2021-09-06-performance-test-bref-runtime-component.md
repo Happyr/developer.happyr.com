@@ -40,7 +40,7 @@ that they are pretty much the same.
 
 So what do these results really say? I do not expect that all applications will
 run 50% faster with the Runtime component. But it is safe to assume that most
-application will do at least 2-3 ms better.
+applications will do at least 2-3 ms better.
 
 There is however one major difference. The Bref FPM uses PHP-FPM to manage the
 PHP threads and make sure that everything is clean when a new HTTP requests comes
