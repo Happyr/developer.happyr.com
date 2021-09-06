@@ -1,5 +1,5 @@
 ---
-title: Performance test: Bref FPM vs Bref + Runtime component
+title: "Performance test: Bref FPM vs Bref + Runtime component"
 author: Tobias Nyholm
 date: '2021-09-06 06:44:00 +0200'
 header:
